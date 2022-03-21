@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 import { DateRange } from '@mui/lab';
@@ -10,14 +11,18 @@ import data from './russian-cities.json';
 export const Search = (): React.ReactElement => {
   const [dates, setDates] = React.useState<DateRange<Date>>([null, null]);
 
+  const isMobile = useMediaQuery({ query: '(max-width: 660px)' });
+
   return (
     <Stack
-      direction='row'
+      direction={isMobile ? 'column' : 'row'}
       spacing={2}
       sx={{
         bgcolor: 'background.default',
+        mt: 8,
         p: '8px',
         borderRadius: '5px',
+        justifyContent: 'center',
       }}
     >
       <Autocomplete

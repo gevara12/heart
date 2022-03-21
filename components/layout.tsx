@@ -1,27 +1,21 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
-import Link from 'next/link';
 import { Header } from './Header';
 
-const name = '[Your Name]';
-export const siteTitle = 'Next.js Sample Website';
+export const siteTitle = 'Heart Apart only is for premium hosts';
 
 export default function Layout({
   children,
-  home,
 }: {
   children: React.ReactNode;
-  home?: boolean;
 }) {
   return (
     <div>
       <Head>
+        <title>{siteTitle}</title>
         <link rel='icon' href='/favicon.ico' />
         <meta
           name='description'
-          content='Learn how to build a personal website using Next.js'
+          content='Social network for hosts and travelers'
         />
         <meta
           property='og:image'
