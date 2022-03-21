@@ -1,0 +1,11 @@
+.header {}
+
+.host {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logoHost {
+  display: flex;
+  align-items: center;
+}
