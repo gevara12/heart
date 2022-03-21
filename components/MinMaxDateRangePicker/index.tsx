@@ -1,6 +1,6 @@
 import * as React from 'react';
 import addWeeks from 'date-fns/addWeeks';
-import { Box, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -13,7 +13,7 @@ type TDate = DateRange<Date>;
 
 type TMinMaxDateRangePicker = {
   dates: TDate;
-  setDates: () => void;
+  setDates: (newValue: TDate) => void;
 };
 export const MinMaxDateRangePicker = ({
   dates,
