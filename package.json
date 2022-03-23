@@ -36,11 +36,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "i18n:compile": "formatjs compile-folder lang compiled-lang",
-    "i18n:extract": "formatjs extract 'pages/**/*.ts*' 'components/**/*.ts*' --out-file lang/en.json",
     "lint": "next lint",
-    "prebuild": "npm run i18n:compile",
-    "predev": "npm run i18n:compile",
     "start": "next start"
   },
   "version": "0.1.0"
