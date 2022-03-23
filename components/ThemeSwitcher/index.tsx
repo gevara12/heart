@@ -19,7 +19,7 @@ export const ToggleColorMode = ({
 }: {
   children: React.ReactNode;
 }): React.ReactElement => {
-  const [mode, setMode] = React.useState(Theme.dark);
+  const [mode, setMode] = React.useState(Theme.light);
 
   const colorMode = React.useMemo(
     () => ({
@@ -40,35 +40,43 @@ export const ToggleColorMode = ({
           ...(mode === 'light'
             ? {
                 primary: {
-                  main: '#6027b0',
+                  main: '#00A699',
                 },
                 secondary: {
-                  main: '#f50057',
+                  main: '#FF5A5F',
                 },
                 text: {
                   primary: 'rgba(0,0,0,0.9)',
                 },
               }
             : {
+                primary: {
+                  main: '#00A699',
+                },
+                secondary: {
+                  main: '#FF5A5F',
+                },
                 // primary: {
                 //   light: '#fff1ff',
                 //   main: purple[500],
                 //   dark: '#af8eb5',
                 //   contrastText: '#000',
                 // },
-                secondary: {
-                  light: '#b6ffff',
-                  main: '#81d4fa',
-                  dark: '#4ba3c7',
-                  contrastText: '#000',
-                },
+                // secondary: {
+                //   light: '#b6ffff',
+                //   main: '#81d4fa',
+                //   dark: '#4ba3c7',
+                //   contrastText: '#000',
+                // },
               }),
         },
       }),
     [mode]
   );
 
-  React.useEffect(() => {}, [mode]);
+  React.useEffect(() => {
+    setMode(mode);
+  }, [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -87,6 +95,7 @@ export const ThemeSwitcher = () => {
       sx={{
         position: 'fixed',
         bottom: 0,
+        right: 4,
         alignItems: 'center',
         justifyContent: 'center',
         color: 'text.primary',

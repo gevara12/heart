@@ -1,12 +1,4 @@
 {
-  "name": "heart-apart",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -16,8 +8,10 @@
     "@mui/lab": "^5.0.0-alpha.72",
     "@mui/material": "^5.5.1",
     "@mui/x-data-grid": "^5.0.1",
+    "axios": "^0.26.1",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
+    "lodash": "^4.17.21",
     "next": "latest",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
@@ -28,11 +22,26 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "remark": "^14.0.1",
-    "remark-html": "^15.0.0"
+    "remark-html": "^15.0.0",
+    "styled-components": "latest",
+    "url-parse": "^1.5.10"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
     "@types/react": "^17.0.41",
     "typescript": "^4.6.2"
-  }
+  },
+  "name": "heart-apart",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "i18n:compile": "formatjs compile-folder lang compiled-lang",
+    "i18n:extract": "formatjs extract 'pages/**/*.ts*' 'components/**/*.ts*' --out-file lang/en.json",
+    "lint": "next lint",
+    "prebuild": "npm run i18n:compile",
+    "predev": "npm run i18n:compile",
+    "start": "next start"
+  },
+  "version": "0.1.0"
 }

@@ -1,10 +1,13 @@
 import * as React from 'react';
 import addWeeks from 'date-fns/addWeeks';
-import { TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateRangePicker, { DateRange } from '@mui/lab/DateRangePicker';
+import { InputAdornment } from '@mui/material';
+
+import DateRangeIcon from '@mui/icons-material/DateRange';
 
 const getWeeksAfter = (date: Date | null, amount: number) =>
   date ? addWeeks(date, amount) : undefined;
@@ -32,8 +35,20 @@ export const MinMaxDateRangePicker = ({
         onChange={changeHandle}
         renderInput={(startProps, endProps) => (
           <>
-            <TextField {...startProps} sx={{ mr: 2 }} label='Заезд' />
-            <TextField {...endProps} label='Выезд' />
+            <TextField {...startProps} sx={{ mr: 2 }} label='Заезд' InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <DateRangeIcon />
+                </InputAdornment>
+              ),
+            }}/>
+            <TextField {...endProps} label='Выезд' InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <DateRangeIcon />
+                </InputAdornment>
+              ),
+            }} />
           </>
         )}
       />

@@ -1,0 +1,13 @@
+.footer {
+  padding: 36px 0;
+}
+
+.linkHost {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

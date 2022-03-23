@@ -6,12 +6,13 @@ import { Search } from '@features/Search';
 import styles from './HeroSection.module.css';
 
 export const HeroSection = (): React.ReactElement => {
-  const title = 'Красивый заголовок';
-  const description = 'Не менее красивый дескрипшн';
+  const title = 'Сервис краткосрочной аренды жилья';
+  const description =
+    'HeartApart объединяет гостей и хозяев уникальных квартир';
 
   return (
     <div className={styles.host}>
-      <Container maxWidth='lg'>
+      <Container maxWidth={false} sx={{ maxWidth: '1128px' }}>
         <Typography
           variant='h2'
           component='div'

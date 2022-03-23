@@ -31,11 +31,11 @@
       "@layout/*": [
         "layout/*"
       ],
+      "@services/*": [
+        "services/*"
+      ],
       "@actions/*": [
         "actions/*"
-      ],
-      "@reducers/*": [
-        "./reducers/*"
       ],
       "@static/*": [
         "static/*"

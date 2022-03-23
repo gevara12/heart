@@ -1,23 +1,28 @@
 import * as React from 'react';
 import Link from 'next/link';
-// import { useSelector } from 'react-redux';
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import {
+  AppBar,
+  Button,
+  Container,
+  Stack,
+  Typography,
+} from '@mui/material';
 
-// import { getUserStatus } from 'store/auth/selectors';
-
-// import { SignUp } from 'components/SignUp';
-// import { LogIn } from 'components/LogIn';
+import { SignUp } from '@components/SignUp';
+import { LogIn } from '@components/LogIn';
 
 import styles from './Header.module.css';
+import { getUserStatus } from '@store/auth/selectors';
 
 export const Header = (): React.ReactElement => {
-  // const auth = useSelector(getUserStatus);
-
+  const auth = useSelector(getUserStatus);
   return (
     <header className={styles.header}>
-      <Box
+      <AppBar
+        position="static"
         sx={{
-          bgcolor: 'primary.main',
+          bgcolor: 'background.default',
           p: 1.5,
         }}
       >
@@ -29,7 +34,7 @@ export const Header = (): React.ReactElement => {
                   variant='body2'
                   component='span'
                   sx={{
-                    color: 'primary.contrastText',
+                    color: 'text.primary',
                   }}
                 >
                   Heart Apart
@@ -42,19 +47,19 @@ export const Header = (): React.ReactElement => {
                 <Button
                   variant='outlined'
                   sx={{
-                    color: 'primary.contrastText',
-                    borderColor: 'primary.contrastText',
+                    color: 'text.primary',
+                    borderColor: 'text.primary',
                   }}
                 >
                   Сдать жилье
                 </Button>
               </Link>
-              {/* {auth.isLoggedIn ?? <SignUp />} */}
-              {/* <LogIn /> */}
+              {auth.user.username === null && <SignUp />}
+              <LogIn />
             </Stack>
           </div>
         </Container>
-      </Box>
+      </AppBar>
     </header>
   );
 };

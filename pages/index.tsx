@@ -1,29 +1,18 @@
-import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
+import Layout from '@components/Layout';
 
-import { getSortedPostsData } from '../lib/posts';
-import { GetStaticProps } from 'next';
+// import { getSortedPostsData } from '../lib/posts';
+// import { GetStaticProps } from 'next';
 
 import { HeroSection } from '@components/HeroSection';
+import SEO from '@components/SEO';
 
 export default function Home() {
   return (
     <Layout>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+      <SEO />
       <section>
         <HeroSection />
       </section>
     </Layout>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-};
