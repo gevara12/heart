@@ -22,14 +22,15 @@ export const ImageUpload = ({}: TImageUploadProps): React.ReactElement => {
 
   const handleUploadClick = async (event: React.ChangeEvent<HTMLInputElement>) => {
     let file = event?.target?.files[0];
-    console.info(file);
+    // console.info(file);
     let formData = new FormData();
     formData.append('file', file);
     formData.append('title', title);
     formData.append('id', '5619cb9b-6436-403b-beb5-5d606f15675a');
     // formData.append('id', '276bbd3b-a83f-4827-bcb8-41d9a681556c');
 
-    console.info('formData', formData);
+    // console.info('formData', formData);
+    // @ts-ignore
     dispatch(addImage(formData));
   }
 

@@ -18,15 +18,16 @@ export const uploadPhotoAPI = (data) => axiosService.post(apiUrl(UPLOAD_PHOTO_EN
 });
 
 export type TImageData = {
-  file: File,
-  title: string,
+  file: File;
+  title: string;
   id?: string;
-}
+};
+
 export const addImage = (imageData: TImageData) => async (dispatch: Dispatch) => {
-  console.info('ImageData', imageData)
+  // console.info('ImageData', imageData)
   uploadPhotoAPI(imageData)
     .then(({ data }) => {
-      console.info('add data', data);
+      // console.info('add data', data);
       dispatch(addImageRequest(data.data));
     }).catch((error) => {
     console.error(error);
