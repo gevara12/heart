@@ -9,21 +9,23 @@ import {
   LOGOUT,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
-  SET_MESSAGE,
+  SET_ERROR,
 } from '@store/constants';
 
 import {
   USER_LOGOUT_ENDPOINT,
   userLogInAPI,
   userRegisterAPI,
+  USER_REGISTER_ENDPOINT,
 } from '@store/auth/api';
 
 const userRegisterRequest = createAction(REGISTER_SUCCESS);
 const userRegisterFailRequest = createAction(REGISTER_FAIL);
 const userLogInAction = createAction(LOGIN_SUCCESS);
+const userLogInFailAction = createAction(LOGIN_FAIL);
 const userLogOutAction = createAction(LOGOUT);
 
-const setMessageAction = createAction(SET_MESSAGE);
+const setErrorAction = createAction(SET_ERROR);
 
 type TUserRegister = {
   userName: string;
@@ -57,7 +59,7 @@ export const userRegister =
       },
       (error) => {
         console.error(error?.data?.code);
-        dispatch(setMessageAction(error?.data?.code));
+        dispatch(setErrorAction(error?.data?.code));
         dispatch(userRegisterFailRequest());
         return Promise.reject();
       }
@@ -66,26 +68,21 @@ export const userRegister =
 
 export const userLogin =
   ({ userName, password }: TUserLogin) =>
-  (dispatch: Dispatch) => {
+  async (dispatch: Dispatch) => {
     userLogInAPI({
       username: userName,
       password,
-    }).then(
-      ({ data }) => {
+    })
+      .then(({ data }) => {
         console.info('data.data', data.data);
         dispatch(userLogInAction(data.data.user));
         sessionStorage.setItem('username', data.data.user.username);
         sessionStorage.setItem('accessToken', data.data.token);
-        return Promise.resolve();
-      },
-      (error) => {
-        console.error(error?.data?.code);
-        dispatch({
-          type: LOGIN_FAIL,
-        });
-        return Promise.reject();
-      }
-    );
+      })
+      .catch((error) => {
+        dispatch(setErrorAction(error?.data?.code));
+        // dispatch(userLogInFailAction(error?.data?.code));
+      });
   };
 
 export const logout = () => (dispatch: Dispatch<any>) => {

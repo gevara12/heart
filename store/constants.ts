@@ -6,7 +6,6 @@ export const SERVER_URL =
 export const apiUrl = (pathname?: string) => {
   const URL = urlParse(SERVER_URL);
   URL.set('pathname', `/v1/${pathname}`);
-  console.info(URL.toString());
   return URL.toString();
 };
 
@@ -27,7 +26,5 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
-export const SET_MESSAGE = 'SET_MESSAGE';
-export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
-
-
+export const SET_ERROR = 'SET_ERROR';
+export const HIDE_ERROR = 'HIDE_ERROR';

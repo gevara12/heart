@@ -5,8 +5,8 @@ import { Box, Button, FormControl, Stack, TextField } from '@mui/material';
 
 import { CustomModal } from '@components/CustomModal';
 import { userRegister } from '@store/auth/actions';
-// import { getMessage } from '@store/message/selectors';
-import { setMessage } from '@store/message/actions';
+// import { getErrorSelector } from '@store/error/selectors';
+import { setError } from '@store/error/actions';
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ export const SignUp = () => {
   // @ts-ignore
   // const { message } = useSelector(getMessage);
   const changeMessage = React.useCallback((newMessage) => {
-    dispatch(setMessage(newMessage));
-  }, []);
+    dispatch(setError(newMessage));
+  }, [dispatch]);
 
   // const [message, setMessage] = React.useState<string>('');
 
@@ -37,7 +37,7 @@ export const SignUp = () => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [userName, email, password]);
 
   // console.info('message', message);
 

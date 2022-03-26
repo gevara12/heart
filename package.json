@@ -9,6 +9,7 @@
     "@mui/material": "^5.5.1",
     "@mui/x-data-grid": "^5.0.1",
     "axios": "^0.26.1",
+    "classnames": "^2.3.1",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "lodash": "^4.17.21",
@@ -25,7 +26,8 @@
     "remark": "^14.0.1",
     "remark-html": "^15.0.0",
     "styled-components": "latest",
-    "url-parse": "^1.5.10"
+    "url-parse": "^1.5.10",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",

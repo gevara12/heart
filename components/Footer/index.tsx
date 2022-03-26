@@ -22,27 +22,27 @@ export const Footer = (): React.ReactElement => {
             <a
               href={`mailto:${supportLink}`}
               target='_blank'
-              rel='noopener norefferer'
+              rel='noopener noreferrer'
               className={styles.link}
             >
-               {supportLink}
+              {supportLink}
             </a>
           </span>
           <span>
-           Для обратной связи:{` `}
+            Для обратной связи:{` `}
             <a
               href={`mailto:${feedbackLink} `}
               target='_blank'
-              rel='noopener norefferer'
+              rel='noopener noreferrer'
               className={styles.link}
             >
-               {feedbackLink}
+              {feedbackLink}
             </a>
           </span>
         </Stack>
         <Stack direction='row' sx={{ mt: 10 }} justifyContent='space-between'>
           <div>
-            <Link href='/terms'>
+            <Link href='/terms' passHref>
               <Typography
                 sx={{
                   mr: 4,
@@ -53,7 +53,7 @@ export const Footer = (): React.ReactElement => {
                 Условия
               </Typography>
             </Link>
-            <Link href='/privacy'>
+            <Link href='/privacy' passHref>
               <Typography variant='body1' component='span'>
                 Политика конфиденциальности
               </Typography>

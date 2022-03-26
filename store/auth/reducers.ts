@@ -47,6 +47,7 @@ export const auth = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         user: payload.username,
+        error: null,
       };
     case LOGIN_FAIL:
       return {

@@ -1,12 +1,28 @@
+import classnames from 'classnames';
+
 import { Footer } from '@components/Footer';
 import { Header } from '@components/Header';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+import styles from './layout.module.css';
+
+export default function Layout({
+  children,
+  isHero,
+}: {
+  children: React.ReactNode;
+  isHero?: boolean;
+}) {
   return (
-    <div>
+    <>
       <Header />
-      <main>{children}</main>
+      <main
+        className={classnames(styles.main, {
+          [styles.isHero]: isHero,
+        })}
+      >
+        {children}
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

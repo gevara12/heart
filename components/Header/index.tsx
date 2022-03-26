@@ -3,9 +3,12 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import {
   AppBar,
+  Avatar,
   Button,
   Container,
+  IconButton,
   Stack,
+  Tooltip,
   Typography,
 } from '@mui/material';
 
@@ -18,9 +21,9 @@ import { getUserStatus } from '@store/auth/selectors';
 export const Header = (): React.ReactElement => {
   const auth = useSelector(getUserStatus);
   return (
-    <header className={styles.header}>
+    <div>
       <AppBar
-        position="static"
+        position='static'
         sx={{
           bgcolor: 'background.default',
           p: 1.5,
@@ -28,7 +31,7 @@ export const Header = (): React.ReactElement => {
       >
         <Container maxWidth='lg'>
           <div className={styles.host}>
-            <Link href='/'>
+            <Link href='/' passHref>
               <div className={styles.logoHost}>
                 <Typography
                   variant='body2'
@@ -43,7 +46,7 @@ export const Header = (): React.ReactElement => {
             </Link>
 
             <Stack direction='row' spacing={2}>
-              <Link href='/apartments'>
+              <Link href='/apartments' passHref>
                 <Button
                   variant='outlined'
                   sx={{
@@ -56,10 +59,19 @@ export const Header = (): React.ReactElement => {
               </Link>
               {auth.user.username === null && <SignUp />}
               <LogIn />
+
+              {/*<Tooltip title='Open settings'>*/}
+              {/*  <IconButton*/}
+              {/*    onClick={handleOpenUserMenu}*/}
+              {/*    sx={{ p: 0 }}*/}
+              {/*  >*/}
+              {/*    <Avatar alt='User' src='/static/images/avatar/2.jpg' />*/}
+              {/*  </IconButton>*/}
+              {/*</Tooltip>*/}
             </Stack>
           </div>
         </Container>
       </AppBar>
-    </header>
+    </div>
   );
 };

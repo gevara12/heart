@@ -1,16 +1,24 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Box, Button, FormControl, Stack, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { CustomModal } from '@components/CustomModal';
 import { logout, userLogin } from '@store/auth/actions';
 import { getUserStatus } from '@store/auth/selectors';
 // import { getUserStatus } from '@store/auth/selectors';
+import { getErrorSelector } from '@store/error/selectors';
 
 export const LogIn = () => {
   const dispatch = useDispatch();
-
+  const { error } = useSelector(getErrorSelector);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [userName, setUserName] = React.useState<string>('');
@@ -24,8 +32,6 @@ export const LogIn = () => {
   const handleSubmit = async () => {
     try {
       await dispatch(userLogin({ userName, password }));
-      // auth.isLoggedIn && (await dispatch(currentUser()));
-      // await dispatch(currentUser());
       handleClose();
     } catch (error) {
       console.error(error);
@@ -39,6 +45,10 @@ export const LogIn = () => {
       console.error(error);
     }
   };
+
+  React.useEffect(() => {
+    // console.log('login error', error);
+  }, [dispatch, error]);
 
   return (
     <div>
@@ -104,6 +114,11 @@ export const LogIn = () => {
               Cancel
             </Button>
           </Stack>
+          {error && (
+            <Typography gutterTop variant='h6' component='p' color='error'>
+              {error}
+            </Typography>
+          )}
         </Box>
       </CustomModal>
     </div>

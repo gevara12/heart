@@ -4,18 +4,18 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 // import throttle from 'lodash/throttle';
 
-// import { apartments, currentApartment } from 'store/apartments/reducers';
-// import { images } from 'store/images/reducers';
+import { apartments, currentApartment } from '@store/apartments/reducers';
+import { images } from '@store/images/reducers';
 import { auth } from '@store/auth/reducers';
-import { message } from '@store/message/reducers';
+import { error } from '@store/error/reducers';
 // import { loadState, saveState } from '@store/sessionStorage';
 
 const rootReducer = combineReducers({
-  // apartments,
-  // currentApartment,
-  // images,
+  apartments,
+  currentApartment,
+  images,
   auth,
-  message,
+  error,
 });
 
 const initialState = {};

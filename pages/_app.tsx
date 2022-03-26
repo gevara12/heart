@@ -13,11 +13,11 @@ function Website({ Component, pageProps }: AppProps) {
       <ToggleColorMode>
         <Box
           sx={{
-            display: 'flex',
+            display: 'grid',
             color: 'text.primary',
             bgcolor: 'background.default',
-            flexDirection: 'column',
             minHeight: '100vh',
+            gridTemplateRows: 'auto 1fr auto',
           }}
         >
           <Component {...pageProps} />

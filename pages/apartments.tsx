@@ -1,25 +1,30 @@
 import Layout from '@components/Layout';
-import { getSortedPostsData } from '../lib/posts';
 import Link from 'next/link';
-import { GetStaticProps } from 'next';
 import SEO from '@components/SEO';
+import { Container, Typography, Stack, Button } from '@mui/material';
+import { UserApartments } from '@features/UserApartments';
 
 export default function Apartments() {
   return (
     <Layout>
       <SEO />
       <section>
-        <Link href='/'>Home</Link>
+        <Container maxWidth='lg'>
+          <Stack
+            direction='row'
+            justifyContent='space-between'
+            alignItems='center'
+          >
+            <Typography variant='h3'>Список апартаментов</Typography>
+            <div>
+              <Link href='/host/create' passHref>
+                <Button variant='contained'>Добавить жильё</Button>
+              </Link>
+            </div>
+          </Stack>
+          <UserApartments />
+        </Container>
       </section>
     </Layout>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-};

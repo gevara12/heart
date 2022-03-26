@@ -37,6 +37,9 @@
       "@actions/*": [
         "actions/*"
       ],
+      "@utils/*": [
+        "utils/*"
+      ],
       "@static/*": [
         "static/*"
       ],
