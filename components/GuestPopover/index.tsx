@@ -70,6 +70,7 @@ export const GuestPopover = () => {
           label="Гости"
           value={adultCount + childCount + animalCount}
           onFocus={handleClick}
+          sx={{ width: '100%' }}
           // inputRef={input => (this.tf = input)}
         />
         {/*<Button variant='contained' onClick={handleClick}>*/}
@@ -81,6 +82,7 @@ export const GuestPopover = () => {
         anchorEl={anchorRef.current}
         role={undefined}
         transition
+        style={{zIndex:'10'}}
       >
         {({ TransitionProps, placement }) => (
           <Grow

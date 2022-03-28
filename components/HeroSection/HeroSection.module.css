@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 584px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   text-align: center;
   background-image: url('https://res.cloudinary.com/dh3i90adr/image/upload/v1648032157/heart-apart/248AF219-4C47-4158-AADF-586D769DCDDF_1_201_a_gzg7ot.jpg');
   background-size: cover;
