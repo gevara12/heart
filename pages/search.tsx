@@ -2,15 +2,15 @@ import Layout from '@components/Layout';
 import SEO from '@components/SEO';
 import { Button, Grid, useTheme} from '@mui/material';
 import {useState} from "react";
-import { useMediaQuery } from 'react-responsive';
 
 import {UserApartments} from "@features/UserApartments";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 export default function Search() {
   const { breakpoints } = useTheme();
 
-  const isMobile = useMediaQuery({ query: (breakpoints.down('md')).replace('@media ','') });
+  const isMobile = useMediaQuery( breakpoints.down('md') );
   const [mapIsActive, setMapIsActive] = useState(false);
 
   return (
