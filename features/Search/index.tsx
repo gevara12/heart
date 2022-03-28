@@ -13,14 +13,14 @@ export const Search = (): React.ReactElement => {
 
   return (
     <Stack
-      direction={{ xs: 'column', sm: 'row' }}
+      direction={{ xs: 'column', lg: 'row' }}
       spacing={2}
       sx={{
         bgcolor: 'background.default',
         mt: 8,
         p: 2,
         borderRadius: '5px',
-        justifyContent: 'center',
+        // justifyContent: 'center',
       }}
     >
       <Autocomplete
@@ -29,15 +29,17 @@ export const Search = (): React.ReactElement => {
         options={data}
         getOptionLabel={(option) => option.name}
         selectOnFocus
-        sx={{ flexGrow: 2 }}
-        renderInput={(params) => <TextField {...params} label='Локация' />}
+        // sx={{ flexGrow: 2 }}
+        style={{flex: '1 0 auto'}}
+        renderInput={(params) => <TextField {...params} sx={{flex: '1 0 auto'}} label='Локация' />}
       />
 
-      <MinMaxDateRangePicker dates={dates} setDates={setDates} />
+      <MinMaxDateRangePicker dates={dates} setDates={setDates}  />
 
       <GuestPopover />
+
       <div>
-        <Button size='large' variant='contained' sx={{ minHeight: '56px' }}>
+        <Button size='large' variant='contained' sx={{ minHeight: '56px', width:'100%',flex: '1 0 auto' }}>
           Найти жилье
         </Button>
       </div>
