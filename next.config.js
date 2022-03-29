@@ -3,7 +3,7 @@ const nextConfig = {
   compiler: {
     // ssr and displayName are configured by default
     styledComponents: true
-  }
+  },
   //   i18n: {
 //     /**
 //      * Provide the locales you want to support in your application
@@ -15,6 +15,9 @@ const nextConfig = {
 //      */
 //     defaultLocale: 'ru-RU',
 //   },
+  typescript: {
+    ignoreBuildErrors: true
+  }
 }
 
 module.exports = nextConfig

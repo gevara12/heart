@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 export const GetApartItemComponent = ({
                                         id,
                                       }: {
-  id: string;
+  id: string | string[];
 }): React.ReactElement => {
   const dispatch = useDispatch();
   const { currentApartment } = useSelector(getCurrentApartment);
