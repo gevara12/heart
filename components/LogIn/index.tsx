@@ -115,7 +115,7 @@ export const LogIn = () => {
             </Button>
           </Stack>
           {error && (
-            <Typography gutterTop variant='h6' component='p' color='error'>
+            <Typography variant='h6' component='p' color='error'>
               {error}
             </Typography>
           )}
