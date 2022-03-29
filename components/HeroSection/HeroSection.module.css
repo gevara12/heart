@@ -1,13 +1,25 @@
 .host {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: 100px;
-  padding-bottom: 100px;
   text-align: center;
   background-image: url('https://res.cloudinary.com/dh3i90adr/image/upload/v1648032157/heart-apart/248AF219-4C47-4158-AADF-586D769DCDDF_1_201_a_gzg7ot.jpg');
   background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.host::before {
+  content:'';
+  position:absolute;
+  background-color: #000000;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: -1;
 }
 
 .title, .description {
