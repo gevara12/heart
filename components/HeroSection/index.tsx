@@ -11,16 +11,16 @@ export const HeroSection = (): React.ReactElement => {
   const title = 'Сервис краткосрочной аренды жилья';
   const description = 'HeartApart объединяет гостей и хозяев уникальных квартир';
 
-  const theme = useTheme();
+  const { typography } = useTheme();
 
   return (
-    <Box className={styles.host} sx={{padding:{xs:'50px 0', md:'150px 0',}}}>
+    <Box className={styles.host} sx={{ padding:{xs:'50px 0', md:'150px 0' }}}>
       <Container>
-        <Box sx={{maxWidth:{ xs:'480px', lg:'none' }, margin:'0 auto'}} >
+        <Box sx={{ maxWidth:{ xs:'480px', lg:'none' }, margin:'0 auto' }} >
           <Typography
             component='div'
             gutterBottom
-            sx={{ fontWeight:700, fontSize:{ xs:theme.typography.h4.fontSize, lg:theme.typography.h3.fontSize} }}
+            sx={{ fontWeight:700, fontSize:{ xs:typography.h4.fontSize, lg:typography.h3.fontSize } }}
             className={styles.title}
           >
             {title}
@@ -28,7 +28,7 @@ export const HeroSection = (): React.ReactElement => {
           <Typography
             component='div'
             gutterBottom
-            sx={{ fontSize:{ xs:theme.typography.body1.fontSize, lg:theme.typography.subtitle1.fontSize} }}
+            sx={{ fontSize:{ xs:typography.body1.fontSize, lg:typography.subtitle1.fontSize } }}
             className={styles.description}
           >
             {description}
