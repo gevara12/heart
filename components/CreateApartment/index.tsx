@@ -1,222 +1,116 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 
-import {
-  TextField,
-  Stack,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Button,
-  OutlinedInput,
-  InputLabel,
-  InputAdornment,
-} from '@mui/material';
+import { PlaceType } from './components/PlaceType';
 
-import { createApartment } from '@store/apartments/actions';
-
-import {
-  CustomAlert,
-  hideAlert,
-  AlertTextEnum,
-  SeverityEnum,
-} from '@components/CustomAlert';
-import { MapsGeocode } from '@components/MapsGeocode';
-import type { TPlaceType } from '@utils/types';
-
-import { ImageUpload } from '@components/ImageUpload';
+// import { getCurrentApartment } from '@store/apartments/selectors';
+import { Box, Button, Step, StepButton, Stepper } from '@mui/material';
+// import { MapsGeocode } from '@components/MapsGeocode';
+import { Qualities } from './components/Qualities';
 
 // import styles from './CreateApartment.module.css';
 
-type TState = {
-  name: string;
-  description: string;
-  amount: number;
-};
-
-// type TComport = {
-//   wiFi: boolean;
-//   tv: boolean;
-//   kitchen: boolean;
-//   washingMachine: boolean;
-//   parking: boolean;
-//   conditioner: boolean;
-// };
+const steps = [
+  'Тип жилья',
+  'Адрес',
+  'Характеристики',
+  'Особенности',
+  'Фото',
+  'Описание и цена',
+  'Проверка',
+];
 
 export const CreateApartment = (): React.ReactElement => {
-  const dispatch = useDispatch();
-  const [openSuccess, setOpenSuccess] = React.useState(false);
-  const [openError, setOpenError] = React.useState(false);
-  const [openWarning, setOpenWarning] = React.useState(false);
+  const [activeStep, setActiveStep] = React.useState(0);
 
-  const [values, setValues] = React.useState<TState>({
-    name: '',
-    amount: 0,
-    description: '',
-  });
+  const [completed, setCompleted] = React.useState<{
+    [k: number]: boolean;
+  }>({});
 
-  const [placeType, setPlaceType] = React.useState<TPlaceType>('entire-place');
-
-  const handleChange =
-    (prop: keyof TState) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-    };
-
-  const changePlaceHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // @ts-ignore
-    setPlaceType((event.target as HTMLInputElement).value);
+  const totalSteps = () => {
+    return steps.length;
   };
 
-  const [checked, setChecked] = React.useState(true);
-
-  const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
+  const completedSteps = () => {
+    return Object.keys(completed).length;
   };
 
-  const createNew = async () => {
-    try {
-      if (values.name === '') {
-        setOpenWarning(true);
-        hideAlert(() => setOpenWarning(false));
-      } else {
-        await dispatch(
-          createApartment({
-            name: values.name,
-            description: values.description,
-            placeType,
-            amount: values.amount,
-          })
-        );
-        setOpenSuccess(true);
-        // dispatch(fetchApartments());
-        setValues({
-          ...values,
-          name: '',
-          description: '',
-        });
-        hideAlert(() => setOpenSuccess(false));
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
 
-        // setTimeout(() => {
-        //   history.push(`/${redirectTo}`);
-        // }, REDIRECT_DELAY);
-      }
-    } catch (e: unknown) {
-      console.error(e);
-      setOpenError(true);
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
+  const handleNext = () => {
+    const newActiveStep =
+      isLastStep() && !allStepsCompleted()
+        ? // It's the last step, but not all steps have been completed,
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
+        : activeStep + 1;
+    setActiveStep(newActiveStep);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStep = (step: number) => () => {
+    setActiveStep(step);
+  };
+
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return <PlaceType />;
+      case 1:
+        return <div>default</div>;
+      case 3:
+        return <Qualities />;
+      default:
+        return <div>default</div>;
     }
   };
 
   return (
-    <div>
-      <CustomAlert isOpen={openSuccess} severity={SeverityEnum.success}>
-        {AlertTextEnum.Success}
-      </CustomAlert>
-      <CustomAlert isOpen={openError} severity={SeverityEnum.error}>
-        {AlertTextEnum.Error}
-      </CustomAlert>
-      <CustomAlert isOpen={openWarning} severity={SeverityEnum.warning}>
-        Заполните поля
-      </CustomAlert>
+    <div className='container'>
+      <Box>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label, index) => (
+            <Step key={label} completed={completed[index]}>
+              <StepButton color='inherit' onClick={handleStep(index)}>
+                {label}
+              </StepButton>
+              {/* <StepContent>{getStepContent(index)}</StepContent> */}
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
 
-      <div>
-        <Stack spacing={4}>
-          <FormControl fullWidth>
-            <TextField
-              size='small'
-              id='name'
-              label='Название'
-              variant='outlined'
-              value={values.description}
-              onChange={handleChange('description')}
-              error={openWarning}
-              required
-            />
-          </FormControl>
+      <Box sx={{ minHeight: 'calc(100vh - 400px)', margin: '3rem 0' }}>
+        {getStepContent(activeStep)}
+      </Box>
 
-          <FormControl fullWidth>
-            <TextField
-              size='small'
-              id='description'
-              label='Описание'
-              variant='outlined'
-              multiline
-              rows={4}
-              value={values.description}
-              onChange={handleChange('description')}
-            />
-          </FormControl>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Button
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          variant='outlined'
+        >
+          Back
+        </Button>
+        <Button onClick={handleNext} variant='outlined'>
+          Next
+        </Button>
+      </Box>
 
-          <FormControl fullWidth>
-            <InputLabel htmlFor='amount'>Цена</InputLabel>
-            <OutlinedInput
-              id='amount'
-              size='small'
-              value={values.amount}
-              onChange={handleChange('amount')}
-              startAdornment={
-                <InputAdornment position='start'>₽</InputAdornment>
-              }
-              label='Amount'
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel id='type-of-place'>Выберите тип жилья</FormLabel>
-            <RadioGroup
-              aria-labelledby='type-of-place'
-              value={placeType}
-              onChange={changePlaceHandle}
-              name='type-of-place-group'
-            >
-              <FormControlLabel
-                value='entire-place'
-                control={<Radio />}
-                label='Жилье целиком'
-              />
-              <FormControlLabel
-                value='private-room'
-                control={<Radio />}
-                label='Отдельная комната'
-              />
-              <FormControlLabel
-                value='hotel-room'
-                control={<Radio />}
-                label='Гостиничный номер'
-              />
-              <FormControlLabel
-                value='shared-room'
-                control={<Radio />}
-                label='Место в комнате'
-              />
-            </RadioGroup>
-          </FormControl>
-
-          {/* <FormControl>
-            <FormControlLabel
-              control={
-                <Checkbox checked={checked} onChange={handleCheckChange} />
-              }
-              label={
-                <span>
-                  <AddIcon />
-                </span>
-              }
-              labelPlacement='top'
-            ></FormControlLabel>
-          </FormControl> */}
-
-          <MapsGeocode />
-
-          <ImageUpload />
-          <div>
-            <Button variant='contained' onClick={createNew}>
-              Добавить
-            </Button>
-          </div>
-        </Stack>
-      </div>
+      {/* <ImageUpload /> */}
     </div>
   );
 };

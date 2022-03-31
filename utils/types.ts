@@ -1,4 +1,8 @@
-export type TPlaceType = 'entire-place' | 'private-room' | 'hotel-room' | 'shared-room';
+export type TPlaceType =
+  | 'entire-place'
+  | 'private-room'
+  | 'hotel-room'
+  | 'shared-room';
 
 export type TImage = {
   image: string;
@@ -7,9 +11,10 @@ export type TImage = {
 };
 
 export type TApartment = {
-  description: string;
-  name: string;
-  placeType: TPlaceType;
-  amount: number;
+  id?: string;
+  description?: string;
+  name?: string;
+  placeType?: TPlaceType;
+  amount?: number;
   images?: TImage[];
 };

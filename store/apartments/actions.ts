@@ -5,7 +5,8 @@ import {
   createApartmentAPI,
   deleteApartmentByIdAPI,
   fetchApartmentByIdAPI,
-  searchApartmentAPI
+  searchApartmentAPI,
+  updateApartmentAPI,
 } from '@store/apartments/api';
 import {
   CREATE_APARTMENT,
@@ -15,7 +16,7 @@ import {
   SET_ERROR,
 } from '../constants';
 
-import type { TApartment } from '@utils/types';
+import type { TApartment, TPlaceType } from '@utils/types';
 
 export const APARTMENTS = 'APARTMENTS';
 
@@ -33,13 +34,46 @@ export const fetchApartments = () => async (dispatch: Dispatch) => {
   });
 };
 
+export const fetchApartmentById =
+  (id: string) => async (dispatch: Dispatch) => {
+    fetchApartmentByIdAPI(id)
+      .then(({ data }) => {
+        console.info('data', data.data);
+        dispatch(getItemApartmentRequest(data.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+//
+export const deleteApartmentById =
+  (id: string) => async (dispatch: Dispatch) => {
+    deleteApartmentByIdAPI(id).then(({ data }) => {
+      dispatch(deleteApartmentRequest(id));
+    });
+  };
+
 export const createApartment =
-  (newApartment: TApartment) => async (dispatch: Dispatch) => {
-    const { name, description, placeType, amount } = newApartment;
+  ({ placeType }: { placeType: TPlaceType }) =>
+  async (dispatch: Dispatch) => {
     createApartmentAPI({
+      placeType,
+    })
+      .then(({ data }) => {
+        dispatch(createApartmentRequest(data));
+      })
+      .catch((error) => {
+        dispatch(setErrorAction(error?.data?.code));
+      });
+  };
+
+export const updateApartment =
+  (newApartment: TApartment) => async (dispatch: Dispatch) => {
+    const { id, name, description, amount } = newApartment;
+    updateApartmentAPI({
+      id,
       name,
       description,
-      placeType,
       amount,
     })
       .then(({ data }) => {
@@ -50,21 +84,3 @@ export const createApartment =
         // dispatch(userLogInFailAction(error?.data?.code));
       });
   };
-
-export const fetchApartmentById = (id: string) => async (dispatch: Dispatch) => {
-  fetchApartmentByIdAPI(id)
-    .then(({ data }) => {
-      console.info('data', data.data)
-      dispatch(getItemApartmentRequest(data.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-//
-export const deleteApartmentById = (id: string) => async (dispatch: Dispatch) => {
-  deleteApartmentByIdAPI((id))
-  .then(({ data }) => {
-    dispatch(deleteApartmentRequest(id));
-  });
-};

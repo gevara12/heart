@@ -1,10 +1,15 @@
 import * as React from 'react';
 import debounce from 'lodash/debounce';
-import { Button, FormControl, TextField } from '@mui/material';
+// import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+
+import { Autocomplete, FormControl, TextField } from '@mui/material';
+
+// const position = [51.505, -0.09];
 
 export const MapsGeocode = (): React.ReactElement => {
   const [value, setValue] = React.useState<string>('');
   const [dbValue, saveToDb] = React.useState<string>('');
+  const [result, setResult] = React.useState<[]>([]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = React.useCallback(
@@ -19,48 +24,56 @@ export const MapsGeocode = (): React.ReactElement => {
     debouncedSave(nextValue);
   };
 
-  // const API_KEY = 'eb50643f-5042-4adb-bf03-add61c041354';
-  const API_KEY = 'runsuj6833';
-  const fetchUrl = `https://catalog.api.2gis.com/3.0/items/geocode?q=Moscow, Sadovnicheskaya, 25&fields=items.point&key=${API_KEY}`;
+  // const token = 'SY9Gz6fHAEtGBn4Fa6HiyGQSQfrn9FRB';
+  // const fetchUrl = `https://kladr-api.ru/api.php?query=${decodeURI(
+  //   dbValue
+  // )}&contentType=city&withParent=1&limit=3`;
+
+  const fetchUrl = `https://nominatim.openstreetmap.org/search/?q=Красносельское, ${decodeURI(
+    dbValue
+  )}&accept-language=ru-RU&countrycodes=RU&format=json&addressdetails=1&limit=5`;
 
   const getCoordinates = async () => {
     try {
       const response = await fetch(fetchUrl, {
         method: 'GET',
-        // headers: {
-        //   'Content-Type': 'application/json',
-        // },
       });
       const result = await response.json();
-
-      console.info(response, result);
+      console.info('result', result);
       return result;
     } catch (error) {
       console.log('Fetch error: ', error);
     }
   };
 
+  React.useEffect(() => {
+    getCoordinates().then((r) => setResult(r));
+  }, [dbValue]);
+
+  // console.info(result);
   return (
     <div>
-      <FormControl>
-        <TextField
-          size='small'
-          label='Введите адрес'
-          value={value}
-          onChange={handleChange}
-        />
-      </FormControl>
-
-      <div>
-        {value}
-        <br />
-        {dbValue}
-      </div>
-      <div>
-        <Button variant='contained' onClick={getCoordinates}>
-          Указать местоположение
-        </Button>
-      </div>
+      {result && (
+        <FormControl>
+          <Autocomplete
+            disablePortal
+            id='select-area'
+            sx={{ minWidth: '300px' }}
+            size='small'
+            options={result}
+            getOptionLabel={(option) => option?.display_name}
+            selectOnFocus
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label='Адрес'
+                value={value}
+                onChange={handleChange}
+              />
+            )}
+          />
+        </FormControl>
+      )}
     </div>
   );
 };
