@@ -20,20 +20,21 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import StarIcon from '@mui/icons-material/Star';
 import BoltIcon from '@mui/icons-material/Bolt';
+import ShareIcon from '@mui/icons-material/Share';
 import * as React from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  // padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
-  height:'188px'
+  height:'184px'
 }));
 const BigItem = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  // padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
   height:"400px",
@@ -64,25 +65,79 @@ export default function ApartmentPlaceholder() {
                     <FmdGoodOutlinedIcon fontSize="small" sx={{marginRight:'3px'}} />Санкт-Петербург, Свердловская наб.</a>
                 </Link>
               </Stack>
-              <div>share</div>
+              <Link href='#' passHref>
+                <a style={{display:'flex', alignItems:'center', color: '#00A699'}}>
+                  <ShareIcon fontSize="small" sx={{marginRight:'3px'}} />Поделиться</a>
+              </Link>
             </Box>
           </header>
 
           <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gridTemplateRows="repeat(2, 1fr)" gap={4} alignItems="stretch" sx={{mb:3}}>
             <Box gridColumn="span 8" gridRow="1/3">
-              <BigItem>main/first image</BigItem>
+              <BigItem>
+                <img
+                  src={'https://cdn.pixabay.com/photo/2017/02/14/10/46/cat-2065595_1280.jpg'}
+                  alt=""
+                  loading="lazy"
+                  style={{height: '100%', width:'100%', objectFit:'cover'}}
+                />
+              </BigItem>
             </Box>
             <Box gridColumn="span 4" gridRow="1">
-              <Item>aside image</Item>
+              <Item>
+                <img
+                    src={'https://cdn.pixabay.com/photo/2017/02/14/10/46/cat-2065595_1280.jpg'}
+                    alt=""
+                    loading="lazy"
+                    style={{height: '100%', width:'100%', objectFit:'cover'}}
+                />
+              </Item>
             </Box>
             <Box gridColumn="span 4" gridRow="2">
-              <Item sx={{height:'188px'}}>aside image</Item>
+              <Item><img
+                  src={'https://cdn.pixabay.com/photo/2017/02/14/10/46/cat-2065595_1280.jpg'}
+                  alt=""
+                  loading="lazy"
+                  style={{height: '100%', width:'100%', objectFit:'cover'}}
+              /></Item>
             </Box>
           </Box>
 
           <Grid container spacing={4}>
             <Grid item xs={7}>
-              <div>common info</div>
+              <Grid container wrap="nowrap" spacing={2} sx={{mb:1}}>
+                <Grid item xs>
+                  <Typography variant='h5' component='div' sx={{mb:1}}>Иван Иванов</Typography>
+                  <Stack direction={'row'} alignItems={'center'} spacing={2}>
+                    <Typography>до 2х гостей</Typography>
+                    <Typography>1 спальня</Typography>
+                    <Typography>1 двуспальная кровать</Typography>
+                  </Stack>
+                  <Stack direction={'row'} alignItems={'center'} spacing={2} sx={{mt:2}}>
+                    <Stack direction={'row'} alignItems={'center'} spacing={1}>
+                      <Typography>bla</Typography>
+                      <Link href='#' passHref>
+                        <a style={{ color: '#00A699'}}>Поделиться</a>
+                      </Link>
+                    </Stack>
+                    <Stack direction={'row'} alignItems={'center'} spacing={1}>
+                      <Typography>bla</Typography>
+                      <Link href='#' passHref>
+                        <a style={{ color: '#00A699'}}>Поделиться</a>
+                      </Link>
+                    </Stack>
+                    <Stack direction={'row'} alignItems={'center'} spacing={1}>
+                      <Typography>bla</Typography>
+                      <Link href='#' passHref>
+                        <a style={{ color: '#00A699'}}>Поделиться</a>
+                      </Link>
+                    </Stack>
+                  </Stack>
+                </Grid>
+                <Grid item>
+                  <Avatar sx={{ width: 70, height: 70 }}>W</Avatar>
+                </Grid>
+              </Grid>
               <Divider sx={{mt:3, mb:3}}/>
               <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad at cupiditate doloremque esse ex facilis fugiat ipsa maiores, minima nesciunt, nostrum officiis perferendis porro quasi recusandae sed totam voluptas voluptate.</div>
               <Divider sx={{mt:3, mb:3}}/>
