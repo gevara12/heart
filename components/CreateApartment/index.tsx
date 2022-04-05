@@ -91,7 +91,6 @@ function CreateApartment(): React.ReactElement {
               <StepButton color='inherit' onClick={handleStep(index)}>
                 {label}
               </StepButton>
-              {/* <StepContent>{getStepContent(index)}</StepContent> */}
             </Step>
           ))}
         </Stepper>
@@ -118,10 +117,10 @@ function CreateApartment(): React.ReactElement {
           onClick={handleBack}
           variant='outlined'
         >
-          Back
+          Вернуться
         </Button>
         <Button onClick={handleNext} variant='outlined'>
-          Next
+          Дальше
         </Button>
       </Box>
 

@@ -29,13 +29,12 @@ import ApartmentPhotoSlider from "@components/ApartmentPhotoSlider";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ApartmentPhotoBlock from "@components/ApartmentPhotoBlock";
 
-import Apartment from "./ApartmentMock";
+import Apartment from "@components/ApartmentMock";
 import ApartmentAboutBlock from "@components/ApartmentAboutBlock";
 import ApartmentOwnerAboutBlock from "@components/ApartmentOwnerAboutBlock";
 import ApartmentPinnedBlock from "@components/ApartmentPinnedBlock";
 import RatingIconsPanel from "@components/RatingIconsPanel";
 import ApartmentMobilePinnedBlock from "@components/ApartmentMobilePinnedBlock";
-
 
 export default function ApartmentPlaceholder() {
   const { breakpoints } = useTheme();

@@ -79,7 +79,7 @@ export const LogIn = () => {
       )}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>
-        <Box sx={{ maxWidth: '380px', p: 4 }}>
+        <Box sx={{ maxWidth: '380px', p: 3 }}>
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
               label='Имя пользователя'
