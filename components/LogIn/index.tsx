@@ -15,6 +15,7 @@ import { logout, userLogin } from '@store/auth/actions';
 import { getUserStatus } from '@store/auth/selectors';
 // import { getUserStatus } from '@store/auth/selectors';
 import { getErrorSelector } from '@store/error/selectors';
+import MenuItem from "@mui/material/MenuItem";
 
 export const LogIn = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,8 @@ export const LogIn = () => {
   return (
     <div>
       {auth.user.username === null ? (
-        <Button
+        <MenuItem key={'login'} onClick={handleOpen}>Войти</MenuItem>
+        /*<Button
           variant='text'
           onClick={handleOpen}
           sx={{
@@ -61,9 +63,10 @@ export const LogIn = () => {
           }}
         >
           Войти
-        </Button>
+        </Button>*/
       ) : (
-        <Button
+        <MenuItem key={'logout'} onClick={handleLogout}>Выйти</MenuItem>
+        /*<Button
           variant='text'
           color='primary'
           sx={{
@@ -72,7 +75,7 @@ export const LogIn = () => {
           onClick={handleLogout}
         >
           Log Out
-        </Button>
+        </Button>*/
       )}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>

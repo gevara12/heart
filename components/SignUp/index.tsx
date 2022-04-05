@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import debounce from 'lodash/debounce';
-import { Box, Button, FormControl, Stack, TextField } from '@mui/material';
+import {Box, Button, FormControl, Stack, TextField, Typography} from '@mui/material';
 
 import { CustomModal } from '@components/CustomModal';
 import { userRegister } from '@store/auth/actions';
 // import { getErrorSelector } from '@store/error/selectors';
 import { setError } from '@store/error/actions';
+import MenuItem from "@mui/material/MenuItem";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,10 @@ export const SignUp = () => {
 
   return (
     <div>
-      <Button
+      <MenuItem key={'register'} onClick={handleOpen}>
+        Регистрация
+      </MenuItem>
+      {/*<Button
         variant='text'
         onClick={handleOpen}
         sx={{
@@ -51,7 +55,7 @@ export const SignUp = () => {
         }}
       >
         Регистрация
-      </Button>
+      </Button>*/}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>
         <Box sx={{ maxWidth: '380px', p: 4 }}>
