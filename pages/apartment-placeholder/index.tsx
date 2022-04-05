@@ -19,6 +19,7 @@ import {
   HighlightOffRounded as HighlightOffRoundedIcon,
   FmdGoodOutlined as FmdGoodOutlinedIcon,
   HelpOutline as HelpOutlineIcon,
+  AccessTime as AccessTimeIcon,
 } from '@mui/icons-material';
 
 import Layout from '@components/Layout';
@@ -33,6 +34,7 @@ import ApartmentAboutBlock from "@components/ApartmentAboutBlock";
 import ApartmentOwnerAboutBlock from "@components/ApartmentOwnerAboutBlock";
 import ApartmentPinnedBlock from "@components/ApartmentPinnedBlock";
 import RatingIconsPanel from "@components/RatingIconsPanel";
+import ApartmentMobilePinnedBlock from "@components/ApartmentMobilePinnedBlock";
 
 
 export default function ApartmentPlaceholder() {
@@ -61,8 +63,8 @@ export default function ApartmentPlaceholder() {
                     </IconButton>
                   </Tooltip>
                 </Stack>
-                <Link href='#' passHref>
-                  <a style={{ display:'flex', alignItems:'center', color: '#00A699' }}>
+                <Link href='#map' passHref>
+                  <a style={{ display:'flex', color: '#00A699' }}>
                     <FmdGoodOutlinedIcon fontSize="small" sx={{marginRight:'3px'}} />{Apartment.address}</a>
                 </Link>
               </Stack>
@@ -89,21 +91,21 @@ export default function ApartmentPlaceholder() {
               <Divider sx={{mt:3, mb:3}}/>
 
               <ApartmentBlock title={'Заселение'}>
-                <Grid container spacing={2}>
-                  <Grid item xs={4}>
+                <Grid container spacing={{xs:1,md:2}}>
+                  <Grid item xs={12} md={4}>
                     <Stack spacing={1}>
-                      <div>Прибытие с 12:00</div>
-                      <div>Выезд с 14:00</div>
+                      <div style={{display:'flex'}}><AccessTimeIcon sx={{ mr:1 }}/>Прибытие с 12:00</div>
+                      <div style={{display:'flex'}}><AccessTimeIcon sx={{ mr:1 }}/>Выезд с 14:00</div>
                     </Stack>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <Stack spacing={1}>
                       <div style={{display:'flex'}}><HighlightOffRoundedIcon sx={{color:'red', mr:1}} />Без раннего заезда</div>
                       <div style={{display:'flex'}}><CheckCircleOutlineIcon sx={{color:'green', mr:1}} />Поздний выезд</div>
                     </Stack>
                   </Grid>
                 </Grid>
-                <Alert severity="info" sx={{mt:4}}>После связи с хозяином вам будет доступна инструкция по заселению</Alert>
+                <Alert severity="info" sx={{mt:{xs:2,md:4}}}>После связи с хозяином вам будет доступна инструкция по заселению</Alert>
               </ApartmentBlock>
 
               <Divider sx={{mt:3, mb:3}}/>
@@ -111,8 +113,8 @@ export default function ApartmentPlaceholder() {
               <ApartmentBlock title={'Удобства'}>
                 <Grid container spacing={{xs:1}}>
                   {Apartment.options.map((option,i)=>
-                    <Grid item xs={12} md={5}>
-                      <div style={{display:'flex'}} key={i}><CheckCircleOutlineIcon sx={{color:'green', mr:1}} />{option}</div>
+                    <Grid item xs={12} md={5} key={i}>
+                      <div style={{display:'flex'}}><CheckCircleOutlineIcon sx={{color:'green', mr:1}} />{option}</div>
                     </Grid>
                   )}
                 </Grid>
@@ -140,15 +142,16 @@ export default function ApartmentPlaceholder() {
               </ApartmentBlock>
             </Grid>
             <Grid item xs={12} md={1}/>
-            <Grid item xs={12} md={4}>
-              <ApartmentPinnedBlock/>
-            </Grid>
 
+            { isMobile
+              ? <ApartmentMobilePinnedBlock/>
+              : <Grid item xs={12} md={4}><ApartmentPinnedBlock/></Grid>
+            }
           </Grid>
 
           <Divider sx={{mt:3, mb:3}}/>
 
-          <ApartmentBlock title={'На карте'}>
+          <ApartmentBlock title={'На карте'} id='map'>
             <Box sx={{ height: {xs:'162px', sm:'320px', lg:'510px'} }}>
             <iframe width="100%" height="100%" style={{objectFit:'cover'}}
                     src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"

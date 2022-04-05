@@ -18,10 +18,7 @@ export default function ApartmentPinnedBlock() {
 						<RatingIconsPanel/>
 					</Stack>
 				</Stack>
-				<Stack
-					direction={{ xs: 'column' }}
-					spacing={2}
-				>
+				<Stack direction={{ xs: 'column' }} spacing={2}>
 					<MinMaxDateRangePicker dates={dates} setDates={setDates}  />
 					<GuestPopover />
 				</Stack>

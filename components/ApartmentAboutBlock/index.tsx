@@ -8,21 +8,19 @@ import Bull from "@components/Bull";
 export default function ApartmentAboutBlock(){
 	return (
 		<Grid container wrap="nowrap" spacing={2} sx={{mb:1}}>
-			<Grid item xs>
+			<Grid item>
 				<Typography variant='h6' component='div' sx={{mb:1}}>Жилье целиком в многоэтажном доме</Typography>
-				<Stack direction={ 'row' } alignItems={'center'} spacing={1}>
-					<Typography>до 2х гостей</Typography>
-					<Bull/>
-					<Typography>1 спальня</Typography>
-					<Bull/>
-					<Typography>1 кровать</Typography>
+				<Stack direction={ 'row' } alignItems={'center'} spacing={1} divider={<Bull/>}>
+					<Typography variant='body2'>до 2 гостей</Typography>
+					<Typography variant='body2'>1 спальня</Typography>
+					<Typography variant='body2'>1 кровать</Typography>
 				</Stack>
-				<Stack direction={{ xs: 'column', md:'row' }} alignItems={{xs:'start',md:'center'}} spacing={1} sx={{mt:2}}>
+				<Stack direction={{ xs: 'column', md:'row' }} alignItems={{xs:'start',md:'center'}} spacing={1} sx={{mt:2}} divider={<Bull/>}>
 					<Stack direction={'row'} alignItems={'center'} spacing={1}>
 						<Typography>20 отзывов</Typography>
 						<Link href='#' passHref><a style={{ color: '#00A699'}}>на сервисе A</a></Link>
 					</Stack>
-					<Bull/>
+
 					<Stack direction={'row'} alignItems={'center'} spacing={1}>
 						<Typography>20 отзывов</Typography>
 						<Link href='#' passHref><a style={{ color: '#00A699'}}>на сервисе B</a></Link>
