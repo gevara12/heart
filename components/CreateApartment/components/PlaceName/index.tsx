@@ -1,7 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Button,
   FormControl,
   InputAdornment,
   InputLabel,
@@ -17,6 +16,7 @@ import {
 } from '@components/CustomAlert';
 import { getCurrentApartment } from '@store/apartments/selectors';
 import { updateApartment } from '@store/apartments/actions';
+import { SaveButton } from '../SaveButton';
 
 type TState = {
   name: string;
@@ -116,11 +116,7 @@ export const PlaceName = () => {
           />
         </FormControl>
 
-        <div>
-          <Button variant='contained' onClick={createNew}>
-            Добавить
-          </Button>
-        </div>
+        <SaveButton onClick={createNew} />
       </Stack>
     </div>
   );

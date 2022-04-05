@@ -4,10 +4,17 @@ import { PlaceType } from './components/PlaceType';
 
 // import { getCurrentApartment } from '@store/apartments/selectors';
 import { Box, Button, Step, StepButton, Stepper } from '@mui/material';
+import { Hang } from './components/Hang';
 // import { MapsGeocode } from '@components/MapsGeocode';
-import { Qualities } from './components/Qualities';
+import dynamic from 'next/dynamic';
+
+const MapsGeocode = dynamic(() => import('@components/MapsGeocode'), {
+  loading: () => (<span>Loading...</span>),
+  ssr: false,
+});
 
 // import styles from './CreateApartment.module.css';
+import { PlaceName } from './components/PlaceName/index';
 
 const steps = [
   'Тип жилья',
@@ -19,7 +26,7 @@ const steps = [
   'Проверка',
 ];
 
-export const CreateApartment = (): React.ReactElement => {
+function CreateApartment(): React.ReactElement {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const [completed, setCompleted] = React.useState<{
@@ -65,9 +72,11 @@ export const CreateApartment = (): React.ReactElement => {
       case 0:
         return <PlaceType />;
       case 1:
-        return <div>default</div>;
+        return <MapsGeocode />;
+      case 2:
+        return <Hang />;
       case 3:
-        return <Qualities />;
+        return <PlaceName />;
       default:
         return <div>default</div>;
     }
@@ -88,7 +97,13 @@ export const CreateApartment = (): React.ReactElement => {
         </Stepper>
       </Box>
 
-      <Box sx={{ minHeight: 'calc(100vh - 400px)', margin: '3rem 0' }}>
+      <Box
+        sx={{
+          position: 'relative',
+          minHeight: 'calc(100vh - 400px)',
+          margin: '3rem 0',
+        }}
+      >
         {getStepContent(activeStep)}
       </Box>
 
@@ -113,4 +128,5 @@ export const CreateApartment = (): React.ReactElement => {
       {/* <ImageUpload /> */}
     </div>
   );
-};
+}
+export default CreateApartment;

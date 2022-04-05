@@ -84,3 +84,18 @@ export const updateApartment =
         // dispatch(userLogInFailAction(error?.data?.code));
       });
   };
+
+export const updateApartmentInfo =
+  (newApartment: TApartment) => async (dispatch: Dispatch) => {
+    updateApartmentAPI({
+      id: newApartment.id,
+      ...newApartment,
+    })
+      .then(({ data }) => {
+        dispatch(createApartmentRequest(data));
+      })
+      .catch((error) => {
+        dispatch(setErrorAction(error?.data?.code));
+        // dispatch(userLogInFailAction(error?.data?.code));
+      });
+  };

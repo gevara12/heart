@@ -1,79 +1,79 @@
 import * as React from 'react';
-import debounce from 'lodash/debounce';
-// import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
-import { Autocomplete, FormControl, TextField } from '@mui/material';
+import MapGL, { Marker } from 'react-map-gl';
+import PlaceIcon from '@mui/icons-material/Place';
 
-// const position = [51.505, -0.09];
+import Geocoder from 'react-map-gl-geocoder';
 
-export const MapsGeocode = (): React.ReactElement => {
-  const [value, setValue] = React.useState<string>('');
-  const [dbValue, saveToDb] = React.useState<string>('');
-  const [result, setResult] = React.useState<[]>([]);
+function MapsGeocode(): React.ReactElement {
+  const [viewport, setViewport] = React.useState({
+    latitude: 59.9311,
+    longitude: 30.3609,
+    zoom: 10,
+  });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedSave = React.useCallback(
-    debounce((nextValue) => saveToDb(nextValue), 800),
+  const mapRef = React.useRef();
+
+  const handleViewportChange = React.useCallback(
+    (newViewport) => setViewport(newViewport),
     []
   );
 
-  const handleChange = (event) => {
-    const { value: nextValue } = event.target;
-    setValue(nextValue);
+  const handleGeocoderViewportChange = React.useCallback((newViewport) => {
+    const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
-    debouncedSave(nextValue);
-  };
+    return handleViewportChange({
+      ...newViewport,
+      ...geocoderDefaultOverrides,
+    });
+  }, []);
 
-  // const token = 'SY9Gz6fHAEtGBn4Fa6HiyGQSQfrn9FRB';
-  // const fetchUrl = `https://kladr-api.ru/api.php?query=${decodeURI(
-  //   dbValue
-  // )}&contentType=city&withParent=1&limit=3`;
+  // const onResult = (param) => {
+  //   console.info('param', param);
+  // };
 
-  const fetchUrl = `https://nominatim.openstreetmap.org/search/?q=Красносельское, ${decodeURI(
-    dbValue
-  )}&accept-language=ru-RU&countrycodes=RU&format=json&addressdetails=1&limit=5`;
+  // const localGeocoder = (query) => {
+  //   console.info('query', query);
+  // };
 
-  const getCoordinates = async () => {
-    try {
-      const response = await fetch(fetchUrl, {
-        method: 'GET',
-      });
-      const result = await response.json();
-      console.info('result', result);
-      return result;
-    } catch (error) {
-      console.log('Fetch error: ', error);
-    }
-  };
+  const MAPBOX_TOKEN =
+    'pk.eyJ1IjoiZ2V2YXJhMTIiLCJhIjoiY2wxZjUzbnE2MDB2ZTNwdDlkb2xoYWZ5aCJ9.5pmbL-fy9fjHSJzW_OMjXw';
 
   React.useEffect(() => {
-    getCoordinates().then((r) => setResult(r));
-  }, [dbValue]);
+    console.info(viewport);
+  }, [viewport]);
 
-  // console.info(result);
   return (
     <div>
-      {result && (
-        <FormControl>
-          <Autocomplete
-            disablePortal
-            id='select-area'
-            sx={{ minWidth: '300px' }}
-            size='small'
-            options={result}
-            getOptionLabel={(option) => option?.display_name}
-            selectOnFocus
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label='Адрес'
-                value={value}
-                onChange={handleChange}
-              />
-            )}
+      <div style={{ height: 'calc(100vh - 400px)' }}>
+        <MapGL
+          ref={mapRef}
+          {...viewport}
+          width='100%'
+          height='100%'
+          mapStyle='mapbox://styles/gevara12/cl1g9baz6000c15pk8wik4xc8'
+          mapboxApiAccessToken={MAPBOX_TOKEN}
+          onViewportChange={handleViewportChange}
+        >
+          <Geocoder
+            mapRef={mapRef}
+            onViewportChange={handleGeocoderViewportChange}
+            mapboxApiAccessToken={MAPBOX_TOKEN}
+            position='top-right'
+            language='ru-RU'
+            countries='ru'
           />
-        </FormControl>
-      )}
+          <Marker
+            longitude={viewport.longitude}
+            latitude={viewport.latitude}
+            anchor='bottom'
+          >
+            <PlaceIcon color='secondary' />
+          </Marker>
+        </MapGL>
+      </div>
     </div>
   );
-};
+}
+
+export default MapsGeocode;

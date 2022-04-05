@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  Button,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
@@ -11,6 +10,7 @@ import { TPlaceType } from '@utils/types';
 
 import styles from './PlaceType.module.css';
 import { createApartment } from '@store/apartments/actions';
+import { SaveButton } from '../SaveButton';
 
 export const PlaceType = () => {
   const dispatch = useDispatch();
@@ -67,6 +67,7 @@ export const PlaceType = () => {
       </ToggleButtonGroup>
 
       {/* <Button onClick={createNew}>Next</Button> */}
+      <SaveButton onClick={createNew} />
     </div>
   );
 };
