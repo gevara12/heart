@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import {Avatar, Grid, Stack, Typography} from "@mui/material";
+import {Avatar, Stack, Typography} from "@mui/material";
 import Link from "next/link";
-import { VerifiedUser as VerifiedUserIcon} from '@mui/icons-material';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
-export default function ApartmentOwnerAboutBlock(){
+export default function OwnerAboutBlock(){
 	const owner = {
 		fullName: 'Иван Иванов',
 		registerDate: 'апрель 2022 г.',

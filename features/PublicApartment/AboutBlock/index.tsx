@@ -5,9 +5,9 @@ import {Avatar, Grid, Stack, Typography} from "@mui/material";
 import Bull from "@components/Bull";
 
 
-export default function ApartmentAboutBlock(){
+export default function AboutBlock(){
 	return (
-		<Grid container wrap="nowrap" spacing={2} sx={{mb:1}}>
+		<Grid container spacing={2} sx={{mb:1}}>
 			<Grid item>
 				<Typography variant='h6' component='div' sx={{mb:1}}>Жилье целиком в многоэтажном доме</Typography>
 				<Stack direction={ 'row' } alignItems={'center'} spacing={1} divider={<Bull/>}>

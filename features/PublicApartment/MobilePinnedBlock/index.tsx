@@ -1,9 +1,10 @@
 import * as React from "react";
-import {Box, Button, Card, CardContent, Stack} from "@mui/material";
 import Link from "next/link";
 
+import {Box, Button, Card, CardContent, Stack} from "@mui/material";
 
-export default function ApartmentMobilePinnedBlock() {
+
+export default function MobilePinnedBlock() {
 	return (
 		<Card sx={{ position:'fixed', left:0, bottom:0, width:'100%', zIndex:1, boxShadow: 3 }}>
 			<CardContent>
