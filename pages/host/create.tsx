@@ -7,8 +7,8 @@ import { Container } from '@mui/material';
 // import MapsGeocode from '@components/CreateApartment';
 
 // @ts-ignore
-const CreateWithNoSSR = dynamic(() => import('@components/CreateApartment'), {
-  ssr: false
+const CreateWithNoSSR = dynamic(() => import('@features/CreateApartment'), {
+  ssr: false,
 });
 
 export default function Create() {

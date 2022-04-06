@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from '@mui/material';
+import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 
 import { TPlaceType } from '@utils/types';
 
 import styles from './PlaceType.module.css';
 import { createApartment } from '@store/apartments/actions';
 import { SaveButton } from '../SaveButton';
+import { ApartmentReducer } from '@features/CreateApartment/customReducer';
 
 export const PlaceType = () => {
   const dispatch = useDispatch();
@@ -33,17 +30,32 @@ export const PlaceType = () => {
     setPlaceType(newPlace);
   };
 
+  const initialState = {
+    currentApartment: {},
+  };
+
+  const [state, apartDispatch] = React.useReducer(
+    ApartmentReducer,
+    initialState
+  );
+
   const createNew = async () => {
     try {
-      await dispatch(
-        createApartment({
-          placeType,
-        })
-      );
+      // @ts-ignore
+      apartDispatch({ type: 'update', payload: { placeType } });
+      // await dispatch(
+      //   createApartment({
+      //     placeType,
+      //   })
+      // );
     } catch (e: unknown) {
       console.error(e);
     }
   };
+
+  React.useEffect(() => {}, []);
+
+  console.info('state', state);
 
   return (
     <div className={styles.host}>

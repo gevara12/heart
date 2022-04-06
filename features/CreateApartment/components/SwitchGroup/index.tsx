@@ -1,38 +1,26 @@
 import * as React from 'react';
 import { FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentApartment } from '@store/apartments/selectors';
-import {
-  fetchApartmentById,
-  updateApartmentInfo,
-} from '@store/apartments/actions';
 
 import { SaveButton } from '../SaveButton';
 
+import {
+  ApartmentReducer,
+  initializer,
+} from '@features/CreateApartment/customReducer';
+
 import styles from './SwitchGroup.module.css';
 
-export const SwitchGroup = ({ qualitiesArr, title }) => {
-  const id = 'b6d01951-9785-4322-b1cc-7623110c48c3';
-  const dispatch = useDispatch();
-
+export const SwitchGroup = ({ qualitiesArr, title, payloadField }) => {
   const [values, setValues] = React.useState(qualitiesArr);
 
-  const { currentApartment } = useSelector(getCurrentApartment);
+  const [state, apartDispatch] = React.useReducer(
+    ApartmentReducer,
+    {},
+    initializer
+  );
 
-  const updateInfo = async () => {
-    try {
-      await dispatch(
-        updateApartmentInfo({
-          // id: currentApartment?.data?.id,
-          ...currentApartment,
-          id: 'b6d01951-9785-4322-b1cc-7623110c48c3',
-          qualities: values,
-        })
-      );
-    } catch (e: unknown) {
-      console.error(e);
-      //  setOpenError(true);
-    }
+  const updateInfo = () => {
+    apartDispatch({ type: 'update', payload: { [payloadField]: values } });
   };
 
   const checkHandler = React.useCallback(
@@ -46,10 +34,21 @@ export const SwitchGroup = ({ qualitiesArr, title }) => {
   );
 
   React.useEffect(() => {
-    dispatch(fetchApartmentById(id));
-  }, [dispatch, id]);
+    const { currentApartment } =
+      JSON.parse(localStorage.getItem('currentApartment')) || {};
+    console.info('jso', currentApartment);
+    currentApartment && setValues([...currentApartment?.[payloadField]]);
+  }, []);
 
-  console.info('currentApartment', currentApartment);
+  React.useEffect(() => {
+    apartDispatch({
+      type: 'update',
+      payload: { ...state.currentApartment, [payloadField]: values },
+    });
+    localStorage.setItem('currentApartment', JSON.stringify(state));
+  }, [values]);
+
+  // console.table(state.currentApartment);
 
   return (
     <div className={styles.host}>

@@ -9,7 +9,7 @@ import { Hang } from './components/Hang';
 import dynamic from 'next/dynamic';
 
 const MapsGeocode = dynamic(() => import('@components/MapsGeocode'), {
-  loading: () => (<span>Loading...</span>),
+  loading: () => <span>Loading...</span>,
   ssr: false,
 });
 
@@ -69,11 +69,11 @@ function CreateApartment(): React.ReactElement {
 
   const getStepContent = (step: number) => {
     switch (step) {
-      case 0:
-        return <PlaceType />;
-      case 1:
-        return <MapsGeocode />;
       case 2:
+        return <PlaceType />;
+      // case 1:
+      //   return <MapsGeocode />;
+      case 0:
         return <Hang />;
       case 3:
         return <PlaceName />;

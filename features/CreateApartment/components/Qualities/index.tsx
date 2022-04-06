@@ -35,5 +35,11 @@ export const Qualities = () => {
     },
   ];
 
-  return <SwitchGroup qualitiesArr={qualitiesArr} title='Стандратные' />;
+  return (
+    <SwitchGroup
+      qualitiesArr={qualitiesArr}
+      title='Стандратные'
+      payloadField='qualities'
+    />
+  );
 };
