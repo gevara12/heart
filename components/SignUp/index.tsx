@@ -38,7 +38,7 @@ export const SignUp = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [userName, email, password]);
+  }, [userName, email, password, dispatch, changeMessage]);
 
   // console.info('message', message);
 

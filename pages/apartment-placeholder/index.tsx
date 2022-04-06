@@ -28,7 +28,7 @@ import PhotoSlider from "@features/PublicApartment/PhotoSlider";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PhotoBlock from "@features/PublicApartment/PhotoBlock";
 
-import Apartment from "./ApartmentMock";
+import Apartment from "@components/ApartmentMock";
 import AboutBlock from "@features/PublicApartment/AboutBlock";
 import OwnerAboutBlock from "@features/PublicApartment/OwnerAboutBlock";
 import PinnedBlock from "@features/PublicApartment/PinnedBlock";
