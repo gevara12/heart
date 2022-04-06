@@ -31,17 +31,23 @@ interface ApartmentPhotoBlockProps  {
 }
 export default function PhotoBlock({photos}:ApartmentPhotoBlockProps) {
 
-	let lightbox;
+	const [lightbox, setLightbox] = React.useState(null);
 
 	React.useEffect(() => {
-		lightbox = new PhotoSwipeLightbox({ dataSource: [...photos], pswpModule: PhotoSwipe });
-		lightbox.init();
+		setLightbox(new PhotoSwipeLightbox({ dataSource: [...photos], pswpModule: PhotoSwipe }));
 
 		return () => {
-			lightbox.destroy();
-			lightbox = null;
+			if (lightbox !== null) {
+				lightbox.destroy();
+				setLightbox(null);
+			}
 		};
 	}, []);
+	React.useEffect(() => {
+		if (lightbox !== null){
+			lightbox.init();
+		}
+	},[lightbox]);
 
 	const slicedPhotos = [...photos].slice(0,5);
 
@@ -50,12 +56,12 @@ export default function PhotoBlock({photos}:ApartmentPhotoBlockProps) {
 			{ slicedPhotos.map(( image, i) =>
 				(i === 0
 					? <BigItem gridColumn="span 6" gridRow="1/3" key={i}>
-							<div onClick={()=>lightbox.loadAndOpen(i)}>
+							<div onClick={lightbox !==null ? ()=>lightbox.loadAndOpen(i) : ()=>{}}>
 								<img src={image.src} height={image.height} width={image.width} alt=""/>
 							</div>
 						</BigItem>
 					: <Item gridColumn="span 3" gridRow={i%2!==0 ? 1 : 2} key={i}>
-							<div onClick={()=>lightbox.loadAndOpen(i)}>
+							<div onClick={lightbox !==null ? ()=>lightbox.loadAndOpen(i) : ()=>{}}>
 									<img src={image.src} height={image.height} width={image.width} alt="" />
 							</div>
 						</Item>
