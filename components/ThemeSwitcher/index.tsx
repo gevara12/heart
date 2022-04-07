@@ -19,7 +19,7 @@ export const ToggleColorMode = ({
 }: {
   children: React.ReactNode;
 }): React.ReactElement => {
-  const [mode, setMode] = React.useState(Theme.dark);
+  const [mode, setMode] = React.useState(Theme.light); // weve got light design
 
   const colorMode = React.useMemo(
     () => ({
