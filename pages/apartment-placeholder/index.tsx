@@ -42,12 +42,12 @@ export default function ApartmentPlaceholder() {
   const isMobile = useMediaQuery( breakpoints.down('md') );
 
   return (
-    <Layout>
+    <Layout isHero={true}>
       <SEO />
       <section>
         <Container maxWidth='lg'>
 
-          { isMobile && <PhotoSlider/>}
+          { isMobile && <PhotoSlider photos={Apartment.photos}/>}
 
           <header>
             <Typography variant='h4' component='div'>{Apartment.title}</Typography>
