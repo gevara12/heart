@@ -28,3 +28,6 @@ export const LOGOUT = 'LOGOUT';
 
 export const SET_ERROR = 'SET_ERROR';
 export const HIDE_ERROR = 'HIDE_ERROR';
+
+export const SNACKBAR_OPEN = 'SNACKBAR_OPEN';
+export const SNACKBAR_CLEAR = 'SNACKBAR_CLEAR';

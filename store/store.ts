@@ -8,6 +8,7 @@ import { apartments, currentApartment } from '@store/apartments/reducers';
 import { images } from '@store/images/reducers';
 import { auth } from '@store/auth/reducers';
 import { error } from '@store/error/reducers';
+import { snackbar } from '@store/snackbar/reducers';
 // import { loadState, saveState } from '@store/sessionStorage';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   images,
   auth,
   error,
+  snackbar
 });
 
 const initialState = {};

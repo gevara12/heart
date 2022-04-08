@@ -1,13 +1,20 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import debounce from 'lodash/debounce';
-import {Box, Button, FormControl, Stack, TextField, Typography} from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  MenuItem,
+  Stack,
+  TextField,
+} from '@mui/material';
+
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 import { CustomModal } from '@components/CustomModal';
+import { showSnackbar } from '@store/snackbar/actions';
+import { SeverityEnum } from '@components/CustomSnackBar';
 import { userRegister } from '@store/auth/actions';
-// import { getErrorSelector } from '@store/error/selectors';
-import { setError } from '@store/error/actions';
-import MenuItem from "@mui/material/MenuItem";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -17,59 +24,48 @@ export const SignUp = () => {
   const [userName, setUserName] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
-
-  // @ts-ignore
-  // const { message } = useSelector(getMessage);
-  const changeMessage = React.useCallback((newMessage) => {
-    dispatch(setError(newMessage));
-  }, [dispatch]);
-
-  // const [message, setMessage] = React.useState<string>('');
+  const [rePassword, setRePassword] = React.useState<string>('');
+  const [phoneNumber, setPhoneNumber] = React.useState<string>('');
 
   const handleOpen = (): void => setIsModalOpen(true);
   const handleClose = (): void => setIsModalOpen(false);
 
+  const phoneChange = (value: string) => {
+    setPhoneNumber(value);
+  };
+
   const handleSubmit = React.useCallback(async () => {
     try {
-      console.log(userName, email, password);
-      await dispatch(userRegister({ userName, email, password }));
-      debounce(changeMessage, 500);
-      // message === '' && handleClose();
+      if (password === rePassword && phoneNumber.length > 17) {
+        await dispatch(userRegister({ email, phoneNumber, password }));
+        dispatch(
+          showSnackbar({
+            message: 'Вы успешно зарегистрированы',
+            severity: SeverityEnum.success,
+          })
+        );
+      } else {
+        dispatch(
+          showSnackbar({
+            message: 'Пожалуйста, заполните поля',
+            severity: SeverityEnum.warning,
+          })
+        );
+      }
     } catch (error) {
       console.error(error);
     }
-  }, [userName, email, password, dispatch, changeMessage]);
+  }, [userName, email, password, dispatch]);
 
-  // console.info('message', message);
-
+  console.info(phoneNumber.length, password === rePassword);
   return (
     <div>
       <MenuItem key={'register'} onClick={handleOpen}>
         Регистрация
       </MenuItem>
-      {/*<Button
-        variant='text'
-        onClick={handleOpen}
-        sx={{
-          color: 'text.primary',
-        }}
-      >
-        Регистрация
-      </Button>*/}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>
         <Box sx={{ maxWidth: '380px', p: 4 }}>
-          <FormControl sx={{ mb: 4 }} fullWidth>
-            <TextField
-              label='Имя пользователя'
-              variant='outlined'
-              required
-              size='small'
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </FormControl>
-
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
               label='Email'
@@ -81,9 +77,20 @@ export const SignUp = () => {
             />
           </FormControl>
 
-          <FormControl sx={{ mb: 5 }} fullWidth>
+          <FormControl sx={{ mb: 4 }} fullWidth>
+            <MuiPhoneNumber
+              defaultCountry={'ru'}
+              label='Номер телефона'
+              variant='outlined'
+              size='small'
+              regions={'europe'}
+              onChange={phoneChange}
+            />
+          </FormControl>
+
+          <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
-              label='Пароль'
+              label='Введите пароль'
               variant='outlined'
               type='password'
               size='small'
@@ -92,7 +99,16 @@ export const SignUp = () => {
             />
           </FormControl>
 
-          {/*{message !== '' && (<div>{message}</div>)}*/}
+          <FormControl sx={{ mb: 5 }} fullWidth>
+            <TextField
+              label='Повторите пароль'
+              variant='outlined'
+              type='password'
+              size='small'
+              required
+              onChange={(e) => setRePassword(e.target.value)}
+            />
+          </FormControl>
 
           <Stack direction='row'>
             <Button
@@ -103,10 +119,10 @@ export const SignUp = () => {
               size='large'
               onClick={handleSubmit}
             >
-              Signup
+              Регистрация
             </Button>
             <Button variant='text' size='large' onClick={handleClose}>
-              Cancel
+              Отмена
             </Button>
           </Stack>
         </Box>

@@ -14,12 +14,12 @@ import { CustomModal } from '@components/CustomModal';
 import { logout, userLogin } from '@store/auth/actions';
 import { getUserStatus } from '@store/auth/selectors';
 // import { getUserStatus } from '@store/auth/selectors';
-import { getErrorSelector } from '@store/error/selectors';
-import MenuItem from "@mui/material/MenuItem";
+import MenuItem from '@mui/material/MenuItem';
+import { showSnackbar } from '@store/snackbar/actions';
+import { SeverityEnum } from '@components/CustomSnackBar';
 
 export const LogIn = () => {
   const dispatch = useDispatch();
-  const { error } = useSelector(getErrorSelector);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [userName, setUserName] = React.useState<string>('');
@@ -33,6 +33,12 @@ export const LogIn = () => {
   const handleSubmit = async () => {
     try {
       await dispatch(userLogin({ userName, password }));
+      dispatch(
+        showSnackbar({
+          message: 'Авторизация пройдена',
+          severity: SeverityEnum.success,
+        })
+      );
       handleClose();
     } catch (error) {
       console.error(error);
@@ -49,40 +55,25 @@ export const LogIn = () => {
 
   React.useEffect(() => {
     // console.log('login error', error);
-  }, [dispatch, error]);
+  }, [dispatch]);
 
   return (
     <div>
       {auth.user.username === null ? (
-        <MenuItem key={'login'} onClick={handleOpen}>Войти</MenuItem>
-        /*<Button
-          variant='text'
-          onClick={handleOpen}
-          sx={{
-            color: 'text.primary',
-          }}
-        >
+        <MenuItem key={'login'} onClick={handleOpen}>
           Войти
-        </Button>*/
+        </MenuItem>
       ) : (
-        <MenuItem key={'logout'} onClick={handleLogout}>Выйти</MenuItem>
-        /*<Button
-          variant='text'
-          color='primary'
-          sx={{
-            color: 'text.primary',
-          }}
-          onClick={handleLogout}
-        >
-          Log Out
-        </Button>*/
+        <MenuItem key={'logout'} onClick={handleLogout}>
+          Выйти
+        </MenuItem>
       )}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>
         <Box sx={{ maxWidth: '380px', p: 3 }}>
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
-              label='Имя пользователя'
+              label='Email или номер телефона'
               variant='outlined'
               required
               size='small'
@@ -111,17 +102,12 @@ export const LogIn = () => {
               size='large'
               onClick={handleSubmit}
             >
-              Log in
+              Войти
             </Button>
             <Button variant='text' size='large' onClick={handleClose}>
-              Cancel
+              Отмена
             </Button>
           </Stack>
-          {error && (
-            <Typography variant='h6' component='p' color='error'>
-              {error}
-            </Typography>
-          )}
         </Box>
       </CustomModal>
     </div>

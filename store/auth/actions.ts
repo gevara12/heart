@@ -4,33 +4,27 @@ import { createAction } from 'redux-actions';
 
 import {
   apiUrl,
-  LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  REGISTER_FAIL,
   REGISTER_SUCCESS,
-  SET_ERROR,
+  SNACKBAR_OPEN,
 } from '@store/constants';
 
 import {
   USER_LOGOUT_ENDPOINT,
   userLogInAPI,
   userRegisterAPI,
-  USER_REGISTER_ENDPOINT,
 } from '@store/auth/api';
+import { SeverityEnum } from '@components/CustomSnackBar';
 
 const userRegisterRequest = createAction(REGISTER_SUCCESS);
-const userRegisterFailRequest = createAction(REGISTER_FAIL);
 const userLogInAction = createAction(LOGIN_SUCCESS);
-const userLogInFailAction = createAction(LOGIN_FAIL);
 const userLogOutAction = createAction(LOGOUT);
 
-const setErrorAction = createAction(SET_ERROR);
-
 type TUserRegister = {
-  userName: string;
   email: string;
   password: string;
+  phoneNumber: string;
 };
 
 type TUserLogin = {
@@ -46,24 +40,24 @@ export type TUser = {
 };
 
 export const userRegister =
-  ({ userName, password }: TUserRegister) =>
+  ({ email, password, phoneNumber }: TUserRegister) =>
   async (dispatch: Dispatch) => {
     userRegisterAPI({
-      username: userName,
+      phonenumber: phoneNumber,
+      email,
       password,
-    }).then(
-      ({ data }) => {
+    })
+      .then(({ data }) => {
         dispatch(userRegisterRequest(data.data));
         localStorage.setItem('accessToken', JSON.stringify(data.data.token));
-        return Promise.resolve();
-      },
-      (error) => {
-        console.error(error?.data?.code);
-        dispatch(setErrorAction(error?.data?.code));
-        dispatch(userRegisterFailRequest());
-        return Promise.reject();
-      }
-    );
+      })
+      .catch((error) => {
+        dispatch({
+          type: SNACKBAR_OPEN,
+          message: error?.data?.code,
+          severity: SeverityEnum.error,
+        });
+      });
   };
 
 export const userLogin =
@@ -74,14 +68,16 @@ export const userLogin =
       password,
     })
       .then(({ data }) => {
-        console.info('data.data', data.data);
         dispatch(userLogInAction(data.data.user));
         sessionStorage.setItem('username', data.data.user.username);
         sessionStorage.setItem('accessToken', data.data.token);
       })
       .catch((error) => {
-        dispatch(setErrorAction(error?.data?.code));
-        // dispatch(userLogInFailAction(error?.data?.code));
+        dispatch({
+          type: SNACKBAR_OPEN,
+          message: error?.data?.code,
+          severity: SeverityEnum.error,
+        });
       });
   };
 

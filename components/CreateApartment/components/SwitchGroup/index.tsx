@@ -12,7 +12,7 @@ import { SaveButton } from '../SaveButton';
 import styles from './SwitchGroup.module.css';
 
 export const SwitchGroup = ({ qualitiesArr, title }) => {
-  const id = 'b6d01951-9785-4322-b1cc-7623110c48c3';
+  const id = '876a0798-5051-44e7-a67a-6dca2b916804';
   const dispatch = useDispatch();
 
   const [values, setValues] = React.useState(qualitiesArr);
@@ -25,7 +25,7 @@ export const SwitchGroup = ({ qualitiesArr, title }) => {
         updateApartmentInfo({
           // id: currentApartment?.data?.id,
           ...currentApartment,
-          id: 'b6d01951-9785-4322-b1cc-7623110c48c3',
+          id: '876a0798-5051-44e7-a67a-6dca2b916804',
           qualities: values,
         })
       );
