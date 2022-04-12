@@ -1,30 +1,34 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import AppBar from '@mui/material/AppBar';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Tooltip from '@mui/material/Tooltip';
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  IconButton,
+  Menu,
+  Toolbar,
+  Tooltip,
+  Typography,
+  MenuItem,
+} from '@mui/material';
 
 import { SignUp } from '@components/SignUp';
 import { LogIn } from '@components/LogIn';
 
 import { getUserStatus } from '@store/auth/selectors';
-import { ThemeSwitcher } from '@components/ThemeSwitcher';
+// import { ThemeSwitcher } from '@components/ThemeSwitcher';
+import { fetchCurrentUser } from '@store/auth/actions';
 
 export const Header = (): React.ReactElement => {
+  const dispatch = useDispatch();
   const auth = useSelector(getUserStatus);
 
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -34,25 +38,25 @@ export const Header = (): React.ReactElement => {
     setAnchorElUser(null);
   };
 
+  React.useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <div>
       <AppBar
-        position='static'
+        position="static"
         sx={{
           bgcolor: 'background.default',
           boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.15)',
         }}
       >
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 0, mr: 2 }}>
-              <Link href='/' passHref>
+              <Link href="/" passHref>
                 <a style={{ display: 'block' }}>
-                  <img
-                    style={{ display: 'block', height: '40px' }}
-                    src={'/images/heart-logo.png'}
-                    alt={''}
-                  />
+                  <img style={{ display: 'block', height: '40px' }} src={'/images/heart-logo.png'} alt={''} />
                 </a>
               </Link>
             </Box>
@@ -64,26 +68,23 @@ export const Header = (): React.ReactElement => {
                 justifyContent: { xs: 'center', sm: 'flex-end' },
               }}
             >
-              <Link href='/apartments' passHref>
-                <Button
-                  variant='outlined'
-                  sx={{ color: '#1976D2', borderColor: '#1976D2' }}
-                >
+              <Link href="/apartments" passHref>
+                <Button variant="outlined" sx={{ color: '#1976D2', borderColor: '#1976D2' }}>
                   Сдать жилье
                 </Button>
               </Link>
             </Box>
 
             <Box sx={{ flexGrow: 0, ml: 2 }}>
-              <Tooltip title='Открыть настройки'>
+              <Tooltip title="Открыть настройки">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt='Remy Sharp' />
+                  <Avatar>N</Avatar>
                 </IconButton>
               </Tooltip>
 
               <Menu
                 sx={{ mt: '45px' }}
-                id='menu-appbar'
+                id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 keepMounted
@@ -91,12 +92,28 @@ export const Header = (): React.ReactElement => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {auth.user.username === null && <SignUp />}
+                {auth.isLoggedIn === true ? (
+                  <MenuItem component="div">
+                    <Link href="/profile">
+                      <Typography
+                        sx={{
+                          mr: 4,
+                        }}
+                        variant="body1"
+                        component="span"
+                      >
+                        Профиль
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                ) : (
+                  <SignUp />
+                )}
 
-                {auth.user.username === null && <Divider />}
+                {auth.isLoggedIn === false && <Divider />}
 
                 <LogIn />
-                <ThemeSwitcher />
+                {/* <ThemeSwitcher /> */}
               </Menu>
             </Box>
           </Toolbar>

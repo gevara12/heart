@@ -12,15 +12,15 @@ export type TApartment = {
 };
 
 export type TUser = {
-  enabled: boolean;
-  id: string;
-  username: string;
-  status: 'ACTIVE' | 'DISABLED';
+  data: {
+    enabled: boolean;
+    id: string;
+    name: string;
+    status: 'ACTIVE' | 'DISABLED';
+  };
 };
 
 export type TAuth = {
   isLoggedIn: boolean;
   user: TUser;
 };
-
-

@@ -1,13 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  Box,
-  Button,
-  FormControl,
-  MenuItem,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Box, Button, FormControl, MenuItem, Stack, TextField } from '@mui/material';
 
 import MuiPhoneNumber from 'material-ui-phone-number';
 
@@ -21,7 +14,6 @@ export const SignUp = () => {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const [userName, setUserName] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
   const [rePassword, setRePassword] = React.useState<string>('');
@@ -31,33 +23,35 @@ export const SignUp = () => {
   const handleClose = (): void => setIsModalOpen(false);
 
   const phoneChange = (value: string) => {
-    setPhoneNumber(value);
+    let resultValue = value.replace(/[^\d]/g, '');
+    setPhoneNumber(resultValue);
   };
 
   const handleSubmit = React.useCallback(async () => {
     try {
-      if (password === rePassword && phoneNumber.length > 17) {
-        await dispatch(userRegister({ email, phoneNumber, password }));
-        dispatch(
-          showSnackbar({
-            message: 'Вы успешно зарегистрированы',
-            severity: SeverityEnum.success,
-          })
-        );
-      } else {
-        dispatch(
-          showSnackbar({
-            message: 'Пожалуйста, заполните поля',
-            severity: SeverityEnum.warning,
-          })
-        );
-      }
+      await dispatch(userRegister({ email, phoneNumber, password }));
+      dispatch(
+        showSnackbar({
+          message: 'Вы успешно зарегистрированы',
+          severity: SeverityEnum.success,
+        }),
+      );
+      handleClose();
+      // if (password === rePassword) {
+      //
+      // } else {
+      //   dispatch(
+      //     showSnackbar({
+      //       message: 'Пожалуйста, заполните поля',
+      //       severity: SeverityEnum.warning,
+      //     })
+      //   );
+      // }
     } catch (error) {
       console.error(error);
     }
-  }, [userName, email, password, dispatch]);
+  }, [email, password, rePassword, dispatch]);
 
-  console.info(phoneNumber.length, password === rePassword);
   return (
     <div>
       <MenuItem key={'register'} onClick={handleOpen}>
@@ -68,10 +62,10 @@ export const SignUp = () => {
         <Box sx={{ maxWidth: '380px', p: 4 }}>
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
-              label='Email'
-              variant='outlined'
-              type='email'
-              size='small'
+              label="Email"
+              variant="outlined"
+              type="email"
+              size="small"
               required
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -80,9 +74,9 @@ export const SignUp = () => {
           <FormControl sx={{ mb: 4 }} fullWidth>
             <MuiPhoneNumber
               defaultCountry={'ru'}
-              label='Номер телефона'
-              variant='outlined'
-              size='small'
+              label="Номер телефона"
+              variant="outlined"
+              size="small"
               regions={'europe'}
               onChange={phoneChange}
             />
@@ -90,10 +84,10 @@ export const SignUp = () => {
 
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
-              label='Введите пароль'
-              variant='outlined'
-              type='password'
-              size='small'
+              label="Введите пароль"
+              variant="outlined"
+              type="password"
+              size="small"
               required
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -101,27 +95,27 @@ export const SignUp = () => {
 
           <FormControl sx={{ mb: 5 }} fullWidth>
             <TextField
-              label='Повторите пароль'
-              variant='outlined'
-              type='password'
-              size='small'
+              label="Повторите пароль"
+              variant="outlined"
+              type="password"
+              size="small"
               required
               onChange={(e) => setRePassword(e.target.value)}
             />
           </FormControl>
 
-          <Stack direction='row'>
+          <Stack direction="row">
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               sx={{ mr: 3 }}
-              size='large'
+              size="large"
               onClick={handleSubmit}
             >
               Регистрация
             </Button>
-            <Button variant='text' size='large' onClick={handleClose}>
+            <Button variant="text" size="large" onClick={handleClose}>
               Отмена
             </Button>
           </Stack>

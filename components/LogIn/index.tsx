@@ -1,14 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  Box,
-  Button,
-  FormControl,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, FormControl, Stack, TextField } from '@mui/material';
 
 import { CustomModal } from '@components/CustomModal';
 import { logout, userLogin } from '@store/auth/actions';
@@ -37,7 +30,7 @@ export const LogIn = () => {
         showSnackbar({
           message: 'Авторизация пройдена',
           severity: SeverityEnum.success,
-        })
+        }),
       );
       handleClose();
     } catch (error) {
@@ -59,13 +52,13 @@ export const LogIn = () => {
 
   return (
     <div>
-      {auth.user.username === null ? (
-        <MenuItem key={'login'} onClick={handleOpen}>
-          Войти
-        </MenuItem>
-      ) : (
+      {auth.isLoggedIn === true ? (
         <MenuItem key={'logout'} onClick={handleLogout}>
           Выйти
+        </MenuItem>
+      ) : (
+        <MenuItem key={'login'} onClick={handleOpen}>
+          Войти
         </MenuItem>
       )}
 
@@ -73,10 +66,10 @@ export const LogIn = () => {
         <Box sx={{ maxWidth: '380px', p: 3 }}>
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
-              label='Email или номер телефона'
-              variant='outlined'
+              label="Email или номер телефона"
+              variant="outlined"
               required
-              size='small'
+              size="small"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
@@ -84,27 +77,27 @@ export const LogIn = () => {
 
           <FormControl sx={{ mb: 5 }} fullWidth>
             <TextField
-              label='Пароль'
-              variant='outlined'
-              type='password'
-              size='small'
+              label="Пароль"
+              variant="outlined"
+              type="password"
+              size="small"
               required
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
 
-          <Stack direction='row'>
+          <Stack direction="row">
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               sx={{ mr: 3 }}
-              size='large'
+              size="large"
               onClick={handleSubmit}
             >
               Войти
             </Button>
-            <Button variant='text' size='large' onClick={handleClose}>
+            <Button variant="text" size="large" onClick={handleClose}>
               Отмена
             </Button>
           </Stack>

@@ -2,24 +2,16 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 import { createAction } from 'redux-actions';
 
-import {
-  apiUrl,
-  LOGIN_SUCCESS,
-  LOGOUT,
-  REGISTER_SUCCESS,
-  SNACKBAR_OPEN,
-} from '@store/constants';
+import { apiUrl, CURRENT_USER, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS, SNACKBAR_OPEN } from '@store/constants';
 
-import {
-  USER_LOGOUT_ENDPOINT,
-  userLogInAPI,
-  userRegisterAPI,
-} from '@store/auth/api';
+import { USER_LOGOUT_ENDPOINT, userCurrentAPI, userLogInAPI, userRegisterAPI, userUpdateAPI } from '@store/auth/api';
 import { SeverityEnum } from '@components/CustomSnackBar';
+import { error } from '@store/error/reducers';
 
 const userRegisterRequest = createAction(REGISTER_SUCCESS);
 const userLogInAction = createAction(LOGIN_SUCCESS);
 const userLogOutAction = createAction(LOGOUT);
+const userCurrentAction = createAction(CURRENT_USER);
 
 type TUserRegister = {
   email: string;
@@ -37,6 +29,31 @@ export type TUser = {
   id: string;
   username: string;
   status: 'ACTIVE' | 'DISABLED';
+};
+
+export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
+  userCurrentAPI()
+    .then(({ data }) => {
+      dispatch(userCurrentAction(data));
+    })
+    .catch((error) => {
+      dispatch({
+        type: SNACKBAR_OPEN,
+        message: error?.data?.code,
+        severity: SeverityEnum.error,
+      });
+    });
+};
+
+export const userUpdate = (userInfo) => async (dispatch: Dispatch) => {
+  console.info('userInfo', userInfo);
+  userUpdateAPI(userInfo)
+    .then(({ data }) => {
+      console.info('userUpdate', data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 export const userRegister =
