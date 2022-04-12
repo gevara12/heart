@@ -15,7 +15,7 @@ export default function OwnerAboutBlock(){
 		<>
 			<Stack direction={{xs:'row-reverse', md:'row'}} spacing={2} sx={{mb:1}}>
 				<div>
-					<Avatar>W</Avatar>
+					<Avatar src="https://i1.sndcdn.com/avatars-000211446087-hahqw0-t500x500.jpg">W</Avatar>
 				</div>
 				<div style={{flex:'1 1 auto'}}>
 					<Typography variant='h5'>{owner.fullName}</Typography>

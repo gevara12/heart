@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -44,10 +44,10 @@ export default function PhotoSlider({photos}:PhotoSliderProps){
 	},[lightbox]);
 
 	return (
-		<Box sx={{ ml:{xs:-2, sm:-3}, mr:{xs:-2, sm:-3} }}>
+		<Box sx={{ ml:{xs:-2, sm:-3}, mr:{xs:-2, sm:-3}, mb:1.5 }}>
 			<Swiper {...SwiperOpts}>
 				{ photos.map((photo, i) =>
-					<SwiperSlide style={{ height:'auto' }} key={i}>
+					<SwiperSlide style={{ height:'194px' }} key={i}>
 						<div onClick={ ()=>((lightbox !==null) && lightbox.loadAndOpen(i)) } style={{ height:'100%' }}>
 							<img src={photo.src} alt="" style={{ width: '100%', height:'100%', objectFit:'cover' }} />
 						</div>

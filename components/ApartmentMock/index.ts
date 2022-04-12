@@ -4,6 +4,16 @@ const Apartment = {
 	description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad at cupiditate doloremque esse ex facilis fugiat ipsa maiores, minima nesciunt, nostrum officiis perferendis porro quasi recusandae sed totam voluptas voluptate.',
 	photos: [
 		{
+			src: 'https://1.bp.blogspot.com/-l8DkLh3-zAc/WDyBKcA_iaI/AAAAAAAALKQ/qCz456IHNAIx2uSFOmLHo2TUoMhEtYXTQCEw/s1600/madeira_demolicao6.jpeg',
+			width: 1200,
+			height: 1600,
+		},
+		{
+			src:'https://dizainexpert.ru/wp-content/uploads/2019/07/loft-v-malenkoj-kvartire-interer-foto.jpg',
+			width: 1772,
+			height: 1181,
+		},
+		{
 			src: 'https://cdn.pixabay.com/photo/2017/02/14/10/46/cat-2065595_1280.jpg',
 			width: 1280,
 			height: 853,

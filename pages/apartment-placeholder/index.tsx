@@ -50,7 +50,7 @@ export default function ApartmentPlaceholder() {
           { isMobile && <PhotoSlider photos={Apartment.photos}/>}
 
           <header>
-            <Typography variant='h4' component='div'>{Apartment.title}</Typography>
+            <Typography variant='h5' component='div'>{Apartment.title}</Typography>
             <Box sx={{display:{xs:'block',md:'flex'}, justifyContent:'space-between'}}>
 
               <Stack direction={{ xs: 'column', md:'row' }} alignItems={{xs:'start',md:'center'}} spacing={{ xs: 0, md:3 }}>
@@ -79,6 +79,8 @@ export default function ApartmentPlaceholder() {
               </Box>
             </Box>
           </header>
+
+          <Divider sx={{mt:3, mb:3}}/>
 
           { !isMobile && <PhotoBlock photos={Apartment.photos}/> }
 
@@ -151,7 +153,7 @@ export default function ApartmentPlaceholder() {
                   </Grid>
                 </ApartmentBlock>
               </Grid>
-              <Grid item xs={12} md={1}/>
+              <Grid item xs={12} md={1} sx={{display:{xs:'none',md:"block"}}}/>
 
               { isMobile
                 ? <MobilePinnedBlock/>
