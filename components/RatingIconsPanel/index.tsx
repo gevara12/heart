@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import {Stack} from "@mui/material";
-import {Bolt as BoltIcon, Star as StarIcon} from "@mui/icons-material";
+import StarIcon from "@mui/icons-material/Star";
+import BoltIcon from "@mui/icons-material/Bolt";
 import Bull from "@components/Bull";
 
 

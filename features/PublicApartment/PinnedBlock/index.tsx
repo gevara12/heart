@@ -7,7 +7,7 @@ import RatingIconsPanel from "@components/RatingIconsPanel";
 
 
 
-export default function ApartmentPinnedBlock() {
+export default function PinnedBlock() {
 	const [dates, setDates] = React.useState<DateRange<Date>>([null, null]);
 	return (
 		<Card sx={{ position:'sticky', top:20 }}>
