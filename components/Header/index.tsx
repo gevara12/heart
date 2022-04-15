@@ -46,7 +46,7 @@ export const Header = (): React.ReactElement => {
   React.useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
-  console.info('auth', auth);
+
   return (
     <div>
       <AppBar
