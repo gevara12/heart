@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Stack } from '@mui/material';
 
-export const SaveButton = ({ onClick }) => {
+export const NextButton = ({ onClick }) => {
   return (
     <Stack
       direction='row'
@@ -9,7 +9,7 @@ export const SaveButton = ({ onClick }) => {
       sx={{ position: 'absolute', bottom: 0, right: 0 }}
     >
       <Button variant='contained' onClick={onClick}>
-        Сохранить
+        Дальше
       </Button>
     </Stack>
   );

@@ -28,3 +28,11 @@ export const LOGOUT = 'LOGOUT';
 
 export const SET_ERROR = 'SET_ERROR';
 export const HIDE_ERROR = 'HIDE_ERROR';
+
+export const SNACKBAR_OPEN = 'SNACKBAR_OPEN';
+export const SNACKBAR_CLEAR = 'SNACKBAR_CLEAR';
+
+export const INCREASE = 'INCREASE';
+export const DECREASE = 'DECREASE';
+export const FORM_VALUE = 'FORM_VALUE';
+export const FORM_GROUP_VALUE = 'FORM_GROUP_VALUE';

@@ -2,7 +2,7 @@ import axiosService from '@services/axiosService';
 import { apiUrl } from '@store/constants';
 
 export const CREATE_APARTMENT_ENDPOINT = 'APARTMENTS';
-export const SEARCH_APARTMENT_ENDPOINT = 'APARTMENTS/search';
+export const SEARCH_APARTMENT_ENDPOINT = 'public/APARTMENTS/search';
 export const GET_APARTMENT_ENDPOINT = 'APARTMENTS';
 export const UPDATE_APARTMENT_ENDPOINT = 'APARTMENTS';
 export const DELETE_APARTMENT_ENDPOINT = 'APARTMENTS/delete';

@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 
+import { CustomSnackBar } from '@components/CustomSnackBar';
 import { Footer } from '@components/Footer';
 import { Header } from '@components/Header';
 
@@ -14,6 +15,7 @@ export default function Layout({
 }) {
   return (
     <>
+      <CustomSnackBar />
       <Header />
       <main
         className={classnames(styles.main, {

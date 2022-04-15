@@ -18,25 +18,20 @@ const initialState = { isLoggedIn: false, user: { username } };
 export const auth = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    // TODO remove current user get by separate action
-    case CURRENT_USER: {
-      console.info('payload', payload);
+    case CURRENT_USER:
       return {
         ...state,
         isLoggedIn: true,
         user: { ...payload },
       };
-    }
 
-    case REGISTER_SUCCESS: {
-      console.info('REGISTER_SUCCESS payload', payload);
-
+    case REGISTER_SUCCESS:
       return {
-        ...state,
-        isLoggedIn: false,
-        user: payload?.user,
-      };
-    }
+      ...state,
+      isLoggedIn: false,
+      user: payload?.user,
+    };
+
     case REGISTER_FAIL:
       return {
         ...state,
