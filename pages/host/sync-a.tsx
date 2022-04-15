@@ -65,13 +65,14 @@ export default function SyncA() {
               <Grid item xs={12} md={6}>
                 <FormControl fullWidth>
                   <TextField variant='outlined' placeholder='https://www.airbnb.com/users/show/<;номер аккаунта>'
+                             autoComplete='off'
                              size='small'
                              value={serviceLink}
                              onChange={(e) => setServiceLink(e.target.value)}/>
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={3}>
-                <LoadingButton size="large" onClick={handleSync} loading={loading} disabled={loading} variant="contained">Синхронихировать</LoadingButton>
+                <LoadingButton size="large" onClick={handleSync} loading={loading} disabled={loading} variant="contained">Синхронизировать</LoadingButton>
               </Grid>
             </Grid>
           </Box>
