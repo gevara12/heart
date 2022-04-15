@@ -6,18 +6,25 @@ import { PlaceType } from './components/PlaceType';
 import { Box, Step, StepLabel, Stepper } from '@mui/material';
 import { Hang } from './components/Hang';
 // import { MapsGeocode } from '@components/MapsGeocode';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
-const MapsGeocode = dynamic(() => import('@components/MapsGeocode'), {
-  loading: () => <span>Loading...</span>,
-  ssr: false,
-});
+// const MapsGeocode = dynamic(() => import('@components/MapsGeocode'), {
+//   loading: () => <span>Loading...</span>,
+//   ssr: false,
+// });
 
 import { PlaceName } from './components/PlaceName';
 import { useSelector } from 'react-redux';
 import { getActiveStep } from '@store/newApartForm/selectors';
 
-const steps = ['Тип жилья', 'Адрес', 'Характеристики', 'Особенности', 'Фото', 'Описание и цена', 'Проверка'];
+const steps = [
+  'Тип жилья',
+  // 'Адрес',
+  'Характеристики',
+  // 'Особенности', 'Фото',
+  'Описание и цена',
+  // 'Проверка'
+];
 
 function CreateApartment(): React.ReactElement {
   const activeStep = useSelector(getActiveStep);
@@ -25,19 +32,17 @@ function CreateApartment(): React.ReactElement {
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <MapsGeocode />;
+        return <PlaceType />;
       case 1:
         return <Hang />;
       case 2:
-        return <PlaceType />;
-      case 3:
         return <PlaceName />;
+      // case 3:
+      //   return <MapsGeocode />;
       default:
         return <div>default</div>;
     }
   };
-
-  console.info('activeStep', activeStep);
 
   return (
     <div className="container">
