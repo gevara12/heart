@@ -92,25 +92,23 @@ export const Header = (): React.ReactElement => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {auth.isLoggedIn === true ? (
-                  <MenuItem component="div">
-                    <Link href="/profile">
-                      <Typography
-                        sx={{
-                          mr: 4,
-                        }}
-                        variant="body1"
-                        component="span"
-                      >
-                        Профиль
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                ) : (
-                  <SignUp />
-                )}
+                {auth.isLoggedIn
+                  && <MenuItem component="div">
+                      <Link href="/profile">
+                        <Typography sx={{ mr: 4 }} variant="body1" component="span">Профиль</Typography>
+                      </Link>
+                    </MenuItem>
+                }
+                {auth.isLoggedIn
+                  && <MenuItem component="div">
+                      <Link href="/profile/apartments">
+                        <Typography sx={{ mr: 4 }} variant="body1" component="span">Апартаменты</Typography>
+                      </Link>
+                    </MenuItem>
+                }
 
-                {auth.isLoggedIn === false && <Divider />}
+                { !auth.isLoggedIn && <SignUp />}
+                { !auth.isLoggedIn && <Divider />}
 
                 <LogIn />
                 {/* <ThemeSwitcher /> */}
