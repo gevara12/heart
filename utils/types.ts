@@ -17,4 +17,5 @@ export type TApartment = {
   placeType?: TPlaceType;
   amount?: number;
   images?: TImage[];
+  publicInfo: object;
 };

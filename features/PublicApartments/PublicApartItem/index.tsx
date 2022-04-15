@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 
-export type TApartItemProps = {
+export type TPublicApartItemProps = {
   apart: {
     publicInfo: {
       id: number;
@@ -19,11 +19,11 @@ export type TApartItemProps = {
   };
 };
 
-export const ApartItem = ({ apart }: TApartItemProps): React.ReactElement => {
-  const { publicInfo:{ id, name, description } } = apart;
+export const PublicApartItem = ({ apart }: TPublicApartItemProps): React.ReactElement => {
+  const { publicInfo:{ id, name, description, image } } = apart;
   return (
     <Card>
-      <CardActionArea href={`/apartment/${id}`}>
+      <CardActionArea href={`/apartment-public/${id}`}>
         <CardMedia component='img' height='140' image={'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'} alt={name}/>
         <CardContent>
           <Typography gutterBottom variant='h5'>{name}</Typography>
@@ -32,4 +32,4 @@ export const ApartItem = ({ apart }: TApartItemProps): React.ReactElement => {
       </CardActionArea>
     </Card>
   );
-}
+};
