@@ -11,12 +11,12 @@ import { addZeroBefore } from '@utils/helpers';
 
 export const CheckInOut = () => {
   const dispatch = useDispatch();
-  const [checkInValue, setCheckInValue] = React.useState<Date | null>(new Date('2022-08-18T14:00:00'));
-  const [checkOutValue, setCheckOutValue] = React.useState<Date | null>(new Date('2022-08-18T12:00:00'));
+  const [checkIn, setCheckIn] = React.useState<Date | null>(new Date('2022-08-18T14:00:00'));
+  const [checkOut, setCheckOut] = React.useState<Date | null>(new Date('2022-08-18T12:00:00'));
 
   const checkInHandler = React.useCallback(
     (newValue) => {
-      setCheckInValue(newValue);
+      setCheckIn(newValue);
       let time = `${addZeroBefore(newValue.getHours())}:${addZeroBefore(newValue.getMinutes())}`;
       dispatch({
         type: FORM_VALUE,
@@ -24,12 +24,12 @@ export const CheckInOut = () => {
         fieldValue: time,
       });
     },
-    [checkInValue, setCheckInValue],
+    [checkIn, setCheckIn],
   );
 
   const checkOutHandler = React.useCallback(
     (newValue) => {
-      setCheckOutValue(newValue);
+      setCheckOut(newValue);
       let time = `${addZeroBefore(newValue.getHours())}:${addZeroBefore(newValue.getMinutes())}`;
       dispatch({
         type: FORM_VALUE,
@@ -37,7 +37,7 @@ export const CheckInOut = () => {
         fieldValue: time,
       });
     },
-    [checkInValue, setCheckInValue],
+    [checkIn, setCheckIn],
   );
 
   return (
@@ -47,7 +47,7 @@ export const CheckInOut = () => {
           <FormControl>
             <TimePicker
               label="Заселение после"
-              value={checkInValue}
+              value={checkIn}
               onChange={checkInHandler}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -56,7 +56,7 @@ export const CheckInOut = () => {
           <FormControl>
             <TimePicker
               label="Выезд до"
-              value={checkOutValue}
+              value={checkOut}
               onChange={checkOutHandler}
               renderInput={(params) => <TextField {...params} />}
             />

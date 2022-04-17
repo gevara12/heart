@@ -15,6 +15,8 @@ function Website({ Component, pageProps }: AppProps) {
           sx={{
             // display: 'grid', // this block broke some html code inside single page
             // gridTemplateRows: 'auto 1fr auto',
+            display: 'flex',
+            flexDirection: 'column',
             color: 'text.primary',
             bgcolor: 'background.default',
             minHeight: '100vh',

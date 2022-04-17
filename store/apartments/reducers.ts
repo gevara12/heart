@@ -30,6 +30,7 @@ const initialApartmentState = {
     description: '',
     name: '',
     placeType: 'entire-place',
+    publicInfo: {},
   },
 };
 

@@ -1,6 +1,7 @@
 import urlParse from 'url-parse';
 
-export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://45.131.40.137/' : 'http://localhost:8088';
+export const SERVER_URL =
+  process.env.NODE_ENV === 'production' ? 'https://45.131.40.137/8080' : 'http://localhost:8088';
 
 export const apiUrl = (pathname?: string) => {
   const URL = urlParse(SERVER_URL);
@@ -35,3 +36,5 @@ export const INCREASE = 'INCREASE';
 export const DECREASE = 'DECREASE';
 export const FORM_VALUE = 'FORM_VALUE';
 export const FORM_GROUP_VALUE = 'FORM_GROUP_VALUE';
+
+export const UPDATE_AVATAR = 'UPDATE_AVATAR';

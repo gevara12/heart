@@ -3,16 +3,19 @@ const runtimeCaching = require('next-pwa/cache');
 
 const nextConfig = withPWA({
   pwa: {
-    dest: "public",
+    dest: 'public',
     register: true,
     skipWaiting: true,
     runtimeCaching,
-    disable: process.env.NODE_ENV === 'development'
+    disable: process.env.NODE_ENV === 'development',
+  },
+  images: {
+    domains: ['res.cloudinary.com'],
   },
   reactStrictMode: false,
   compiler: {
     // ssr and displayName are configured by default
-    styledComponents: true
+    styledComponents: true,
   },
   //   i18n: {
   //     /**
@@ -26,8 +29,8 @@ const nextConfig = withPWA({
   //     defaultLocale: 'ru-RU',
   //   },
   typescript: {
-    ignoreBuildErrors: true
-  }
+    ignoreBuildErrors: true,
+  },
 });
 
 module.exports = nextConfig;

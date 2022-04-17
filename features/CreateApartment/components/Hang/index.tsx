@@ -8,6 +8,7 @@ import styles from './Hang.module.css';
 import { NextButton } from '../NextButton';
 import { useDispatch } from 'react-redux';
 import { INCREASE } from '@store/constants';
+import { BetterComfort } from '@features/CreateApartment/components/BetterComfort';
 
 export const Hang = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export const Hang = () => {
 
       <Qualities />
 
-      {/* <BetterComfort /> */}
+      <BetterComfort />
 
       <Typography variant="h4" className={styles.title}>
         Укажите правила в вашем жилье

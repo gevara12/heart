@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -17,12 +18,16 @@ import {
   MenuItem,
 } from '@mui/material';
 
+import { grey } from '@mui/material/colors';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import { SignUp } from '@components/SignUp';
 import { LogIn } from '@components/LogIn';
 
 import { getUserStatus } from '@store/auth/selectors';
-// import { ThemeSwitcher } from '@components/ThemeSwitcher';
 import { fetchCurrentUser } from '@store/auth/actions';
+// import { ThemeSwitcher } from '@components/ThemeSwitcher';
+import styles from '@features/Profile/components/AddAvatar/AddAvatar.module.css';
 
 export const Header = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -78,7 +83,15 @@ export const Header = (): React.ReactElement => {
             <Box sx={{ flexGrow: 0, ml: 2 }}>
               <Tooltip title="Открыть настройки">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar>N</Avatar>
+                  <Avatar sx={{ bgcolor: grey[100] }}>
+                    {auth?.user?.data?.avatar ? (
+                      <div className={styles.imageContainer}>
+                        <Image className={styles.image} src={auth?.user?.data?.avatar} alt="avatar" layout="fill" />
+                      </div>
+                    ) : (
+                      <AccountCircleIcon sx={{ color: '#707070' }} />
+                    )}
+                  </Avatar>
                 </IconButton>
               </Tooltip>
 
@@ -92,28 +105,26 @@ export const Header = (): React.ReactElement => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {auth.isLoggedIn === true ? (
-                  <MenuItem component="div">
-                    <Link href="/profile">
-                      <Typography
-                        sx={{
-                          mr: 4,
-                        }}
-                        variant="body1"
-                        component="span"
-                      >
-                        Профиль
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                ) : (
-                  <SignUp />
-                )}
+                {auth.isLoggedIn
+                  && <MenuItem component="div">
+                      <Link href="/profile">
+                        <Typography sx={{ mr: 4 }} variant="body1" component="span">Профиль</Typography>
+                      </Link>
+                    </MenuItem>
+                }
+                {auth.isLoggedIn
+                  && <MenuItem component="div">
+                      <Link href="/profile/apartments">
+                        <Typography sx={{ mr: 4 }} variant="body1" component="span">Апартаменты</Typography>
+                      </Link>
+                    </MenuItem>
+                }
 
-                {auth.isLoggedIn === false && <Divider />}
+                { !auth.isLoggedIn && <SignUp />}
+                { !auth.isLoggedIn && <Divider />}
 
                 <LogIn />
-                {/* <ThemeSwitcher /> */}
+                {/*<ThemeSwitcher />*/}
               </Menu>
             </Box>
           </Toolbar>

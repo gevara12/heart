@@ -9,9 +9,10 @@ type TSwitch = {
   name: string;
   label: string;
   isChecked: boolean;
+  category?: string;
 };
 
-export const SwitchGroup = ({ qualitiesArr, title }) => {
+export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities' }) => {
   const dispatch = useDispatch();
 
   const [values, setValues] = React.useState(qualitiesArr);
@@ -23,7 +24,7 @@ export const SwitchGroup = ({ qualitiesArr, title }) => {
       items[index].isChecked = event.target.checked;
       dispatch({
         type: FORM_GROUP_VALUE,
-        groupName: 'qualities',
+        groupName: category,
         name: event.target.title,
         fieldValue: event.target.checked,
       });

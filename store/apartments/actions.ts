@@ -8,13 +8,7 @@ import {
   searchApartmentAPI,
   updateApartmentAPI,
 } from '@store/apartments/api';
-import {
-  CREATE_APARTMENT,
-  DELETE_APARTMENT,
-  GET_APARTMENTS,
-  GET_ITEM_APARTMENT,
-  SET_ERROR,
-} from '../constants';
+import { CREATE_APARTMENT, DELETE_APARTMENT, GET_APARTMENTS, GET_ITEM_APARTMENT, SET_ERROR } from '../constants';
 
 import type { TApartment, TPlaceType } from '@utils/types';
 
@@ -34,68 +28,61 @@ export const fetchApartments = () => async (dispatch: Dispatch) => {
   });
 };
 
-export const fetchApartmentById =
-  (id: string) => async (dispatch: Dispatch) => {
-    fetchApartmentByIdAPI(id)
-      .then(({ data }) => {
-        console.info('data', data.data);
-        dispatch(getItemApartmentRequest(data.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-//
-export const deleteApartmentById =
-  (id: string) => async (dispatch: Dispatch) => {
-    deleteApartmentByIdAPI(id).then(({ data }) => {
-      dispatch(deleteApartmentRequest(id));
+export const fetchApartmentById = (id: string) => async (dispatch: Dispatch) => {
+  fetchApartmentByIdAPI(id)
+    .then(({ data }) => {
+      console.info('data', data.data);
+      dispatch(getItemApartmentRequest(data.data));
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  };
+};
+//
+export const deleteApartmentById = (id: string) => async (dispatch: Dispatch) => {
+  deleteApartmentByIdAPI(id).then(({ data }) => {
+    dispatch(deleteApartmentRequest(id));
+  });
+};
 
-export const createApartment =
-  ({ placeType }: { placeType: TPlaceType }) =>
-  async (dispatch: Dispatch) => {
-    createApartmentAPI({
-      placeType,
+export const createApartment = (formValues: TApartment) => async (dispatch: Dispatch) => {
+  createApartmentAPI({ publicInfo: formValues })
+    .then(({ data }) => {
+      console.info('data', data);
+      dispatch(createApartmentRequest(data));
     })
-      .then(({ data }) => {
-        dispatch(createApartmentRequest(data));
-      })
-      .catch((error) => {
-        dispatch(setErrorAction(error?.data?.code));
-      });
-  };
+    .catch((error) => {
+      dispatch(setErrorAction(error?.data?.code));
+    });
+};
 
-export const updateApartment =
-  (newApartment: TApartment) => async (dispatch: Dispatch) => {
-    const { id, name, description, amount } = newApartment;
-    updateApartmentAPI({
-      id,
-      name,
-      description,
-      amount,
+export const updateApartment = (newApartment: TApartment) => async (dispatch: Dispatch) => {
+  const { id, name, description, amount } = newApartment;
+  updateApartmentAPI({
+    id,
+    name,
+    description,
+    amount,
+  })
+    .then(({ data }) => {
+      dispatch(createApartmentRequest(data));
     })
-      .then(({ data }) => {
-        dispatch(createApartmentRequest(data));
-      })
-      .catch((error) => {
-        dispatch(setErrorAction(error?.data?.code));
-        // dispatch(userLogInFailAction(error?.data?.code));
-      });
-  };
+    .catch((error) => {
+      dispatch(setErrorAction(error?.data?.code));
+      // dispatch(userLogInFailAction(error?.data?.code));
+    });
+};
 
-export const updateApartmentInfo =
-  (newApartment: TApartment) => async (dispatch: Dispatch) => {
-    updateApartmentAPI({
-      id: newApartment.id,
-      ...newApartment,
+export const updateApartmentInfo = (newApartment: TApartment) => async (dispatch: Dispatch) => {
+  updateApartmentAPI({
+    id: newApartment.id,
+    ...newApartment,
+  })
+    .then(({ data }) => {
+      dispatch(createApartmentRequest(data));
     })
-      .then(({ data }) => {
-        dispatch(createApartmentRequest(data));
-      })
-      .catch((error) => {
-        dispatch(setErrorAction(error?.data?.code));
-        // dispatch(userLogInFailAction(error?.data?.code));
-      });
-  };
+    .catch((error) => {
+      dispatch(setErrorAction(error?.data?.code));
+      // dispatch(userLogInFailAction(error?.data?.code));
+    });
+};

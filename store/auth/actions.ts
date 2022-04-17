@@ -4,7 +4,14 @@ import { createAction } from 'redux-actions';
 
 import { apiUrl, CURRENT_USER, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS, SNACKBAR_OPEN } from '@store/constants';
 
-import { USER_LOGOUT_ENDPOINT, userCurrentAPI, userLogInAPI, userRegisterAPI, userUpdateAPI } from '@store/auth/api';
+import {
+  USER_LOGOUT_ENDPOINT,
+  userCurrentAPI,
+  userLogInAPI,
+  userRegisterAPI,
+  userUpdateContactsAPI,
+  userUpdateInfoAPI,
+} from '@store/auth/api';
 import { SeverityEnum } from '@components/CustomSnackBar';
 import { error } from '@store/error/reducers';
 
@@ -24,13 +31,6 @@ type TUserLogin = {
   password: string;
 };
 
-export type TUser = {
-  enabled: boolean;
-  id: string;
-  username: string;
-  status: 'ACTIVE' | 'DISABLED';
-};
-
 export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
   userCurrentAPI()
     .then(({ data }) => {
@@ -45,9 +45,28 @@ export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
     });
 };
 
+export const userUpdateInfo = (userInfo) => async () => {
+  userUpdateInfoAPI(userInfo)
+    .then(({ data }) => {})
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+export const userUpdateContacts = (userContacts) => async () => {
+  console.info('userContacts', userContacts);
+  userUpdateContactsAPI(userContacts)
+    .then(({ data }) => {
+      console.info('data', data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 export const userUpdate = (userInfo) => async (dispatch: Dispatch) => {
   console.info('userInfo', userInfo);
-  userUpdateAPI(userInfo)
+  userUpdateInfoAPI(userInfo)
     .then(({ data }) => {
       console.info('userUpdate', data);
     })
