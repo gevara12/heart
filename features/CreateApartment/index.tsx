@@ -16,14 +16,17 @@ import { Hang } from './components/Hang';
 import { PlaceName } from './components/PlaceName';
 import { useSelector } from 'react-redux';
 import { getActiveStep } from '@store/newApartForm/selectors';
+import { LastStep } from '@features/CreateApartment/components/LastStep';
+import { Characteristics } from '@features/CreateApartment/components/Characteristics';
 
 const steps = [
   'Тип жилья',
   // 'Адрес',
   'Характеристики',
-  // 'Особенности', 'Фото',
+  'Особенности',
+  // 'Фото',
   'Описание и цена',
-  // 'Проверка'
+  'Проверка',
 ];
 
 function CreateApartment(): React.ReactElement {
@@ -34,10 +37,14 @@ function CreateApartment(): React.ReactElement {
       case 0:
         return <PlaceType />;
       case 1:
-        return <Hang />;
+        return <Characteristics />;
       case 2:
+        return <Hang />;
+      case 3:
         return <PlaceName />;
-      // case 3:
+      case 4:
+        return <LastStep />;
+      // case 5:
       //   return <MapsGeocode />;
       default:
         return <div>default</div>;

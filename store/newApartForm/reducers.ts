@@ -1,15 +1,10 @@
-import {
-  DECREASE,
-  FORM_GROUP_VALUE,
-  FORM_VALUE,
-  INCREASE,
-} from '@store/constants';
+import { DECREASE, FORM_GROUP_VALUE, FORM_VALUE, INCREASE } from '@store/constants';
 import { TPlaceType } from '@utils/types';
 
 export type State = {
   activeStep: number;
   formValues: {
-    placeType: TPlaceType;
+    placeType?: TPlaceType;
   };
 };
 
@@ -30,10 +25,7 @@ const initialState = {
   formValues: { placeType: { value: 'entire-place' } },
 };
 
-export const newApart = (
-  state: State = initialState,
-  action: Action
-): State => {
+export const newApart = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case INCREASE:
       return {
@@ -72,7 +64,7 @@ export const newApart = (
             [name]: {
               value: fieldValue,
             },
-          }
+          },
         },
       };
     }

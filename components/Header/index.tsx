@@ -124,7 +124,7 @@ export const Header = (): React.ReactElement => {
                 { !auth.isLoggedIn && <Divider />}
 
                 <LogIn />
-                {/* <ThemeSwitcher /> */}
+                {/*<ThemeSwitcher />*/}
               </Menu>
             </Box>
           </Toolbar>

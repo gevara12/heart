@@ -4,6 +4,8 @@ import { FormControl, InputAdornment, OutlinedInput, Stack, TextField, Typograph
 
 import { FORM_VALUE, INCREASE } from '@store/constants';
 import { NextButton } from '../NextButton';
+import { showSnackbar } from '@store/snackbar/actions';
+import { SeverityEnum } from '@components/CustomSnackBar';
 
 type TState = {
   name: string;
@@ -14,7 +16,14 @@ type TState = {
 export const PlaceName = () => {
   const dispatch = useDispatch();
   const handleNext = () => {
-    dispatch({ type: INCREASE });
+    values.name === ''
+      ? dispatch(
+          showSnackbar({
+            message: 'Заполните Название',
+            severity: SeverityEnum.warning,
+          }),
+        )
+      : dispatch({ type: INCREASE });
   };
 
   const [values, setValues] = React.useState<TState>({

@@ -36,5 +36,5 @@ export const BetterComfort = () => {
     },
   ];
 
-  return <SwitchGroup qualitiesArr={qualitiesArr} title='Повышенный комфорт' />;
+  return <SwitchGroup qualitiesArr={qualitiesArr} title="Повышенный комфорт" category="betterComfort" />;
 };

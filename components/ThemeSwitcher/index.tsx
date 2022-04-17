@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { useTheme, ThemeProvider, createTheme, styled } from '@mui/material/styles';
-import { Box, FormControlLabel, IconButton } from '@mui/material';
+import { FormControlLabel } from '@mui/material';
 import Switch, { SwitchProps } from '@mui/material/Switch';
-
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
@@ -15,22 +12,16 @@ export enum Theme {
   dark = 'dark',
 }
 
-export const ToggleColorMode = ({
-  children,
-}: {
-  children: React.ReactNode;
-}): React.ReactElement => {
+export const ToggleColorMode = ({ children }: { children: React.ReactNode }): React.ReactElement => {
   const [mode, setMode] = React.useState(Theme.light); // weve got light design
 
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) =>
-          prevMode === Theme.light ? Theme.dark : Theme.light
-        );
+        setMode((prevMode) => (prevMode === Theme.light ? Theme.dark : Theme.light));
       },
     }),
-    []
+    [],
   );
 
   const theme = React.useMemo(
@@ -48,6 +39,7 @@ export const ToggleColorMode = ({
                 },
                 text: {
                   primary: 'rgba(0,0,0,0.9)',
+                  secondary: 'rgba(0, 0, 0, 0.6)',
                 },
               }
             : {
@@ -72,7 +64,7 @@ export const ToggleColorMode = ({
               }),
         },
       }),
-    [mode]
+    [mode],
   );
 
   React.useEffect(() => {
@@ -139,7 +131,13 @@ export const ThemeSwitcher = () => {
   const colorMode = React.useContext(ColorModeContext);
   return (
     <FormControlLabel
-      control={<MaterialUISwitch checked={theme.palette.mode === Theme.light} sx={{ m: 1 }} onChange={colorMode.toggleColorMode}/>}
+      control={
+        <MaterialUISwitch
+          checked={theme.palette.mode === Theme.light}
+          sx={{ m: 1 }}
+          onChange={colorMode.toggleColorMode}
+        />
+      }
       label="Тема"
     />
   );

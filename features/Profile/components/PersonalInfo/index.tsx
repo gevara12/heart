@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 import { Stack, TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 
@@ -10,6 +11,8 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 import { userUpdateInfo } from '@store/auth/actions';
 import { getCurrentUser } from '@store/auth/selectors';
+import { showSnackbar } from '@store/snackbar/actions';
+import { SeverityEnum } from '@components/CustomSnackBar';
 
 type TState = {
   name: string;
@@ -29,9 +32,10 @@ const initialState = {
 };
 
 export const PersonalInfo = (): React.ReactElement => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const data = useSelector(getCurrentUser);
-  console.info('profile', data);
+  // console.info('profile', data);
 
   const [values, setValues] = React.useState<TState>(initialState);
 
@@ -57,6 +61,13 @@ export const PersonalInfo = (): React.ReactElement => {
         id: data?.id,
         dateOfBirth: `${dateOfBirth.getDay()}.${dateOfBirth.getMonth()}.${dateOfBirth.getFullYear()}`,
         ...values,
+      }),
+    );
+
+    dispatch(
+      showSnackbar({
+        message: 'Информация успешно сохранена',
+        severity: SeverityEnum.success,
       }),
     );
   };
@@ -130,6 +141,17 @@ export const PersonalInfo = (): React.ReactElement => {
             </Select>
           </FormControl>
         </Stack>
+
+        <FormControl fullWidth>
+          <TextField
+            size="small"
+            id="city"
+            label="Город"
+            variant="outlined"
+            value={values.city}
+            onChange={handleChange('city')}
+          />
+        </FormControl>
 
         <FormControl fullWidth>
           <TextField
