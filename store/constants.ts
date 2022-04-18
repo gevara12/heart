@@ -38,3 +38,5 @@ export const FORM_VALUE = 'FORM_VALUE';
 export const FORM_GROUP_VALUE = 'FORM_GROUP_VALUE';
 
 export const UPDATE_AVATAR = 'UPDATE_AVATAR';
+
+export const GET_A_DATA = 'GET_A_DATA';
