@@ -1,6 +1,9 @@
 import { Dispatch } from 'redux';
 
-import { userUpdateAPI } from '@store/auth/api';
+import { userUpdateAPI, userGetDataAAPI } from '@store/auth/api';
+import {createAction} from "redux-actions";
+import { GET_A_DATA } from '@store/constants';
+
 
 const data = {
   status: 'OK',
@@ -179,6 +182,8 @@ const data = {
   },
 };
 
+const getADataRequest = createAction(GET_A_DATA);
+
 export const getDataFromA = (url: string) => async (dispatch: Dispatch) => {
   userUpdateAPI({ service: 'Airbnb', url })
     .then(({ data }) => {
@@ -188,3 +193,16 @@ export const getDataFromA = (url: string) => async (dispatch: Dispatch) => {
       console.error(error);
     });
 };
+
+
+export const getDataFromA2 = (url: string) => async (dispatch: Dispatch) => {
+  userGetDataAAPI({ service: 'Airbnb', url })
+    .then(({ data }) => {
+      console.info('parsed data', data.data);
+      dispatch(getADataRequest(data.data))
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
