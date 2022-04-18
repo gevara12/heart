@@ -1,6 +1,6 @@
 import { SNACKBAR_CLEAR, SNACKBAR_OPEN } from '@store/constants';
 
-export const snackbar = (state = {}, action) => {
+export const snackbar = (state = { snackbarOpen: false }, action) => {
   switch (action.type) {
     case SNACKBAR_OPEN:
       return {
@@ -14,8 +14,6 @@ export const snackbar = (state = {}, action) => {
       return {
         ...state,
         snackbarOpen: false,
-        errorSnackbarOpen: false,
-        infoSnackbarOpen: false,
       };
     default:
       return state;

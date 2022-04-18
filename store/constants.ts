@@ -1,7 +1,7 @@
 import urlParse from 'url-parse';
 
 export const SERVER_URL =
-  process.env.NODE_ENV === 'production' ? 'https://45.131.40.137/8080' : 'http://localhost:8088';
+  process.env.NODE_ENV === 'development' ? 'http://localhost:8088' : 'http://45.131.40.137';
 
 export const apiUrl = (pathname?: string) => {
   const URL = urlParse(SERVER_URL);

@@ -8,6 +8,7 @@ import { CustomModal } from '@components/CustomModal';
 import { showSnackbar } from '@store/snackbar/actions';
 import { SeverityEnum } from '@components/CustomSnackBar';
 import { userRegister } from '@store/auth/actions';
+import { usePasswordValidation } from '@hooks/usePasswordValidation';
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -15,42 +16,58 @@ export const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
-  const [rePassword, setRePassword] = React.useState<string>('');
   const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+
+  const [password, setPassword] = React.useState({
+    firstPassword: '',
+    secondPassword: '',
+  });
+
+  const [validLength, upperCase, lowerCase, match, specialChar] = usePasswordValidation({
+    firstPassword: password.firstPassword,
+    secondPassword: password.secondPassword,
+  });
+
+  const setFirst = (event) => {
+    setPassword({ ...password, firstPassword: event.target.value });
+  };
+  const setSecond = (event) => {
+    setPassword({ ...password, secondPassword: event.target.value });
+  };
 
   const handleOpen = (): void => setIsModalOpen(true);
   const handleClose = (): void => setIsModalOpen(false);
 
   const phoneChange = (value: string) => {
-    let resultValue = value.replace(/[^\d]/g, '');
+    let resultValue = value.replace(/\D/g, '');
     setPhoneNumber(resultValue);
   };
 
+  let passwordValid = validLength && upperCase && lowerCase && match && specialChar;
+
   const handleSubmit = React.useCallback(async () => {
     try {
-      await dispatch(userRegister({ email, phoneNumber, password }));
-      dispatch(
-        showSnackbar({
-          message: 'Вы успешно зарегистрированы',
-          severity: SeverityEnum.success,
-        }),
-      );
-      handleClose();
-      // if (password === rePassword) {
-      //
-      // } else {
-      //   dispatch(
-      //     showSnackbar({
-      //       message: 'Пожалуйста, заполните поля',
-      //       severity: SeverityEnum.warning,
-      //     })
-      //   );
-      // }
+      if (passwordValid && email) {
+        await dispatch(userRegister({ email, phoneNumber, password: password.firstPassword }));
+        dispatch(
+          showSnackbar({
+            message: 'Вы успешно зарегистрированы',
+            severity: SeverityEnum.success,
+          }),
+        );
+        handleClose();
+      } else {
+        dispatch(
+          showSnackbar({
+            message: 'Что-то пошло не так',
+            severity: SeverityEnum.error,
+          }),
+        );
+      }
     } catch (error) {
       console.error(error);
     }
-  }, [email, password, rePassword, dispatch]);
+  }, [email, password, dispatch]);
 
   return (
     <div>
@@ -89,7 +106,9 @@ export const SignUp = () => {
               type="password"
               size="small"
               required
-              onChange={(e) => setPassword(e.target.value)}
+              value={password.firstPassword}
+              onChange={setFirst}
+              error={!passwordValid}
             />
           </FormControl>
 
@@ -100,7 +119,10 @@ export const SignUp = () => {
               type="password"
               size="small"
               required
-              onChange={(e) => setRePassword(e.target.value)}
+              value={password.secondPassword}
+              onChange={setSecond}
+              error={!passwordValid}
+              helperText="Пароль должен содержать больше 8 символов, специальный знак, верхний регистр и должен совпадать"
             />
           </FormControl>
 
