@@ -10,6 +10,8 @@ import { auth } from '@store/auth/reducers';
 import { error } from '@store/error/reducers';
 import { snackbar } from '@store/snackbar/reducers';
 import { newApart } from '@store/newApartForm/reducers';
+import { syncA } from './syncA/reducers';
+
 // import { loadState, saveState } from '@store/sessionStorage';
 
 const rootReducer = combineReducers({
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
   error,
   snackbar,
   newApart,
+  syncA,
 });
 
 const initialState = {};
