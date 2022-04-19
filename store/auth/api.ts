@@ -8,8 +8,6 @@ export const USER_CURRENT_ENDPOINT = 'users/current';
 export const USER_UPDATE_INFO_ENDPOINT = 'users/update/info';
 export const USER_UPDATE_CONTACTS_ENDPOINT = 'users/update/contacts';
 
-export const USER_GET_DATA_A_ENDPOINT = 'draft/get';
-
 
 export const userRegisterAPI = (data) => axiosService.post(apiUrl(USER_REGISTER_ENDPOINT), data);
 
@@ -19,5 +17,3 @@ export const userUpdateContactsAPI = (data) => axiosService.post(apiUrl(USER_UPD
 
 export const userLogOutAPI = () => axiosService.get(apiUrl(USER_LOGOUT_ENDPOINT));
 export const userCurrentAPI = () => axiosService.get(apiUrl(USER_CURRENT_ENDPOINT));
-
-export const userGetDataAAPI = (data) => axiosService.post(apiUrl(USER_GET_DATA_A_ENDPOINT), data);

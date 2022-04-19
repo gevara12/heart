@@ -7,7 +7,7 @@ import { Box, Button, Container, FormControl, Grid, Stack, TextField, Typography
 
 import SyncAccountInfo from "@features/host/SyncAccountInfo";
 import {useDispatch, useSelector} from "react-redux";
-import { getDataFromA2 } from "@store/syncA/actions";
+import { getDataFromA } from "@store/syncA/actions";
 
 import {getParsedData} from "@store/syncA/selectors";
 
@@ -25,7 +25,7 @@ export default function SyncA() {
     setLoading(true);
     try {
       // await new Promise(resolve => setTimeout(resolve, 2000));
-      await dispatch(getDataFromA2('https://www.airbnb.ru/users/show/144225005'));
+      await dispatch(getDataFromA('https://www.airbnb.ru/users/show/144225005'));
     } catch (e) {
       console.error(e);
     }
