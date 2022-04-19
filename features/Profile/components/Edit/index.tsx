@@ -50,12 +50,12 @@ export const ProfileEdit = ({}: TProfileEditProps): React.ReactElement => {
             onChange={handleTabChange}
             aria-label="profile tabs"
             variant="scrollable"
-            scrollButtons="false"
+            scrollButtons="auto"
           >
             <Tab label="Аватар" {...a11yProps(0)} />
             <Tab label="Личная информация" {...a11yProps(1)} />
             <Tab label="Контакты и уведомления" {...a11yProps(2)} />
-            <Tab label="Вход и безопасность" {...a11yProps(3)} />
+            {/*<Tab label="Вход и безопасность" {...a11yProps(3)} />*/}
           </Tabs>
         </Box>
         <Box sx={{ py: 4 }}>{getStepContent(tabValue)}</Box>

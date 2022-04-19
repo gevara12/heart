@@ -1,68 +1,93 @@
 import * as React from 'react';
 import styles from '@features/CreateApartment/components/Hang/Hang.module.css';
-import { Button, IconButton, Stack, TextField, Typography } from '@mui/material';
-import { INCREASE } from '@store/constants';
+import { Button, InputAdornment, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
+import { FORM_GROUP_VALUE, INCREASE } from '@store/constants';
 import { useDispatch } from 'react-redux';
 import { NextButton } from '@features/CreateApartment/components/NextButton';
 
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
+type TState = {
+  guest: number;
+  bed: number;
+  floor: number;
+  square: number;
+};
 export const Characteristics = (): React.ReactElement => {
   const dispatch = useDispatch();
+
+  const [values, setValues] = React.useState<TState>({
+    guest: 0,
+    bed: 0,
+    floor: 0,
+    square: 4,
+  });
+
+  const handleChange = React.useCallback(
+    (prop: keyof TState) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({
+        type: FORM_GROUP_VALUE,
+        groupName: 'characteristics',
+        name: [prop],
+        fieldValue: Number(event.target.value),
+      });
+      setValues({ ...values, [prop]: Number(event.target.value) });
+    },
+    [dispatch, values],
+  );
+
+  const incHandleChange = (prop: keyof TState) => {
+    dispatch({
+      type: FORM_GROUP_VALUE,
+      groupName: 'characteristics',
+      name: [prop],
+      fieldValue: Number(values[prop]) + 1,
+    });
+    setValues({ ...values, [prop]: Number(values[prop]) + 1 });
+  };
+
+  const decHandleChange = (prop: keyof TState) => {
+    dispatch({
+      type: FORM_GROUP_VALUE,
+      groupName: 'characteristics',
+      name: [prop],
+      fieldValue: values[prop] > 0 ? Number(values[prop]) - 1 : 0,
+    });
+    setValues({ ...values, [prop]: values[prop] > 0 ? Number(values[prop]) - 1 : 0 });
+  };
 
   const handleNext = () => {
     dispatch({ type: INCREASE });
   };
 
-  const [guest, setGuestCount] = React.useState<number>(0);
-  const [bed, setBedCount] = React.useState<number>(0);
-  const [floor, setFloorCount] = React.useState<number>(0);
-
-  const incGuestNum = () => {
-    setGuestCount(guest + 1);
-  };
-  const decGuestNum = () => {
-    guest > 0 ? setGuestCount(guest - 1) : setGuestCount(0);
-  };
-
-  const incBedNum = () => {
-    setBedCount(bed + 1);
-  };
-  const decBedNum = () => {
-    bed > 0 ? setBedCount(bed - 1) : setBedCount(0);
-  };
-
-  const incFloorNum = () => {
-    setFloorCount(floor + 1);
-  };
-
-  const decFloorNum = () => {
-    floor > 0 ? setFloorCount(floor - 1) : setFloorCount(0);
-  };
-
   return (
     <>
       <Typography variant="h4" className={styles.title}>
-        Укажите удобства вашего жилья
+        Укажите характеристики
       </Typography>
 
       <Stack spacing={4}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
           <Typography variant="body1" component="span" className={styles.countLabel}>
             Сколько гостей вы готовы принять?
           </Typography>
 
           <div>
-            <Button size="large" onClick={decGuestNum} variant="outlined">
+            <Button size="large" onClick={() => decHandleChange('guest')} variant="outlined">
               <RemoveIcon />
             </Button>
             <TextField
               size="small"
               variant="outlined"
-              value={guest}
-              onChange={(e) => setGuestCount(+e.target.value)}
-              sx={{ mx: 2, width: '60px' }}
+              value={values.guest}
+              onChange={handleChange('guest')}
+              sx={{ mx: 2, width: '100px' }}
               inputProps={{
                 step: 1,
                 min: 0,
@@ -72,27 +97,32 @@ export const Characteristics = (): React.ReactElement => {
                 pattern: '[0-9]*',
               }}
             />
-            <Button size="large" variant="outlined" onClick={incGuestNum}>
+            <Button size="large" variant="outlined" onClick={() => incHandleChange('guest')}>
               <AddIcon />
             </Button>
           </div>
         </Stack>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
           <Typography variant="body1" component="span" className={styles.countLabel}>
             Количество кроватей
           </Typography>
 
           <div>
-            <Button onClick={decBedNum} size="large" variant="outlined">
+            <Button onClick={() => decHandleChange('bed')} size="large" variant="outlined">
               <RemoveIcon />
             </Button>
             <TextField
               size="small"
               variant="outlined"
-              value={bed}
-              onChange={(e) => setBedCount(+e.target.value)}
-              sx={{ mx: 2, width: '60px' }}
+              value={values.bed}
+              onChange={handleChange('bed')}
+              sx={{ mx: 2, width: '100px' }}
               inputProps={{
                 step: 1,
                 min: 0,
@@ -102,26 +132,80 @@ export const Characteristics = (): React.ReactElement => {
                 pattern: '[0-9]*',
               }}
             />
-            <Button onClick={incBedNum} size="large" variant="outlined">
+            <Button onClick={() => incHandleChange('bed')} size="large" variant="outlined">
               <AddIcon />
             </Button>
           </div>
         </Stack>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
           <Typography variant="body1" component="span" className={styles.countLabel}>
-            Этаж:
+            Этаж
           </Typography>
 
-          <IconButton onClick={decFloorNum}>
-            <RemoveIcon />
-          </IconButton>
-          <Typography variant="body1" component="span" sx={{ mx: 2 }}>
-            {floor}
+          <div>
+            <Button onClick={() => decHandleChange('floor')} size="large" variant="outlined">
+              <RemoveIcon />
+            </Button>
+            <TextField
+              size="small"
+              variant="outlined"
+              value={values.floor}
+              onChange={handleChange('floor')}
+              sx={{ mx: 2, width: '100px' }}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 40,
+                type: 'number',
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
+              }}
+            />
+            <Button onClick={() => incHandleChange('floor')} size="large" variant="outlined">
+              <AddIcon />
+            </Button>
+          </div>
+        </Stack>
+
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
+          <Typography variant="body1" component="span" className={styles.countLabel}>
+            Общая площадь жилья
           </Typography>
-          <IconButton onClick={incFloorNum}>
-            <AddIcon />
-          </IconButton>
+
+          <div>
+            <Button onClick={() => decHandleChange('square')} size="large" variant="outlined">
+              <RemoveIcon />
+            </Button>
+            <OutlinedInput
+              size="small"
+              value={values.square}
+              onChange={handleChange('square')}
+              sx={{ mx: 2, width: '100px' }}
+              endAdornment={<InputAdornment position="end">㎡</InputAdornment>}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 2000,
+                type: 'number',
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
+              }}
+            />
+            <Button onClick={() => incHandleChange('square')} size="large" variant="outlined">
+              <AddIcon />
+            </Button>
+          </div>
         </Stack>
       </Stack>
 

@@ -9,16 +9,17 @@ export default function Apartments() {
     <Layout>
       <SEO />
       <section>
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <Stack
-            direction='row'
-            justifyContent='space-between'
-            alignItems='center'
+            direction={{ xs: 'column', md: 'row' }}
+            justifyContent="space-between"
+            spacing={{ xs: 2, md: 2 }}
+            alignItems={{ xs: 'start', md: 'center' }}
           >
-            <Typography variant='h3'>Список апартаментов</Typography>
+            <Typography variant="h4">Список апартаментов</Typography>
             <div>
-              <Link href='/host/create' passHref>
-                <Button variant='contained'>Добавить жильё</Button>
+              <Link href="/host/create" passHref>
+                <Button variant="contained">Добавить жильё</Button>
               </Link>
             </div>
           </Stack>

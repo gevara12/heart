@@ -33,8 +33,6 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities' }) => 
     [dispatch, values],
   );
 
-  // console.info('formValues', formValues?.qualities);
-
   return (
     <div className={styles.host}>
       <Typography variant="h5" className={styles.subTitle}>

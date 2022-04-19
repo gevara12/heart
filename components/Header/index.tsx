@@ -7,15 +7,14 @@ import {
   AppBar,
   Avatar,
   Box,
-  Button,
   Container,
   Divider,
   IconButton,
   Menu,
-  Toolbar,
   Tooltip,
   Typography,
   MenuItem,
+  Stack,
 } from '@mui/material';
 
 import { grey } from '@mui/material/colors';
@@ -57,8 +56,13 @@ export const Header = (): React.ReactElement => {
         }}
       >
         <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            <Box sx={{ flexGrow: 0, mr: 2 }}>
+          <Stack justifyContent="space-between" direction="row" sx={{ py: 2 }}>
+            <Box
+              sx={{
+                // flexGrow: 0,
+                mr: 2,
+              }}
+            >
               <Link href="/" passHref>
                 <a style={{ display: 'block' }}>
                   <img style={{ display: 'block', height: '40px' }} src={'/images/heart-logo.png'} alt={''} />
@@ -66,21 +70,26 @@ export const Header = (): React.ReactElement => {
               </Link>
             </Box>
 
+            {/*<Box*/}
+            {/*  sx={{*/}
+            {/*    flexGrow: 1,*/}
+            {/*    display: 'flex',*/}
+            {/*    justifyContent: { xs: 'center', sm: 'flex-end' },*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  <Link href="/apartments" passHref>*/}
+            {/*    <Button variant="outlined" sx={{ color: '#1976D2', borderColor: '#1976D2' }}>*/}
+            {/*      Сдать жилье*/}
+            {/*    </Button>*/}
+            {/*  </Link>*/}
+            {/*</Box>*/}
+
             <Box
               sx={{
-                flexGrow: 1,
-                display: 'flex',
-                justifyContent: { xs: 'center', sm: 'flex-end' },
+                // flexGrow: 0,
+                ml: 2,
               }}
             >
-              <Link href="/apartments" passHref>
-                <Button variant="outlined" sx={{ color: '#1976D2', borderColor: '#1976D2' }}>
-                  Сдать жилье
-                </Button>
-              </Link>
-            </Box>
-
-            <Box sx={{ flexGrow: 0, ml: 2 }}>
               <Tooltip title="Открыть настройки">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar sx={{ bgcolor: grey[100] }}>
@@ -131,7 +140,7 @@ export const Header = (): React.ReactElement => {
                 {/*<ThemeSwitcher />*/}
               </Menu>
             </Box>
-          </Toolbar>
+          </Stack>
         </Container>
       </AppBar>
     </div>

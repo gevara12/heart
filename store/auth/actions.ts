@@ -37,6 +37,7 @@ export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
       dispatch(userCurrentAction(data));
     })
     .catch((error) => {
+      sessionStorage.removeItem('accessToken');
       dispatch({
         type: SNACKBAR_OPEN,
         message: error?.data?.code,

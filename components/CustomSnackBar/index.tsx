@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Alert } from "@mui/material";
+import { Alert } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import { clearSnackbar } from "@store/snackbar/actions";
+import { clearSnackbar } from '@store/snackbar/actions';
 import { getSnackbar } from '@store/snackbar/selectors';
 
 export enum SeverityEnum {
@@ -26,14 +26,10 @@ export const CustomSnackBar = () => {
   };
 
   return (
-    <Snackbar
-      open={snackbarOpen}
-      autoHideDuration={4000}
-      onClose={handleClose}
-    >
+    <Snackbar open={snackbarOpen} autoHideDuration={4000} onClose={handleClose}>
       <Alert onClose={handleClose} sx={{ width: '100%' }} severity={severity} variant="filled">
         {snackbarMessage}
       </Alert>
     </Snackbar>
   );
-}
+};

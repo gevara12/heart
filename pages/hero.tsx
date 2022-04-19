@@ -1,14 +1,14 @@
 import Layout from '@components/Layout';
 
+import { HeroSection } from '@components/HeroSection';
 import SEO from '@components/SEO';
-import { LastHero } from '@components/LastHero';
 
-export default function Home() {
+export default function Hero() {
   return (
     <Layout isHero>
       <SEO />
       <section>
-        <LastHero />
+        <HeroSection />
       </section>
     </Layout>
   );

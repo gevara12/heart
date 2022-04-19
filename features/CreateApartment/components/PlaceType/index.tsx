@@ -40,10 +40,10 @@ export const PlaceType = () => {
         Выберите тип жилья
       </Typography>
 
-      <ToggleButtonGroup value={placeType?.value} exclusive onChange={handlePlace}>
+      <ToggleButtonGroup value={placeType?.value} exclusive onChange={handlePlace} orientation="vertical">
         {placeArr.map(({ type, label }) => {
           return (
-            <ToggleButton value={type} aria-label={type} key={type} color="primary">
+            <ToggleButton value={type} aria-label={type} key={type} color="primary" size="small">
               {label}
             </ToggleButton>
           );

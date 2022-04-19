@@ -10,9 +10,7 @@ import {
 } from '@store/apartments/api';
 import { CREATE_APARTMENT, DELETE_APARTMENT, GET_APARTMENTS, GET_ITEM_APARTMENT, SET_ERROR } from '../constants';
 
-import type { TApartment, TPlaceType } from '@utils/types';
-
-export const APARTMENTS = 'APARTMENTS';
+import type { TApartment } from '@utils/types';
 
 const getApartmentsRequest = createAction(GET_APARTMENTS);
 const getItemApartmentRequest = createAction(GET_ITEM_APARTMENT);

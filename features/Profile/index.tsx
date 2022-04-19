@@ -26,14 +26,12 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
 
   const currentYear = new Date().getFullYear();
 
-  // console.info('profile', data);
-
   return (
     <>
       {data && (
         <>
           <Grid container spacing={{ xs: 2, sm: 8 }}>
-            <Grid item xs={2} sm={4}>
+            <Grid item xs={12} sm={4}>
               <Avatar sx={{ mb: 4, bgcolor: grey[100], maxWidth: 190, width: '100%', height: 190 }} variant="square">
                 {data?.avatar ? (
                   <div className={styles.imageContainer}>
@@ -73,27 +71,37 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
               )}
             </Grid>
 
-            <Grid item xs={2} sm={8}>
-              <Typography variant="h3" sx={{ mb: 1 }}>
-                {data.name} {data.surname}
+            <Grid item xs={12} sm={8}>
+              <Typography variant="h6" sx={{ mb: 1 }}>
+                {data.name ?? data.email ?? data.name}
+                {data.surname}
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 1.5 }}>
-                {data.gender}, {currentYear - data.dateOfBirth && data.dateOfBirth.substr(6, 4)}
+                {data.gender}
+                {data.dateOfBirth && `, ${currentYear - data.dateOfBirth && data.dateOfBirth.substr(6, 4)}`}
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
                 На HeartApart с {data?.dateOfRegistration}
               </Typography>
 
-              <Typography variant="h5" sx={{ mb: 3 }}>
-                Обо мне
-              </Typography>
-              <Typography variant="body1" sx={{ mb: 4 }}>
-                {data.description}
-              </Typography>
-              <Stack direction="row">
-                <LocationOnIcon />
-                {data.city}
-              </Stack>
+              {data.description ||
+                (data.city && (
+                  <>
+                    <Typography variant="h5" sx={{ mb: 3 }}>
+                      Обо мне
+                    </Typography>
+                    <Typography variant="body1" sx={{ mb: 4 }}>
+                      {data.description}
+                    </Typography>
+
+                    {data.city && (
+                      <Stack direction="row">
+                        <LocationOnIcon />
+                        {data.city}
+                      </Stack>
+                    )}
+                  </>
+                ))}
             </Grid>
           </Grid>
         </>

@@ -46,6 +46,7 @@ export const SignUp = () => {
   let passwordValid = validLength && upperCase && lowerCase && match && specialChar;
 
   const handleSubmit = React.useCallback(async () => {
+    console.info(passwordValid, email);
     try {
       if (passwordValid && email) {
         await dispatch(userRegister({ email, phoneNumber, password: password.firstPassword }));
