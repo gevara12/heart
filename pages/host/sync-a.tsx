@@ -6,52 +6,34 @@ import SEO from '@components/SEO';
 import { Box, Button, Container, FormControl, Grid, Stack, TextField, Typography } from '@mui/material';
 
 import SyncAccountInfo from "@features/host/SyncAccountInfo";
+import {useDispatch, useSelector} from "react-redux";
+import { getDataFromA } from "@store/syncA/actions";
 
+import {getParsedData} from "@store/syncA/selectors";
 
-const parsedInfo = {
-  name:'Дональд',
-  about: 'Я бывший президент США, и у меня есть большая башня.',
-  avatar: 'https://i1.sndcdn.com/avatars-000211446087-hahqw0-t500x500.jpg',
-  aparts: [
-    {
-      image:'https://s1.1zoom.me/b6755/973/Cats_Kittens_Grey_Glance_Wicker_basket_517968_1600x1200.jpg',
-      name:'Lizard 1',
-      description:'1 Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-      rating: 4.83,
-      reviews:12,
-    },
-    {
-      image:'https://s1.1zoom.me/b6755/973/Cats_Kittens_Grey_Glance_Wicker_basket_517968_1600x1200.jpg',
-      name:'Lizard 2',
-      description:'2 Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-      rating: 4.84,
-      reviews:13,
-    },
-    {
-      image:'https://s1.1zoom.me/b6755/973/Cats_Kittens_Grey_Glance_Wicker_basket_517968_1600x1200.jpg',
-      name:'Lizard 3',
-      description:'3 Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-      rating: 4.85,
-      reviews:14,
-    },
-  ]
-};
 
 export default function SyncA() {
+  const dispatch = useDispatch();
 
   const [serviceLink, setServiceLink] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [accountInfo, setAccountInfo] = useState<null|object>(null);
 
+  const parsedData = useSelector(getParsedData);
+
   const handleSync = async () => {
     setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setAccountInfo(parsedInfo);
+    try {
+      // await new Promise(resolve => setTimeout(resolve, 2000));
+      await dispatch(getDataFromA('https://www.airbnb.ru/users/show/144225005'));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  React.useEffect(() => {
+    setAccountInfo(parsedData);
     setLoading(false);
-  };
-  const handleSubmit = () => {
-    console.info('submit');
-  };
+  }, [parsedData]);
 
   return (
     <Layout isHero>
@@ -76,17 +58,16 @@ export default function SyncA() {
               </Grid>
             </Grid>
           </Box>
-
           { accountInfo
             && <>
-                <SyncAccountInfo parsedInfo={parsedInfo}/>
+                <SyncAccountInfo parsedInfo={parsedData}/>
 
                 <Typography variant="body1" sx={{ mt:8 }}>Если данная информация корректна и относится к вашему профилю, нажмите “Подтвердить”</Typography>
 
                 <Box sx={{ overflow:'hidden', mt:4 }}>
                   <Stack direction={'row'} spacing={2}>
                     <Button type='submit' variant='outlined' color='primary' size='large' sx={{width: '168px'}}>Помощь</Button>
-                    <Button type='submit' variant='contained' color='primary' size='large' sx={{width: '168px'}} onClick={handleSubmit}>Подтвердить</Button>
+                    <Button type='submit' variant='contained' color='primary' size='large' sx={{width: '168px'}} onClick={handleSync}>Подтвердить</Button>
                   </Stack>
                 </Box>
               </>
