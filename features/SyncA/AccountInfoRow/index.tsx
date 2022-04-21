@@ -2,7 +2,7 @@ import React from "react";
 import {Grid, Typography} from "@mui/material";
 
 
-export default function SyncAccountInfoRow({ title, children}:{
+export default function AccountInfoRow({ title, children}:{
 	title:string
 	children?:React.ReactNode
 }){

@@ -40,3 +40,6 @@ export const FORM_GROUP_VALUE = 'FORM_GROUP_VALUE';
 export const UPDATE_AVATAR = 'UPDATE_AVATAR';
 
 export const GET_A_DATA = 'GET_A_DATA';
+
+export const SYNC_INCREASE_STEP = 'SYNC_INCREASE_STEP';
+export const SYNC_DECREASE_STEP = 'SYNC_DECREASE_STEP';
