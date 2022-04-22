@@ -6,7 +6,6 @@ import { Box, Button, FormControl, Stack, TextField } from '@mui/material';
 import { CustomModal } from '@components/CustomModal';
 import { logout, userLogin } from '@store/auth/actions';
 import { getUserStatus } from '@store/auth/selectors';
-// import { getUserStatus } from '@store/auth/selectors';
 import MenuItem from '@mui/material/MenuItem';
 import { showSnackbar } from '@store/snackbar/actions';
 import { SeverityEnum } from '@components/CustomSnackBar';
@@ -88,6 +87,8 @@ export const LogIn = () => {
 
           <Stack direction="row">
             <Button
+              fullWidth
+              disabled={!userName && 'disabled'}
               type="submit"
               variant="contained"
               color="primary"
@@ -97,7 +98,7 @@ export const LogIn = () => {
             >
               Войти
             </Button>
-            <Button variant="text" size="large" onClick={handleClose}>
+            <Button fullWidth variant="text" size="large" onClick={handleClose}>
               Отмена
             </Button>
           </Stack>

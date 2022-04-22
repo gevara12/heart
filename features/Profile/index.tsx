@@ -25,7 +25,7 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
   }, [dispatch]);
 
   const currentYear = new Date().getFullYear();
-
+  const fakeName = data?.email.substring(0, data?.email.indexOf('@'));
   return (
     <>
       {data && (
@@ -60,7 +60,7 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
                 <>
                   <Typography
                     component="a"
-                    href={data.refTelegram}
+                    href={`https://${data.refTelegram}`}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                     sx={{ display: 'flex', color: 'text.primary', textDecoration: 'none', mb: 1 }}
@@ -73,7 +73,7 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
 
             <Grid item xs={12} sm={8}>
               <Typography variant="h6" sx={{ mb: 1 }}>
-                {data.name ?? data.email ?? data.name}
+                {data.name ?? fakeName ?? data.name}
                 {data.surname}
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mb: 1.5 }}>

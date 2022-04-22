@@ -5,7 +5,6 @@ export const usePasswordValidation = ({ firstPassword = '', secondPassword = '',
   const [hasNumber, setHasNumber] = React.useState(null);
   const [upperCase, setUpperCase] = React.useState(null);
   const [lowerCase, setLowerCase] = React.useState(null);
-  const [specialChar, setSpecialChar] = React.useState(null);
   const [match, setMatch] = React.useState(null);
 
   React.useEffect(() => {
@@ -14,8 +13,7 @@ export const usePasswordValidation = ({ firstPassword = '', secondPassword = '',
     setLowerCase(firstPassword.toUpperCase() !== firstPassword);
     setHasNumber(/\d/.test(firstPassword));
     setMatch(firstPassword && firstPassword === secondPassword);
-    setSpecialChar(/[ `!@#$%^&*()_+\-=\]{};':"\\|,.<>?~]/.test(firstPassword));
   }, [firstPassword, secondPassword, requiredLength]);
 
-  return [validLength, hasNumber, upperCase, lowerCase, match, specialChar];
+  return [validLength, hasNumber, upperCase, lowerCase, match];
 };

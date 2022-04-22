@@ -40,7 +40,7 @@ export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
       sessionStorage.removeItem('accessToken');
       dispatch({
         type: SNACKBAR_OPEN,
-        message: error?.data?.code,
+        message: error?.defaultMessage,
         severity: SeverityEnum.error,
       });
     });
@@ -91,7 +91,7 @@ export const userRegister =
       .catch((error) => {
         dispatch({
           type: SNACKBAR_OPEN,
-          message: error?.data?.code,
+          message: error?.defaultMessage,
           severity: SeverityEnum.error,
         });
       });
@@ -112,7 +112,7 @@ export const userLogin =
       .catch((error) => {
         dispatch({
           type: SNACKBAR_OPEN,
-          message: error?.data?.code,
+          message: error?.defaultMessage,
           severity: SeverityEnum.error,
         });
       });

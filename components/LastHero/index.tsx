@@ -2,10 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 
-import { styled } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import ToggleButton from '@mui/material/ToggleButton';
+import { ToggleButton, FormControl, TextField, styled } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 import { SITE_NAME } from '@utils/constants';

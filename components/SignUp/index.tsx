@@ -1,6 +1,18 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { Box, Button, FormControl, MenuItem, Stack, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Stack,
+  TextField,
+  FormHelperText,
+} from '@mui/material';
 
 import MuiPhoneNumber from 'material-ui-phone-number';
 
@@ -10,6 +22,9 @@ import { SeverityEnum } from '@components/CustomSnackBar';
 import { userRegister } from '@store/auth/actions';
 import { usePasswordValidation } from '@hooks/usePasswordValidation';
 
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 export const SignUp = () => {
   const dispatch = useDispatch();
 
@@ -17,13 +32,22 @@ export const SignUp = () => {
 
   const [email, setEmail] = React.useState<string>('');
   const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+  const [showPassword, setPasswordVisibility] = React.useState<boolean>(false);
+
+  const handleVisibility = () => {
+    setPasswordVisibility(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
 
   const [password, setPassword] = React.useState({
     firstPassword: '',
     secondPassword: '',
   });
 
-  const [validLength, upperCase, lowerCase, match, specialChar] = usePasswordValidation({
+  const [validLength, upperCase, lowerCase, match] = usePasswordValidation({
     firstPassword: password.firstPassword,
     secondPassword: password.secondPassword,
   });
@@ -43,7 +67,9 @@ export const SignUp = () => {
     setPhoneNumber(resultValue);
   };
 
-  let passwordValid = validLength && upperCase && lowerCase && match && specialChar;
+  let passwordValid = validLength && upperCase && lowerCase && match;
+
+  const showError = !passwordValid && password.firstPassword.length > 0;
 
   const handleSubmit = React.useCallback(async () => {
     console.info(passwordValid, email);
@@ -101,29 +127,61 @@ export const SignUp = () => {
           </FormControl>
 
           <FormControl sx={{ mb: 4 }} fullWidth>
-            <TextField
-              label="Введите пароль"
-              variant="outlined"
-              type="password"
-              size="small"
-              required
+            <InputLabel htmlFor="password" size="small">
+              Введите пароль
+            </InputLabel>
+            <OutlinedInput
+              id="password"
+              type={showPassword ? 'text' : 'password'}
               value={password.firstPassword}
               onChange={setFirst}
-              error={!passwordValid}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleVisibility}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              size="small"
+              label="Введите пароль"
+              error={showError}
             />
+            {showError && (
+              <FormHelperText>
+                Пароль должен содержать больше 8 символов, верхний регистр и должен совпадать
+              </FormHelperText>
+            )}
           </FormControl>
 
           <FormControl sx={{ mb: 5 }} fullWidth>
-            <TextField
-              label="Повторите пароль"
-              variant="outlined"
-              type="password"
-              size="small"
-              required
+            <InputLabel htmlFor="second-password" size="small">
+              Введите пароль
+            </InputLabel>
+            <OutlinedInput
+              id="second-password"
+              type={showPassword ? 'text' : 'password'}
               value={password.secondPassword}
               onChange={setSecond}
-              error={!passwordValid}
-              helperText="Пароль должен содержать больше 8 символов, специальный знак, верхний регистр и должен совпадать"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleVisibility}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              size="small"
+              label="Повторите пароль"
+              error={showError}
             />
           </FormControl>
 
@@ -135,10 +193,11 @@ export const SignUp = () => {
               sx={{ mr: 3 }}
               size="large"
               onClick={handleSubmit}
+              fullWidth
             >
               Регистрация
             </Button>
-            <Button variant="text" size="large" onClick={handleClose}>
+            <Button variant="text" size="large" onClick={handleClose} fullWidth>
               Отмена
             </Button>
           </Stack>
