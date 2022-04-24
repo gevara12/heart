@@ -26,12 +26,14 @@ export default function PublicApartment({ apartment }: any) {
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('md'));
 
+  const { publicInfo } = apartment;
+
   return (
     <>
       {isMobile && <PhotoSlider photos={Apartment.photos} />}
 
       <Typography variant="h5" component="div">
-        {apartment.publicInfo?.name}
+        {publicInfo.name.value}
       </Typography>
 
       <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between">
@@ -57,11 +59,11 @@ export default function PublicApartment({ apartment }: any) {
       <Box sx={{ overflow: 'hidden' }}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={7}>
-            <AboutBlock />
+            <AboutBlock characteristics={publicInfo.characteristics} />
 
             <PublicApartmentDivider />
 
-            <div>{apartment.publicInfo?.description}</div>
+            <div>{publicInfo.description.value}</div>
 
             <PublicApartmentDivider />
 
@@ -75,7 +77,7 @@ export default function PublicApartment({ apartment }: any) {
             <PublicApartmentDivider />
 
             <ApartmentBlock title={'Удобства'}>
-              <OptionsGrid options={Apartment.options} />
+              <OptionsGrid options={publicInfo.qualities} />
             </ApartmentBlock>
 
             <PublicApartmentDivider />

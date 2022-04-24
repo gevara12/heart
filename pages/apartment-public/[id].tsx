@@ -27,7 +27,7 @@ const apartmentPublic = () => {
       <SEO/>
       <section>
         <Container maxWidth='lg'>
-          <PublicApartment apartment={currentApartment}/>
+          {Object.keys(currentApartment.publicInfo).length !== 0 && <PublicApartment apartment={currentApartment}/>}
         </Container>
       </section>
     </Layout>

@@ -5,7 +5,7 @@ import { Avatar, Box, Stack, Typography, useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Bull from '@components/Bull';
 
-export default function AboutBlock() {
+export default function AboutBlock({characteristics}:any) {
   const { breakpoints } = useTheme();
 
   const isMobile = useMediaQuery(breakpoints.down('md'));
@@ -18,9 +18,9 @@ export default function AboutBlock() {
             Жилье целиком в многоэтажном доме
           </Typography>
           <Stack direction={'row'} alignItems={'center'} spacing={1} divider={<Bull />}>
-            <Typography variant="body2">до 2 гостей</Typography>
+            <Typography variant="body2">до {characteristics.guest.value} гостей</Typography>
             <Typography variant="body2">1 спальня</Typography>
-            <Typography variant="body2">1 кровать</Typography>
+            <Typography variant="body2">{characteristics.bed.value} кровать</Typography>
           </Stack>
           <Stack
             direction={{ xs: 'column', md: 'row' }}
