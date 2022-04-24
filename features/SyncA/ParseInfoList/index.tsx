@@ -21,7 +21,7 @@ export default function ParseInfoList (){
 		'Рейтинг и количество отзывов у каждого объявления',
 	];
 	return (
-		<Stack direction="column" spacing={0.5} sx={{mt:2}}>
+		<Stack direction="column" spacing={1.5} sx={{mt:2}}>
 			{ list.map((item) =>
 				<Stack direction="row" spacing={1} alignItems="center" key={uuidv4()}><Dot/><span>{item}</span></Stack>
 			)}

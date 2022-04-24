@@ -21,9 +21,8 @@ export const syncA = (state = initialState, action) => {
       };
     case GET_A_DATA:
       return {
-        ...state,
+        activeStep: state.activeStep,
         parsedData: {
-          ...state.parsedData,
           ...action.payload,
         },
       };
