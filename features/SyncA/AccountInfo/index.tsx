@@ -26,7 +26,7 @@ export default function AccountInfo({ parsedInfo, ...rest }: { parsedInfo: any; 
 
   return (
     <Box {...rest}>
-      <Grid container spacing={{ xs: 2, md: 4 }} sx={{}}>
+      <Grid container spacing={{ xs: 4.5, md: 6.5 }} sx={{}}>
         {smartName && (
           <AccountInfoRow title={'Имя'}>
             <Typography variant="body1" sx={{ width: isMobile ? '100%' : 552 }}>
@@ -56,20 +56,23 @@ export default function AccountInfo({ parsedInfo, ...rest }: { parsedInfo: any; 
             </Alert>
           </AccountInfoRow>
         )}
-        <AccountInfoRow title={'Объявления'}>
-          <Grid container spacing={3}>
-            {managedListings.map((apart) => (
-              <Grid item xs={12} md={4} key={uuidv4()}>
-                <ApartCard apartment={apart} />
-              </Grid>
-            ))}
-          </Grid>
-          <Alert severity="info" sx={{ mt: { xs: 2, md: 4 } }}>
-            <Typography variant="body2">
-              После подтверждения переноса данных ваши объявления сохранятся как черновики в профиле на HeartApart.
-            </Typography>
-          </Alert>
-        </AccountInfoRow>
+        { (managedListings.length !== 0) && (
+          <AccountInfoRow title={'Объявления'}>
+            <Grid container spacing={3}>
+              {managedListings.map((apart) => (
+                <Grid item xs={12} md={4} key={uuidv4()}>
+                  <ApartCard apartment={apart} />
+                </Grid>
+              ))}
+            </Grid>
+            <Alert severity="info" sx={{ mt: { xs: 2, md: 4 }, maxWidth: '820px' }}>
+              <Typography variant="body2">
+                После подтверждения переноса данных ваши объявления сохранятся как черновики в профиле на HeartApart.
+              </Typography>
+            </Alert>
+          </AccountInfoRow>
+        )}
+
         <AccountInfoRow title={'Рейтинг'}>
           <Stack direction={'row'} alignItems={'center'} spacing={0.5}>
             <BoltIcon fontSize={'small'} sx={{ color: 'secondary.main' }} />

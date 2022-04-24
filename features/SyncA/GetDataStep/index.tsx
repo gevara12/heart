@@ -21,7 +21,6 @@ export default function GetDataStep (){
 	const [linkHasError, setLinkHasError] = useState<boolean>(false);
 	const [linkError, setLinkError] = useState<null|string>(null);
 
-
 	const serviceLinkValidate = () => {
 		let formIsValid = true;
 		setLinkHasError(false);
@@ -66,16 +65,16 @@ export default function GetDataStep (){
 	return (
 		<form onSubmit={handleSync}>
 
-			<Typography variant="h4" sx={{mt:11}}>Перенос данных с сервиса А</Typography>
+			<Typography variant="h4" sx={{mt:10.5}}>Перенос данных с сервиса А</Typography>
 			<Typography variant="body1" sx={{mt:4}}><b>Мы можем перенести из открытых данных следующую информацию (при ее наличии):</b></Typography>
 
 			<ParseInfoList/>
 
-			<Alert severity="warning" sx={{mt:3, display:'inline-flex'}}>Убедитесь, что у вас есть доступ к редактированию профиля!</Alert>
+			<Typography variant="body1" sx={{mt:4}}><b>Вставьте ссылку на ваш профиль, данные будут заполнены автоматически.</b></Typography>
 
-			<Typography variant="body1" sx={{mt:3}}><b>Вставьте ссылку на ваш профиль, данные будут заполнены автоматически.</b></Typography>
+			<Alert severity="warning" sx={{mt:2.5, maxWidth:'485px'}}>Убедитесь, что у вас есть доступ к редактированию профиля!</Alert>
 
-			<FormControl fullWidth sx={{mt:3}}>
+			<FormControl fullWidth sx={{mt:2.5, maxWidth:'552px'}}>
 				<TextField variant="outlined"
 				           placeholder="https://www.airbnb.com/users/show/<;номер аккаунта>"
 				           error={linkHasError}
@@ -86,12 +85,12 @@ export default function GetDataStep (){
 				           onChange={(e)=>{setServiceLink(e.target.value)}}/>
 			</FormControl>
 
-			<Typography variant="body1" sx={{mt:4}}>Мы заботимся о доверии, поэтому нам важно подтвердить, что указанный по ссылке профиль на А действительно ваш.</Typography>
+			<Typography variant="body1" sx={{mt:4, maxWidth:'504px'}}>Мы заботимся о доверии, поэтому нам важно подтвердить, что указанный по ссылке профиль на А действительно ваш.</Typography>
 
 			<UserCodeRow/>
 
-			<Typography variant="body1" sx={{mt:3}}>Зайдите в свой профиль на сервисе А, перейдите в режим редактирования и вставьте код в любое место в тексте раздела Информация (About). Сохраните изменения.</Typography>
-			<Typography variant="body1" sx={{mt:3}}>После этого вернитесь сюда и нажмите кнопку ниже “Продолжить”.</Typography>
+			<Typography variant="body1" sx={{mt:3, maxWidth:'456px'}}>Зайдите в свой профиль на сервисе А, перейдите в режим редактирования и вставьте код в любое место в тексте раздела Информация (About). Сохраните изменения.</Typography>
+			<Typography variant="body1" sx={{mt:3, maxWidth:'456px'}}>После этого вернитесь сюда и нажмите кнопку ниже “Продолжить”.</Typography>
 
 			{ requestError
 				&& (
@@ -102,7 +101,7 @@ export default function GetDataStep (){
 				)
 			}
 
-			<Stack direction="row" spacing={2} sx={{mt:4}} justifyContent="stretch">
+			<Stack direction="row" spacing={2} sx={{mt:4, mb:17}} justifyContent="stretch">
 				<LoadingButton variant="contained" type="submit" loading={loading} disabled={loading} sx={{ px:8}}>Продолжить</LoadingButton>
 			</Stack>
 		</form>
