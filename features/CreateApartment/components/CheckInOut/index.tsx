@@ -9,6 +9,10 @@ import { useDispatch } from 'react-redux';
 import { FORM_VALUE } from '@store/constants';
 import { addZeroBefore } from '@utils/helpers';
 
+const formatTime = (value: Date) => {
+  return `${addZeroBefore(value.getHours())}:${addZeroBefore(value.getMinutes())}`;
+};
+
 export const CheckInOut = () => {
   const dispatch = useDispatch();
   const [checkIn, setCheckIn] = React.useState<Date | null>(new Date('2022-08-18T14:00:00'));
@@ -17,28 +21,29 @@ export const CheckInOut = () => {
   const checkInHandler = React.useCallback(
     (newValue) => {
       setCheckIn(newValue);
-      let time = `${addZeroBefore(newValue.getHours())}:${addZeroBefore(newValue.getMinutes())}`;
-      dispatch({
-        type: FORM_VALUE,
-        name: 'checkInTime',
-        fieldValue: time,
-      });
     },
-    [checkIn, setCheckIn],
+    [checkIn],
   );
 
   const checkOutHandler = React.useCallback(
     (newValue) => {
       setCheckOut(newValue);
-      let time = `${addZeroBefore(newValue.getHours())}:${addZeroBefore(newValue.getMinutes())}`;
-      dispatch({
-        type: FORM_VALUE,
-        name: 'checkOutTime',
-        fieldValue: time,
-      });
     },
-    [checkIn, setCheckIn],
+    [checkOut],
   );
+
+  React.useEffect(() => {
+    dispatch({
+      type: FORM_VALUE,
+      name: 'checkInTime',
+      fieldValue: formatTime(checkIn),
+    });
+    dispatch({
+      type: FORM_VALUE,
+      name: 'checkOutTime',
+      fieldValue: formatTime(checkOut),
+    });
+  }, [dispatch, checkIn, checkOut]);
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { ToggleButton, ToggleButtonGroup, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 import { TPlaceType } from '@utils/types';
 
@@ -12,6 +12,8 @@ import { FORM_VALUE, INCREASE } from '@store/constants';
 import { getFormValues } from '@store/newApartForm/selectors';
 
 export const PlaceType = () => {
+  const { breakpoints } = useTheme();
+  const isMobile = useMediaQuery(breakpoints.down('md'));
   const dispatch = useDispatch();
   const { placeType } = useSelector(getFormValues);
 
@@ -40,10 +42,15 @@ export const PlaceType = () => {
         Выберите тип жилья
       </Typography>
 
-      <ToggleButtonGroup value={placeType?.value} exclusive onChange={handlePlace} orientation="vertical">
+      <ToggleButtonGroup
+        value={placeType?.value}
+        exclusive
+        onChange={handlePlace}
+        orientation={isMobile ? 'vertical' : 'horizontal'}
+      >
         {placeArr.map(({ type, label }) => {
           return (
-            <ToggleButton value={type} aria-label={type} key={type} color="primary" size="small">
+            <ToggleButton value={type} aria-label={type} key={type} color="primary" size={isMobile ? 'small' : 'large'}>
               {label}
             </ToggleButton>
           );

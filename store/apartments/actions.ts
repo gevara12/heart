@@ -2,15 +2,24 @@ import { Dispatch } from 'redux';
 import { createAction } from 'redux-actions';
 
 import {
+  activateApartmentAPI,
   createApartmentAPI,
   deleteApartmentByIdAPI,
   fetchApartmentByIdAPI,
   searchApartmentAPI,
   updateApartmentAPI,
 } from '@store/apartments/api';
-import { CREATE_APARTMENT, DELETE_APARTMENT, GET_APARTMENTS, GET_ITEM_APARTMENT, SET_ERROR } from '../constants';
+import {
+  CREATE_APARTMENT,
+  DELETE_APARTMENT,
+  GET_APARTMENTS,
+  GET_ITEM_APARTMENT,
+  SET_ERROR,
+  SNACKBAR_OPEN,
+} from '../constants';
 
 import type { TApartment } from '@utils/types';
+import { SeverityEnum } from '@components/CustomSnackBar';
 
 const getApartmentsRequest = createAction(GET_APARTMENTS);
 const getItemApartmentRequest = createAction(GET_ITEM_APARTMENT);
@@ -48,11 +57,30 @@ export const createApartment = (formValues: TApartment) => async (dispatch: Disp
     .then(({ data }) => {
       console.info('data', data);
       dispatch(createApartmentRequest(data));
+      // activateApartmentAPI(data?.id);
     })
     .catch((error) => {
-      dispatch(setErrorAction(error?.data?.code));
+      dispatch({
+        type: SNACKBAR_OPEN,
+        message: error?.defaultMessage,
+        severity: SeverityEnum.error,
+      });
     });
 };
+
+export const activateApartment = (id: string) => async (dispatch: Dispatch<any>) => {
+  activateApartmentAPI(id).then(({ data }) => {
+    console.info('data', data);
+    dispatch(createApartmentRequest(data));
+  })
+    .catch((error) => {
+      dispatch({
+        type: SNACKBAR_OPEN,
+        message: error?.defaultMessage,
+        severity: SeverityEnum.error,
+      });
+    });
+}
 
 export const updateApartment = (newApartment: TApartment) => async (dispatch: Dispatch) => {
   const { id, name, description, amount } = newApartment;

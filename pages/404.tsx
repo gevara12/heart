@@ -1,3 +1,5 @@
+import { Page404 } from '@features/Page404';
+
 export default function Custom404() {
-  return <h1>404 - Page Not Found</h1>;
+  return <Page404 />;
 }

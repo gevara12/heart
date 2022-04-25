@@ -14,6 +14,5 @@ export const usePasswordValidation = ({ firstPassword = '', secondPassword = '',
     setHasNumber(/\d/.test(firstPassword));
     setMatch(firstPassword && firstPassword === secondPassword);
   }, [firstPassword, secondPassword, requiredLength]);
-
   return [validLength, hasNumber, upperCase, lowerCase, match];
 };

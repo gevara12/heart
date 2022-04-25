@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createWrapper } from 'next-redux-wrapper';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 // import throttle from 'lodash/throttle';
 
 import { apartments, currentApartment } from '@store/apartments/reducers';
@@ -13,6 +13,8 @@ import { newApart } from '@store/newApartForm/reducers';
 import { syncA } from './syncA/reducers';
 
 // import { loadState, saveState } from '@store/sessionStorage';
+
+const composeEnhancers = composeWithDevTools({});
 
 const rootReducer = combineReducers({
   apartments,
@@ -27,11 +29,7 @@ const rootReducer = combineReducers({
 
 const initialState = {};
 const middleware = [thunk];
-const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(...middleware)));
 
 // store.subscribe(
 //   throttle(() => {

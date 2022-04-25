@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 
 import styles from './SwitchGroup.module.css';
@@ -54,7 +54,7 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities' }) => 
             <FormControlLabel
               key={name}
               control={
-                <Switch
+                <Checkbox
                   checked={isChecked}
                   onChange={checkHandler}
                   name={key}

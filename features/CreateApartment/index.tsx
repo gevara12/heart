@@ -24,7 +24,6 @@ const steps = ['Тип жилья', 'Адрес', 'Характеристики'
 
 function CreateApartment(): React.ReactElement {
   const { breakpoints } = useTheme();
-
   const isMobile = useMediaQuery(breakpoints.down('md'));
   const activeStep = useSelector(getActiveStep);
 
