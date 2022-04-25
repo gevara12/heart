@@ -2,6 +2,7 @@ import {SYNC_INCREASE_STEP, GET_A_DATA, SYNC_DECREASE_STEP} from '../constants';
 
 
 const initialState = {
+  parsedUrl: '',
   activeStep: 0,
   parsedData: null,
 };
@@ -21,9 +22,10 @@ export const syncA = (state = initialState, action) => {
       };
     case GET_A_DATA:
       return {
+        parsedUrl: action.payload.url,
         activeStep: state.activeStep,
         parsedData: {
-          ...action.payload,
+          ...action.payload.data,
         },
       };
     default:

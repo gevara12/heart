@@ -59,7 +59,7 @@ export default function MoveDataStep() {
 
 	      <AccountInfo parsedInfo={parsedData} sx={{mt:6.5,overflow:'hidden'}}/>
 
-	      <Typography variant="body1" sx={{ mt:6.5, maxWidth:'648px' }}>Если данная информация корректна и относится к вашему профилю, нажмите “Подтвердить”</Typography>
+	      <Typography variant="body1" sx={{ mt:6.5, maxWidth:'648px' }}>Если данная информация корректна и относится к вашему профилю, нажмите “Перенести данные”</Typography>
 
 	      <Box sx={{ overflow:'hidden', mt:4, mb:17 }}>
 	        <Stack direction="row" justifyContent="space-between" alignItems="center">

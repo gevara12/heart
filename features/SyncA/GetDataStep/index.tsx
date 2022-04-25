@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import { LoadingButton } from '@mui/lab';
 
@@ -9,12 +9,15 @@ import { getDataFromA } from "@store/syncA/actions";
 
 import UserCodeRow from "@features/SyncA/UserCodeRow";
 import ParseInfoList from "@features/SyncA/ParseInfoList";
+import { getParsedUrl } from "@store/syncA/selectors";
 
 
 export default function GetDataStep (){
 	const dispatch = useDispatch();
 
-	const [serviceLink, setServiceLink] = useState<string>('');
+	const parsedUrl = useSelector(getParsedUrl);
+
+	const [serviceLink, setServiceLink] = useState<string>(parsedUrl);
 	const [requestError, setRequestError] = useState<boolean>(false);
 
 	const [loading, setLoading] = useState<boolean>(false);

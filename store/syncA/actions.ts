@@ -11,7 +11,7 @@ export const getDataFromA = (url: string) => async (dispatch: Dispatch) => {
   return userGetDataAAPI({ service: 'Airbnb', url })
     .then(({status, data}) => {
       if ( status !== 200) throw data.code;
-      dispatch(getADataRequest(data.data));
+      dispatch(getADataRequest({url, data:data.data}));
       dispatch({ type:SYNC_INCREASE_STEP });
     })
     .catch((error) => {
