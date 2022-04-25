@@ -8,12 +8,9 @@ import { CustomModal } from '@components/CustomModal';
 import { hideAlert } from '@components/CustomAlert';
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ImageUpload } from '@components/ImageUpload';
 
-export const GetApartItemComponent = ({
-                                        id,
-                                      }: {
-  id: string | string[];
-}): React.ReactElement => {
+export const GetApartItemComponent = ({ id }: { id: string | string[] }): React.ReactElement => {
   const dispatch = useDispatch();
   const { currentApartment } = useSelector(getCurrentApartment);
 
@@ -44,16 +41,20 @@ export const GetApartItemComponent = ({
     dispatch(fetchApartmentById(id));
   }, [dispatch, id]);
 
+  console.info('currentApartment', currentApartment);
+
   return (
     <div>
-      <Typography variant='h2'>{currentApartment.name}</Typography>
+      <Typography variant="h2">{currentApartment.name}</Typography>
 
       <IconButton size="small" onClick={() => handleOpen(id)}>
-        <DeleteIcon/>
+        <DeleteIcon />
       </IconButton>
 
-      {currentApartment.images && currentApartment.images.map(({ image, title, imageId }) => (
-        <img style={{ maxWidth: '100%' }} src={image} alt={title} key={imageId}/>))}
+      {/*{currentApartment.publicInfo.images &&*/}
+      {/*  currentApartment.publicInfo.images.map(({ imageUrl, title, imageId }) => (*/}
+      {/*    <img style={{ maxWidth: '100%' }} src={imageUrl} alt={title} key={imageId} />*/}
+      {/*  ))}*/}
 
       <CustomModal
         isOpen={isModalOpen}
@@ -61,6 +62,8 @@ export const GetApartItemComponent = ({
         onConfirm={confirmationDeleting}
         title="Удалить апартаменты?"
       />
+
+      <ImageUpload id={id} />
     </div>
   );
 };

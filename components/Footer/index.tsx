@@ -33,7 +33,7 @@ export const Footer = (): React.ReactElement => {
                 Написать в поддержку
               </a>
             </Link>
-            <Link href={`mailto:${supportLink}`} passHref>
+            <Link href={`mailto:${feedbackLink}`} passHref>
               <a target="_blank" rel="noopener noreferrer" style={{ color: theme.palette.text.primary }}>
                 Обратная связь
               </a>
@@ -43,7 +43,7 @@ export const Footer = (): React.ReactElement => {
           <Stack spacing={isMobile ? 1 : 10} direction={isMobile ? 'column' : 'row'}>
             {navigation.map((navLink, i) => (
               <Link href={navLink.url} passHref key={i}>
-                <Typography variant="body1">{navLink.title}</Typography>
+                <a style={{ color: theme.palette.text.primary, textDecoration: 'none' }}>{navLink.title}</a>
               </Link>
             ))}
           </Stack>

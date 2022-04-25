@@ -47,7 +47,7 @@ export const SignUp = () => {
     secondPassword: '',
   });
 
-  const [validLength, upperCase, lowerCase, match] = usePasswordValidation({
+  const [validLength, hasNumber, upperCase, lowerCase, match] = usePasswordValidation({
     firstPassword: password.firstPassword,
     secondPassword: password.secondPassword,
   });
@@ -67,7 +67,7 @@ export const SignUp = () => {
     setPhoneNumber(resultValue);
   };
 
-  let passwordValid = validLength && upperCase && lowerCase && match;
+  let passwordValid = validLength && hasNumber && upperCase && lowerCase && match;
 
   const showError = !passwordValid && password.firstPassword.length > 0;
 
@@ -193,6 +193,7 @@ export const SignUp = () => {
               sx={{ mr: 3 }}
               size="large"
               onClick={handleSubmit}
+              disabled={!(email && passwordValid)}
               fullWidth
             >
               Регистрация

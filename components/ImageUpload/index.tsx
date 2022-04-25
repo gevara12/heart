@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { Fab, TextField } from '@mui/material';
+import { Button, Fab, Grid, TextField } from '@mui/material';
 
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
@@ -9,9 +9,9 @@ import { addImage } from '@store/images/actions';
 
 import styles from './ImageUpload.module.css';
 
-type TImageUploadProps = {};
+type TImageUploadProps = { id: string };
 
-export const ImageUpload = ({}: TImageUploadProps): React.ReactElement => {
+export const ImageUpload = ({ id }: TImageUploadProps): React.ReactElement => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = React.useState<string>('');
@@ -20,23 +20,33 @@ export const ImageUpload = ({}: TImageUploadProps): React.ReactElement => {
     setTitle(event.target.value);
   };
 
+  const [selectedImages, setSelectedImages] = React.useState([]);
+
   const handleUploadClick = async (event: React.ChangeEvent<HTMLInputElement>) => {
     let file = event?.target?.files[0];
-    // console.info(file);
-    let formData = new FormData();
+    const files = Array.from(event?.target?.files);
+    console.info('files', files);
+    const formData = new FormData();
     formData.append('file', file);
+    formData.append('id', id);
     formData.append('title', title);
-    formData.append('id', '5619cb9b-6436-403b-beb5-5d606f15675a');
-    // formData.append('id', '276bbd3b-a83f-4827-bcb8-41d9a681556c');
 
     // console.info('formData', formData);
+
+    files.forEach((file) => {
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImages((arr) => [...arr, { file, imageUrl: reader.result }]);
+      };
+      reader.readAsDataURL(file);
+    });
+
     // @ts-ignore
-    dispatch(addImage(formData));
-  }
+    // dispatch(addImage(formData));
+  };
 
-  // const images = useSelector(getImagesList);
+  console.info('images', selectedImages);
 
-  // console.info('images', images);
   return (
     <div>
       <input
@@ -48,9 +58,9 @@ export const ImageUpload = ({}: TImageUploadProps): React.ReactElement => {
         onChange={handleUploadClick}
       />
       <label htmlFor="upload-file">
-        <Fab component="span">
-          <AddPhotoAlternateIcon />
-        </Fab>
+        <Button variant="outlined" component="span">
+          Загрузить
+        </Button>
       </label>
       <TextField
         size="small"
@@ -61,14 +71,15 @@ export const ImageUpload = ({}: TImageUploadProps): React.ReactElement => {
         onChange={changeTitleHandle}
       />
 
-      {/*{images && (*/}
-      {/*  <Grid>{images.map((item: TImageData) => (*/}
-      {/*    <div>*/}
-      {/*      <span>{item.title}</span>*/}
-      {/*      <img src={item.image} alt={item.title} />*/}
-      {/*    </div>*/}
-      {/*  ))}</Grid>*/}
-      {/*)}*/}
+      {selectedImages && (
+        <Grid>
+          {selectedImages.map((item) => (
+            <div>
+              <img src={item.imageUrl} alt="preview" />
+            </div>
+          ))}
+        </Grid>
+      )}
     </div>
   );
 };

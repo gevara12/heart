@@ -1,0 +1,19 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.title {
+  margin-bottom: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00C7B7 0%, #C48CCD 50.31%, #FF6F73 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  margin-bottom: 3rem;
+}

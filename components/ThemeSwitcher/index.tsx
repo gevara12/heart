@@ -21,6 +21,7 @@ const lightTheme = createTheme({
       main: '#FF5A5F',
     },
     background: {
+      default: '#fff',
       paper: grey[50],
     },
     text: {
@@ -40,6 +41,7 @@ const darkTheme = createTheme({
       main: '#FF5A5F',
     },
     background: {
+      default: '#000',
       paper: grey[900],
     },
     text: {
@@ -50,14 +52,15 @@ const darkTheme = createTheme({
 
 export const ToggleColorMode = ({ children }: { children: React.ReactNode }): React.ReactElement => {
   const { isDarkMode } = useDarkMode();
-  const themeConfig = isDarkMode ? darkTheme : lightTheme;
-  const [mode, setMode] = React.useState(isDarkMode ? Theme.dark : Theme.light);
+  const [themeConf, setThemeConf] = React.useState(lightTheme);
+  const [mode, setMode] = React.useState(Theme.light);
 
   React.useEffect(() => {
-    setMode(mode);
-  }, [mode]);
+    setMode(isDarkMode && Theme.dark);
+    setThemeConf(isDarkMode ? darkTheme : lightTheme);
+  }, [mode, isDarkMode]);
 
-  return <ThemeProvider theme={themeConfig}>{children}</ThemeProvider>;
+  return <ThemeProvider theme={themeConf}>{children}</ThemeProvider>;
 };
 
 export const ThemeSwitcher = () => {

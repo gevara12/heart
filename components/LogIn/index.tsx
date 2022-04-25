@@ -88,7 +88,7 @@ export const LogIn = () => {
           <Stack direction="row">
             <Button
               fullWidth
-              disabled={!userName && 'disabled'}
+              disabled={!userName}
               type="submit"
               variant="contained"
               color="primary"

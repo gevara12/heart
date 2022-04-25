@@ -21,13 +21,14 @@ export type TApartItemProps = {
 
 export const ApartItem = ({ apart }: TApartItemProps): React.ReactElement => {
   const { publicInfo:{ id, name, description } } = apart;
+
   return (
     <Card>
       <CardActionArea href={`/apartment/${id}`}>
         <CardMedia component='img' height='140' image={'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'} alt={name}/>
         <CardContent>
-          <Typography gutterBottom variant='h5'>{name}</Typography>
-          <Typography variant='body2' color='text.secondary'>{description}</Typography>
+          <Typography gutterBottom variant='h5'>{name.value}</Typography>
+          {description && (<Typography variant='body2' color='text.secondary'>{description.value}</Typography>)}
         </CardContent>
       </CardActionArea>
     </Card>
