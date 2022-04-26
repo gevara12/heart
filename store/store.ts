@@ -10,7 +10,8 @@ import { auth } from '@store/auth/reducers';
 import { error } from '@store/error/reducers';
 import { snackbar } from '@store/snackbar/reducers';
 import { newApart } from '@store/newApartForm/reducers';
-import { syncA } from './syncA/reducers';
+import { syncA } from '@store/syncA/reducers';
+import { users } from '@store/users/reducers';
 
 // import { loadState, saveState } from '@store/sessionStorage';
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   snackbar,
   newApart,
   syncA,
+  users,
 });
 
 const initialState = {};

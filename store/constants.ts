@@ -43,3 +43,5 @@ export const GET_A_DATA = 'GET_A_DATA';
 
 export const SYNC_INCREASE_STEP = 'SYNC_INCREASE_STEP';
 export const SYNC_DECREASE_STEP = 'SYNC_DECREASE_STEP';
+
+export const USER_GET = 'USER_GET';
