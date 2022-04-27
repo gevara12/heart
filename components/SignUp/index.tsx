@@ -25,7 +25,7 @@ import { usePasswordValidation } from '@hooks/usePasswordValidation';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const SignUp = () => {
+export const SignUp = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -72,25 +72,15 @@ export const SignUp = () => {
   const showError = !passwordValid && password.firstPassword.length > 0;
 
   const handleSubmit = React.useCallback(async () => {
-    console.info(passwordValid, email);
     try {
-      if (passwordValid && email) {
-        await dispatch(userRegister({ email, phoneNumber, password: password.firstPassword }));
-        dispatch(
-          showSnackbar({
-            message: 'Вы успешно зарегистрированы',
-            severity: SeverityEnum.success,
-          }),
-        );
-        handleClose();
-      } else {
-        dispatch(
-          showSnackbar({
-            message: 'Что-то пошло не так',
-            severity: SeverityEnum.error,
-          }),
-        );
-      }
+      await dispatch(userRegister({ email, phoneNumber, password: password.firstPassword }));
+      dispatch(
+        showSnackbar({
+          message: 'Вы успешно зарегистрированы',
+          severity: SeverityEnum.success,
+        }),
+      );
+      handleClose();
     } catch (error) {
       console.error(error);
     }
@@ -98,9 +88,15 @@ export const SignUp = () => {
 
   return (
     <div>
-      <MenuItem key={'register'} onClick={handleOpen}>
-        Регистрация
-      </MenuItem>
+      {isLoginWall ? (
+        <Button variant="contained" onClick={handleOpen}>
+          Регистрация
+        </Button>
+      ) : (
+        <MenuItem key={'register'} onClick={handleOpen}>
+          Регистрация
+        </MenuItem>
+      )}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>
         <Box sx={{ maxWidth: '380px', p: 4 }}>

@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { FormControl, InputAdornment, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 
 import { FORM_VALUE, INCREASE } from '@store/constants';
-import { NextButton } from '../NextButton';
 import { showSnackbar } from '@store/snackbar/actions';
 import { SeverityEnum } from '@components/CustomSnackBar';
+import { BottomStick } from '@features/CreateApartment/components/BottomStick';
 
 type TState = {
   name: string;
@@ -95,7 +95,7 @@ export const PlaceName = () => {
           />
         </FormControl>
 
-        <NextButton onClick={handleNext} />
+        <BottomStick hasPrev clickNext={handleNext} />
       </Stack>
     </div>
   );

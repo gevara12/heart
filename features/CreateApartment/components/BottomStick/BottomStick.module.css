@@ -1,0 +1,13 @@
+.host {
+  position: absolute;
+  left: 24px;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  max-width: calc(100% - 48px);
+  width: 100%;
+}
+
+.wider {
+  flex-grow: 2;
+}

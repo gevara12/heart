@@ -1,27 +1,34 @@
 import * as React from 'react';
-import styles from '@features/CreateApartment/components/Hang/Hang.module.css';
-import { Button, InputAdornment, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
-import { FORM_GROUP_VALUE, INCREASE } from '@store/constants';
 import { useDispatch } from 'react-redux';
-import { NextButton } from '@features/CreateApartment/components/NextButton';
 
+import { Button, InputAdornment, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+
+import { FORM_GROUP_VALUE } from '@store/constants';
+import { BottomStick } from '@features/CreateApartment/components/BottomStick';
+
+import styles from '@features/CreateApartment/components/Hang/Hang.module.css';
 
 type TState = {
   guest: number;
   bed: number;
+  bathrooms: number;
+  rooms: number;
   floor: number;
   square: number;
 };
-export const Characteristics = (): React.ReactElement => {
+
+export default function Characteristics(): React.ReactElement {
   const dispatch = useDispatch();
 
   const [values, setValues] = React.useState<TState>({
-    guest: 0,
-    bed: 0,
-    floor: 0,
-    square: 4,
+    guest: 2,
+    bed: 1,
+    bathrooms: 1,
+    rooms: 1,
+    floor: 1,
+    square: 10,
   });
 
   const handleChange = React.useCallback(
@@ -57,17 +64,13 @@ export const Characteristics = (): React.ReactElement => {
     setValues({ ...values, [prop]: values[prop] > 0 ? Number(values[prop]) - 1 : 0 });
   };
 
-  const handleNext = () => {
-    dispatch({ type: INCREASE });
-  };
-
   return (
-    <>
+    <div>
       <Typography variant="h4" className={styles.title}>
         Укажите характеристики
       </Typography>
 
-      <Stack spacing={4}>
+      <Stack spacing={4} sx={{ mb: 4 }}>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
           alignItems={{ xs: 'start', sm: 'center' }}
@@ -145,6 +148,76 @@ export const Characteristics = (): React.ReactElement => {
           justifyContent="space-between"
         >
           <Typography variant="body1" component="span" className={styles.countLabel}>
+            Количество санузлов
+          </Typography>
+
+          <div>
+            <Button onClick={() => decHandleChange('bathrooms')} size="large" variant="outlined">
+              <RemoveIcon />
+            </Button>
+            <TextField
+              size="small"
+              variant="outlined"
+              value={values.bathrooms}
+              onChange={handleChange('bathrooms')}
+              sx={{ mx: 2, width: '100px' }}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 8,
+                type: 'number',
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
+              }}
+            />
+            <Button onClick={() => incHandleChange('bathrooms')} size="large" variant="outlined">
+              <AddIcon />
+            </Button>
+          </div>
+        </Stack>
+
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
+          <Typography variant="body1" component="span" className={styles.countLabel}>
+            Количество спален
+          </Typography>
+
+          <div>
+            <Button onClick={() => decHandleChange('rooms')} size="large" variant="outlined">
+              <RemoveIcon />
+            </Button>
+            <TextField
+              size="small"
+              variant="outlined"
+              value={values.rooms}
+              onChange={handleChange('rooms')}
+              sx={{ mx: 2, width: '100px' }}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 8,
+                type: 'number',
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
+              }}
+            />
+            <Button onClick={() => incHandleChange('rooms')} size="large" variant="outlined">
+              <AddIcon />
+            </Button>
+          </div>
+        </Stack>
+
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
+          <Typography variant="body1" component="span" className={styles.countLabel}>
             Этаж
           </Typography>
 
@@ -209,7 +282,7 @@ export const Characteristics = (): React.ReactElement => {
         </Stack>
       </Stack>
 
-      <NextButton onClick={handleNext} />
-    </>
+      <BottomStick hasPrev />
+    </div>
   );
-};
+}

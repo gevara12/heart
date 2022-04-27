@@ -6,3 +6,11 @@
 .form {
   margin-top: 2rem;
 }
+
+.centerBlock {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: calc(100vh - 270px);
+  margin: 3rem 0;
+}

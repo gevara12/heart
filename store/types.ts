@@ -1,4 +1,4 @@
-import { Characteristics } from '@features/CreateApartment/components/Characteristics';
+// import { Characteristics } from '@features/CreateApartment/components/Characteristics';
 
 export type TPlaceType = 'entire-place' | 'private-room' | 'hotel-room' | 'shared-room';
 

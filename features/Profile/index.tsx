@@ -92,7 +92,7 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
 								<>
 									<Typography
 										component="a"
-										href={data.refWhatsapp}
+                    href={`https://${data.refWhatsapp}`}
 										target="_blank"
 										rel="noopener noreferrer nofollow"
 										sx={{display: 'flex', color: 'text.primary', textDecoration: 'none', mb: 1}}

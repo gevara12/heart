@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 
 import CssBaseline from '@mui/material/CssBaseline';
+import { StyledEngineProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
 import { ToggleColorMode } from '@components/ThemeSwitcher';
@@ -8,13 +9,11 @@ import { wrapper } from '@store/store';
 
 function Website({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <StyledEngineProvider>
       <CssBaseline />
       <ToggleColorMode>
         <Box
           sx={{
-            // display: 'grid', // this block broke some html code inside single page
-            // gridTemplateRows: 'auto 1fr auto',
             display: 'flex',
             flexDirection: 'column',
             color: 'text.primary',
@@ -25,7 +24,7 @@ function Website({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Box>
       </ToggleColorMode>
-    </>
+    </StyledEngineProvider>
   );
 }
 
