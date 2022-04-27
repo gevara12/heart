@@ -13,6 +13,8 @@ import styles from '@features/CreateApartment/components/Hang/Hang.module.css';
 type TState = {
   guest: number;
   bed: number;
+  bathrooms: number;
+  rooms: number;
   floor: number;
   square: number;
 };
@@ -23,6 +25,8 @@ export default function Characteristics(): React.ReactElement {
   const [values, setValues] = React.useState<TState>({
     guest: 2,
     bed: 1,
+    bathrooms: 1,
+    rooms: 1,
     floor: 1,
     square: 10,
   });
@@ -66,7 +70,7 @@ export default function Characteristics(): React.ReactElement {
         Укажите характеристики
       </Typography>
 
-      <Stack spacing={4}>
+      <Stack spacing={4} sx={{ mb: 4 }}>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
           alignItems={{ xs: 'start', sm: 'center' }}
@@ -132,6 +136,76 @@ export default function Characteristics(): React.ReactElement {
               }}
             />
             <Button onClick={() => incHandleChange('bed')} size="large" variant="outlined">
+              <AddIcon />
+            </Button>
+          </div>
+        </Stack>
+
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
+          <Typography variant="body1" component="span" className={styles.countLabel}>
+            Количество санузлов
+          </Typography>
+
+          <div>
+            <Button onClick={() => decHandleChange('bathrooms')} size="large" variant="outlined">
+              <RemoveIcon />
+            </Button>
+            <TextField
+              size="small"
+              variant="outlined"
+              value={values.bathrooms}
+              onChange={handleChange('bathrooms')}
+              sx={{ mx: 2, width: '100px' }}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 8,
+                type: 'number',
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
+              }}
+            />
+            <Button onClick={() => incHandleChange('bathrooms')} size="large" variant="outlined">
+              <AddIcon />
+            </Button>
+          </div>
+        </Stack>
+
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'start', sm: 'center' }}
+          spacing={{ xs: 2, sm: 1 }}
+          justifyContent="space-between"
+        >
+          <Typography variant="body1" component="span" className={styles.countLabel}>
+            Количество спален
+          </Typography>
+
+          <div>
+            <Button onClick={() => decHandleChange('rooms')} size="large" variant="outlined">
+              <RemoveIcon />
+            </Button>
+            <TextField
+              size="small"
+              variant="outlined"
+              value={values.rooms}
+              onChange={handleChange('rooms')}
+              sx={{ mx: 2, width: '100px' }}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 8,
+                type: 'number',
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
+              }}
+            />
+            <Button onClick={() => incHandleChange('rooms')} size="large" variant="outlined">
               <AddIcon />
             </Button>
           </div>

@@ -14,8 +14,8 @@ const nextConfig = withPWA({
   },
   reactStrictMode: false,
   compiler: {
-    // ssr and displayName are configured by default
     styledComponents: true,
+    removeConsole: true,
   },
   //   i18n: {
   //     /**

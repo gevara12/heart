@@ -88,7 +88,7 @@ function CreateApartment(): React.ReactElement {
       </Box>
 
       <Box className={styles.centerBlock}>
-        <Container maxWidth="md" sx={{ pb: 4 }}>
+        <Container maxWidth="md" sx={{ pb: 5 }}>
           {getStepContent(activeStep)}
         </Container>
       </Box>
