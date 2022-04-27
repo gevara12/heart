@@ -1,12 +1,14 @@
 import * as React from 'react';
-import styles from '@features/CreateApartment/components/Hang/Hang.module.css';
-import { Button, InputAdornment, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
-import { FORM_GROUP_VALUE, INCREASE } from '@store/constants';
 import { useDispatch } from 'react-redux';
-import { NextButton } from '@features/CreateApartment/components/NextButton';
 
+import { Button, InputAdornment, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+
+import { FORM_GROUP_VALUE } from '@store/constants';
+import { BottomStick } from '@features/CreateApartment/components/BottomStick';
+
+import styles from '@features/CreateApartment/components/Hang/Hang.module.css';
 
 type TState = {
   guest: number;
@@ -14,14 +16,15 @@ type TState = {
   floor: number;
   square: number;
 };
-export const Characteristics = (): React.ReactElement => {
+
+export default function Characteristics(): React.ReactElement {
   const dispatch = useDispatch();
 
   const [values, setValues] = React.useState<TState>({
-    guest: 0,
-    bed: 0,
-    floor: 0,
-    square: 4,
+    guest: 2,
+    bed: 1,
+    floor: 1,
+    square: 10,
   });
 
   const handleChange = React.useCallback(
@@ -57,12 +60,8 @@ export const Characteristics = (): React.ReactElement => {
     setValues({ ...values, [prop]: values[prop] > 0 ? Number(values[prop]) - 1 : 0 });
   };
 
-  const handleNext = () => {
-    dispatch({ type: INCREASE });
-  };
-
   return (
-    <>
+    <div>
       <Typography variant="h4" className={styles.title}>
         Укажите характеристики
       </Typography>
@@ -209,7 +208,7 @@ export const Characteristics = (): React.ReactElement => {
         </Stack>
       </Stack>
 
-      <NextButton onClick={handleNext} />
-    </>
+      <BottomStick hasPrev />
+    </div>
   );
-};
+}

@@ -5,3 +5,12 @@
 .subTitle {
   margin-bottom: 24px;
 }
+
+.group {
+  display: grid;
+  grid-gap: 1rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

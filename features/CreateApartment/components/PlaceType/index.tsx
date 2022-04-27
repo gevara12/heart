@@ -1,25 +1,22 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ToggleButton, ToggleButtonGroup, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, ToggleButton, ToggleButtonGroup, Typography, useMediaQuery } from '@mui/material';
+import useTheme from '@mui/material/styles/useTheme';
 
 import { TPlaceType } from '@utils/types';
-
-import styles from './PlaceType.module.css';
-// import { createApartment } from '@store/apartments/actions';
-import { NextButton } from '../NextButton';
-import { FORM_VALUE, INCREASE } from '@store/constants';
+import { FORM_VALUE } from '@store/constants';
 import { getFormValues } from '@store/newApartForm/selectors';
 
-export const PlaceType = () => {
+import { BottomStick } from '@features/CreateApartment/components/BottomStick';
+
+import styles from './PlaceType.module.css';
+
+const PlaceType = (): React.ReactElement => {
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('md'));
   const dispatch = useDispatch();
   const { placeType } = useSelector(getFormValues);
-
-  const handleNext = () => {
-    dispatch({ type: INCREASE });
-  };
 
   const placeArr = [
     { type: 'entire-place', label: 'Жилье целиком' },
@@ -42,22 +39,32 @@ export const PlaceType = () => {
         Выберите тип жилья
       </Typography>
 
-      <ToggleButtonGroup
-        value={placeType?.value}
-        exclusive
-        onChange={handlePlace}
-        orientation={isMobile ? 'vertical' : 'horizontal'}
-      >
-        {placeArr.map(({ type, label }) => {
-          return (
-            <ToggleButton value={type} aria-label={type} key={type} color="primary" size={isMobile ? 'small' : 'large'}>
-              {label}
-            </ToggleButton>
-          );
-        })}
-      </ToggleButtonGroup>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <ToggleButtonGroup
+          value={placeType?.value}
+          exclusive
+          onChange={handlePlace}
+          orientation={isMobile ? 'vertical' : 'horizontal'}
+        >
+          {placeArr.map(({ type, label }) => {
+            return (
+              <ToggleButton
+                value={type}
+                aria-label={type}
+                key={type}
+                color="primary"
+                size={isMobile ? 'small' : 'large'}
+              >
+                {label}
+              </ToggleButton>
+            );
+          })}
+        </ToggleButtonGroup>
+      </Box>
 
-      <NextButton onClick={handleNext} />
+      <BottomStick />
     </div>
   );
 };
+
+export default PlaceType;

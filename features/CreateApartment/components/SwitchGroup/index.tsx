@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material';
+import { Checkbox, Switch, FormControlLabel, FormGroup, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 
 import styles from './SwitchGroup.module.css';
@@ -10,9 +10,10 @@ type TSwitch = {
   label: string;
   isChecked: boolean;
   category?: string;
+  isSwitcher?: boolean;
 };
 
-export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities' }) => {
+export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwitcher }) => {
   const dispatch = useDispatch();
 
   const [values, setValues] = React.useState(qualitiesArr);
@@ -35,33 +36,38 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities' }) => 
 
   return (
     <div className={styles.host}>
-      <Typography variant="h5" className={styles.subTitle}>
-        {title}
-      </Typography>
+      {title && (
+        <Typography variant="h5" className={styles.subTitle}>
+          {title}
+        </Typography>
+      )}
 
-      <FormGroup
-        sx={{
-          display: 'grid',
-          gridGap: '1rem',
-          gridTemplateColumns: {
-            sm: 'repeat(2, 1fr)',
-          },
-        }}
-      >
+      <FormGroup className={styles.group}>
         {Object.entries(values).map(([key, value]: [key: string, value: TSwitch]) => {
           const { name, isChecked, label } = value;
           return (
             <FormControlLabel
               key={name}
               control={
-                <Checkbox
-                  checked={isChecked}
-                  onChange={checkHandler}
-                  name={key}
-                  id={label}
-                  color="primary"
-                  inputProps={{ title: name }}
-                />
+                isSwitcher ? (
+                  <Switch
+                    checked={isChecked}
+                    onChange={checkHandler}
+                    name={key}
+                    id={label}
+                    color="primary"
+                    inputProps={{ title: name }}
+                  />
+                ) : (
+                  <Checkbox
+                    checked={isChecked}
+                    onChange={checkHandler}
+                    name={key}
+                    id={label}
+                    color="primary"
+                    inputProps={{ title: name }}
+                  />
+                )
               }
               label={value.label}
             />

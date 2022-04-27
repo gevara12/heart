@@ -13,8 +13,6 @@ function Website({ Component, pageProps }: AppProps) {
       <ToggleColorMode>
         <Box
           sx={{
-            // display: 'grid', // this block broke some html code inside single page
-            // gridTemplateRows: 'auto 1fr auto',
             display: 'flex',
             flexDirection: 'column',
             color: 'text.primary',

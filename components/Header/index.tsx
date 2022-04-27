@@ -3,19 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Container,
-  Divider,
-  IconButton,
-  Menu,
-  Tooltip,
-  Typography,
-  MenuItem,
-  Stack,
-} from '@mui/material';
+import { AppBar, Avatar, Box, Container, Divider, IconButton, Menu, Typography, MenuItem, Stack } from '@mui/material';
 
 import { grey } from '@mui/material/colors';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -25,7 +13,6 @@ import { LogIn } from '@components/LogIn';
 
 import { getUserStatus } from '@store/auth/selectors';
 import { fetchCurrentUser } from '@store/auth/actions';
-// import { ThemeSwitcher } from '@components/ThemeSwitcher';
 import styles from '@features/Profile/components/AddAvatar/AddAvatar.module.css';
 
 export const Header = (): React.ReactElement => {
@@ -63,7 +50,7 @@ export const Header = (): React.ReactElement => {
                 mr: 2,
               }}
             >
-              <Link href="/" passHref>
+              <Link href="/hero" passHref>
                 <a style={{ display: 'block' }}>
                   <img style={{ display: 'block', height: '40px' }} src={'/images/heart-logo.png'} alt={''} />
                 </a>
@@ -84,25 +71,18 @@ export const Header = (): React.ReactElement => {
             {/*  </Link>*/}
             {/*</Box>*/}
 
-            <Box
-              sx={{
-                // flexGrow: 0,
-                ml: 2,
-              }}
-            >
-              <Tooltip title="Открыть настройки">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ bgcolor: grey[100] }}>
-                    {auth?.user?.data?.avatar ? (
-                      <div className={styles.imageContainer}>
-                        <Image className={styles.image} src={auth?.user?.data?.avatar} alt="avatar" layout="fill" />
-                      </div>
-                    ) : (
-                      <AccountCircleIcon sx={{ color: '#707070' }} />
-                    )}
-                  </Avatar>
-                </IconButton>
-              </Tooltip>
+            <Box sx={{ ml: 2 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar sx={{ bgcolor: 'background.default' }}>
+                  {auth?.user?.data?.avatar ? (
+                    <div className={styles.imageContainer}>
+                      <Image className={styles.image} src={auth?.user?.data?.avatar} alt="avatar" layout="fill" />
+                    </div>
+                  ) : (
+                    <AccountCircleIcon sx={{ color: '#707070' }} />
+                  )}
+                </Avatar>
+              </IconButton>
 
               <Menu
                 sx={{ mt: '45px' }}

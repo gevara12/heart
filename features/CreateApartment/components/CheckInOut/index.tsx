@@ -1,13 +1,15 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
+import { useDispatch } from 'react-redux';
+
+import { FormControl, Stack, TextField } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
 import ruLocale from 'date-fns/locale/ru';
-import { FormControl, Stack } from '@mui/material';
-import { useDispatch } from 'react-redux';
 import { FORM_VALUE } from '@store/constants';
 import { addZeroBefore } from '@utils/helpers';
+
+import styles from './CheckInOut.module.css';
 
 const formatTime = (value: Date) => {
   return `${addZeroBefore(value.getHours())}:${addZeroBefore(value.getMinutes())}`;
@@ -46,7 +48,7 @@ export const CheckInOut = () => {
   }, [dispatch, checkIn, checkOut]);
 
   return (
-    <div>
+    <div className={styles.host}>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
         <Stack spacing={2} direction="row">
           <FormControl>

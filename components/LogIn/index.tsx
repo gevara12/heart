@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { showSnackbar } from '@store/snackbar/actions';
 import { SeverityEnum } from '@components/CustomSnackBar';
 
-export const LogIn = () => {
+export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -51,14 +51,22 @@ export const LogIn = () => {
 
   return (
     <div>
-      {auth.isLoggedIn === true ? (
-        <MenuItem key={'logout'} onClick={handleLogout}>
-          Выйти
-        </MenuItem>
-      ) : (
-        <MenuItem key={'login'} onClick={handleOpen}>
+      {isLoginWall ? (
+        <Button variant="contained" onClick={handleOpen}>
           Войти
-        </MenuItem>
+        </Button>
+      ) : (
+        <>
+          {auth.isLoggedIn === true ? (
+            <MenuItem key={'logout'} onClick={handleLogout}>
+              Выйти
+            </MenuItem>
+          ) : (
+            <MenuItem key={'login'} onClick={handleOpen}>
+              Войти
+            </MenuItem>
+          )}
+        </>
       )}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>

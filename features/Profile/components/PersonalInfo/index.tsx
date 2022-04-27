@@ -103,7 +103,6 @@ export const PersonalInfo = (): React.ReactElement => {
               variant="outlined"
               value={values.surname}
               onChange={handleChange('surname')}
-              required
             />
           </FormControl>
         </Stack>
