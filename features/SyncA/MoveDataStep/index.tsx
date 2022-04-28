@@ -13,6 +13,7 @@ import AccountInfo from '@features/SyncA/AccountInfo';
 import SupportDialog from '@features/SyncA/SupportDialog/SupportDialog';
 import { LoadingButton } from '@mui/lab';
 
+
 const LinkPrimary = styled('a')(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
@@ -66,8 +67,8 @@ export default function MoveDataStep() {
       </Typography>
 
       <Box sx={{ overflow: 'hidden', mt: 4, mb: 17 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
-          <Stack direction="row" spacing={2} alignItems="center">
+        <Stack direction={{xs:'column', sm:'row'}} justifyContent="space-between" alignItems="center">
+          <Stack direction={{xs:'column', sm:'row'}} spacing={2} alignItems="center">
             <Button variant="outlined" onClick={stepDown} sx={{ width: '168px' }}>
               Назад
             </Button>
@@ -83,7 +84,7 @@ export default function MoveDataStep() {
               Перенести данные
             </LoadingButton>
           </Stack>
-          <LinkPrimary href="#" onClick={handleClickOpen}>
+          <LinkPrimary href="#" onClick={handleClickOpen} sx={{mt:{xs:3,sm:0}}}>
             Помощь
           </LinkPrimary>
         </Stack>
