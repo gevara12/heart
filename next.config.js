@@ -15,7 +15,7 @@ const nextConfig = withPWA({
   reactStrictMode: false,
   compiler: {
     styledComponents: true,
-    removeConsole: true,
+    // removeConsole: true,
   },
   //   i18n: {
   //     /**

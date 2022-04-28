@@ -1,7 +1,6 @@
 import { AppProps } from 'next/app';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import { StyledEngineProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
 import { ToggleColorMode } from '@components/ThemeSwitcher';
@@ -9,7 +8,7 @@ import { wrapper } from '@store/store';
 
 function Website({ Component, pageProps }: AppProps) {
   return (
-    <StyledEngineProvider>
+    <>
       <CssBaseline />
       <ToggleColorMode>
         <Box
@@ -24,7 +23,7 @@ function Website({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Box>
       </ToggleColorMode>
-    </StyledEngineProvider>
+    </>
   );
 }
 

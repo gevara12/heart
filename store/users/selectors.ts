@@ -1,2 +1,1 @@
-
-export const getUser = (state: { users:any }) => state.users?.user;
+export const getUser = (state: { users: any }) => state.users?.user;
