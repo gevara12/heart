@@ -76,7 +76,7 @@ export const Header = (): React.ReactElement => {
                 <Avatar sx={{ bgcolor: 'background.default' }}>
                   {auth?.user?.data?.avatar ? (
                     <div className={styles.imageContainer}>
-                      <Image className={styles.image} src={auth?.user?.data?.avatar} alt="avatar" layout="fill" />
+                      <Image className={styles.image} src={auth?.user?.data?.avatar} alt="avatar" layout="fill" unoptimized />
                     </div>
                   ) : (
                     <AccountCircleIcon sx={{ color: '#707070' }} />
