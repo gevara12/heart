@@ -2,12 +2,10 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Image from 'next/image';
-// import {parse} from "date-fns";
 
 import { getCurrentUser } from '@store/auth/selectors';
 import { fetchUser } from '@store/users/actions';
 import { getUser } from '@store/users/selectors';
-import { fetchCurrentUser } from '@store/auth/actions';
 
 import { grey } from '@mui/material/colors';
 

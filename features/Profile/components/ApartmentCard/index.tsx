@@ -10,11 +10,11 @@ type TProfileApartmentProps = {
 	apartment:any
 };
 
-export default function ApartmentCard({apartment:{publicInfo, externalRating}}: TProfileApartmentProps) {
+export default function ApartmentCard({apartment:{publicInfo, externalRating, images}}: TProfileApartmentProps) {
 	return (
 		<Card>
-			{ (publicInfo?.images && publicInfo?.images.length !== 0) ? (
-				<CardMedia component="img" height="140" image={publicInfo?.images[0].imageUrl} alt={''}/>
+			{ (images && images.length !== 0) ? (
+				<CardMedia component="img" height="140" image={images[0].imageUrl} alt={''}/>
 			):(
 				<Box sx={{height:'140px', background:'#707070'}}/>
 			)}
