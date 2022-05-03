@@ -28,6 +28,7 @@ const port = process.env.PORT || 3000;
         const httpsServer = https.createServer({
             key: fs.readFileSync(__dirname + '/privatekey.key', 'utf8'),
             cert: fs.readFileSync(__dirname + '/certificate.cer', 'utf8'),
+            ca: fs.readFileSync(__dirname + '/ca.cer', 'utf8'),
         }, server);
         httpServer.listen(443, () => {
             console.log('HTTP Server running on port 443');
