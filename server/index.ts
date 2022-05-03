@@ -26,7 +26,7 @@ const port = process.env.PORT || 3000;
     const httpsServer = https.createServer(
       {
         key: fs.readFileSync(__dirname + '/privatekey.key', 'utf8'),
-        cacert: fs.readFileSync(__dirname + '/certificate.cer', 'utf8'),
+        cert: fs.readFileSync(__dirname + '/certificate.cer', 'utf8'),
       },
       server,
     );

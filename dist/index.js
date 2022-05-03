@@ -1,20 +1,4 @@
 "use strict";
-// import next from 'next';
-//
-// const port = parseInt(process.env.PORT || '3000', 10);
-// const dev = process.env.NODE_ENV !== 'production';
-// const app = next({ dev });
-// const handle = app.getRequestHandler();
-//
-// app.prepare().then(() => {
-//   createServer((req, res) => {
-//     const parsedUrl = parse(req.url!, true);
-//     handle(req, res, parsedUrl);
-//   }).listen(port);
-//
-//   // tslint:disable-next-line:no-console
-//   console.log(`> Server listening at http://localhost:${port} as ${dev ? 'development' : process.env.NODE_ENV}`);
-// });
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -45,11 +29,11 @@ const port = process.env.PORT || 3000;
             key: fs.readFileSync(__dirname + '/privatekey.key', 'utf8'),
             cert: fs.readFileSync(__dirname + '/certificate.cer', 'utf8'),
         }, server);
-        httpServer.listen(80, () => {
-            console.log('HTTP Server running on port 80');
+        httpServer.listen(443, () => {
+            console.log('HTTP Server running on port 443');
         });
-        httpsServer.listen(443, () => {
-            console.log('HTTPS Server running on port 443');
+        httpsServer.listen(80, () => {
+            console.log('HTTPS Server running on port 80');
         });
     }
     catch (e) {
