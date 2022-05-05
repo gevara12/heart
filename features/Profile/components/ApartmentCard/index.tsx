@@ -20,7 +20,7 @@ export default function ApartmentCard({ apartment }:TProfileApartmentProps) {
 				{ (images && images.length !== 0) && (
 					<CardMedia component="img" height="140" image={images[0].imageUrl} alt={''} sx={{position:'absolute', left:0, top:0,zIndex:-1}}/>
 				)}
-				{ externalRating?.isLuxury && <Chip label="Премиум" color="success" size="small"/>}
+				{ (externalRating?.isSelect || externalRating?.isLuxury) && <Chip label="Премиум" color="success" size="small"/>}
 				{ externalRating?.superHost && <Chip label="Топ-сервис" color="secondary" size="small" />}
 				{ status === 'CREATED' && (
 					<Box sx={{
