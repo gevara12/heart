@@ -2,50 +2,51 @@ import {default as React, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useRouter} from 'next/router';
 
-import {Container} from '@mui/material';
+import {Button, CircularProgress, Container} from '@mui/material';
 import Layout from '@components/Layout';
+import {registerConfirm} from "@store/auth/actions";
 
-import {registerConfirm} from "../../../store/auth/actions";
 
-
-const Confirmation = () => {
+export default function Confirmation() {
     const router = useRouter();
     const {id} = router.query;
     const dispatch = useDispatch();
 
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
+    const [loading, setloading] = useState(false);
 
-    console.info(id);
+    const [regEmail, setRegEmail] = useState('');
+
 
     useEffect(() => {
         setSuccess(false);
         setError(false);
+        setloading(true);
         id && (
             dispatch(registerConfirm(id))
-                .then((response) => {
-                    console.info('success');
-                    console.info(response);
+                .then((data) => {
                     setSuccess(true);
+                    setRegEmail(data.email)
                 })
-                .catch((response)=>{
-                    console.error('error');
-                    console.error(response);
-                    setError(true);
-                })
+                .catch( ()=> setError(true) )
+                .finally(() => setloading(false) )
         );
-    }, [dispatch]);
+    }, [id]);
     return (
         <Layout>
             <section>
                 <Container maxWidth='lg'>
-                    <h1>{id}</h1>
-                    {success && <div>вы успешно зарегистрированы</div>}
+                    {loading && <CircularProgress />}
+                    {success && (
+                        <div>
+                            <div>вы успешно зарегистрированы на имейл {regEmail}</div>
+                            <Button variant="outlined" onClick={()=>router.replace('/profile')} sx={{ width: '168px' }}>профиль</Button>
+                        </div>
+                    )}
                     {error && <div>чтото пошло не так</div>}
                 </Container>
             </section>
         </Layout>
     )
 };
-
-export default Confirmation
