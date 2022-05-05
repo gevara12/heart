@@ -11,6 +11,7 @@ import {
   userRegisterAPI,
   userUpdateContactsAPI,
   userUpdateInfoAPI,
+  userRegisterConfirmAPI,
 } from '@store/auth/api';
 import { SeverityEnum } from '@components/CustomSnackBar';
 import { error } from '@store/error/reducers';
@@ -135,4 +136,14 @@ export const logout = () => (dispatch: Dispatch<any>) => {
     .catch((error) => {
       console.log('error', error);
     });
+};
+
+export const registerConfirm = (id) => async () => {
+  return userRegisterConfirmAPI(id)
+      .then(({ data }) => {
+        return data.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 };
