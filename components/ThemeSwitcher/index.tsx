@@ -56,11 +56,15 @@ export const ToggleColorMode = ({ children }: { children: React.ReactNode }): Re
   const [mode, setMode] = React.useState(Theme.light);
 
   React.useEffect(() => {
-    setMode(isDarkMode && Theme.dark);
+    setMode(isDarkMode ? Theme.dark : Theme.light);
     setThemeConf(isDarkMode ? darkTheme : lightTheme);
   }, [mode, isDarkMode]);
 
-  return <ThemeProvider theme={themeConf}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={themeConf}>
+      <div data-theme={mode}>{children}</div>
+    </ThemeProvider>
+  );
 };
 
 export const ThemeSwitcher = () => {

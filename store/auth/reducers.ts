@@ -28,7 +28,7 @@ export const auth = (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
       ...state,
-      isLoggedIn: false,
+      isLoggedIn: true,
       user: payload?.user,
     };
 

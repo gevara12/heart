@@ -19,3 +19,12 @@ export type TApartment = {
   images?: TImage[];
   publicInfo: object;
 };
+
+export type TCharacteristic = {
+  guest: { value: number };
+  bed: { value: number };
+  bathrooms: { value: number };
+  rooms: { value: number };
+  floor: { value: number };
+  square: { value: number };
+};

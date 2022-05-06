@@ -13,8 +13,8 @@ import {
     userUpdateInfoAPI,
     userRegisterConfirmAPI,
 } from '@store/auth/api';
-import {SeverityEnum} from '@components/CustomSnackBar';
-import {error} from '@store/error/reducers';
+import { SeverityEnum } from '@components/CustomSnackBar';
+import { error } from '@store/error/reducers';
 
 const userRegisterRequest = createAction(REGISTER_SUCCESS);
 const userLogInAction = createAction(LOGIN_SUCCESS);
@@ -22,121 +22,121 @@ const userLogOutAction = createAction(LOGOUT);
 const userCurrentAction = createAction(CURRENT_USER);
 
 type TUserRegister = {
-    email: string;
-    password: string;
-    phoneNumber: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
 };
 
 type TUserLogin = {
-    userName: string;
-    password: string;
+  userName: string;
+  password: string;
 };
 
 export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
-    userCurrentAPI()
-        .then(({data}) => {
-            dispatch(userCurrentAction(data));
-        })
-        .catch((error) => {
-            sessionStorage.removeItem('accessToken');
-            dispatch({
-                type: SNACKBAR_OPEN,
-                message: error?.defaultMessage,
-                severity: SeverityEnum.error,
-            });
-        });
+  userCurrentAPI()
+    .then(({ data }) => {
+      dispatch(userCurrentAction(data));
+    })
+    .catch((error) => {
+      sessionStorage.removeItem('accessToken');
+      dispatch({
+        type: SNACKBAR_OPEN,
+        message: error?.defaultMessage,
+        severity: SeverityEnum.error,
+      });
+    });
 };
 
 export const userUpdateInfo = (userInfo) => async () => {
-    userUpdateInfoAPI(userInfo)
-        .then(({data}) => {
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+  userUpdateInfoAPI(userInfo)
+    .then(({ data }) => {})
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 export const userUpdateContacts = (userContacts) => async () => {
-    console.info('userContacts', userContacts);
-    userUpdateContactsAPI(userContacts)
-        .then(({data}) => {
-            console.info('data', data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+  console.info('userContacts', userContacts);
+  userUpdateContactsAPI(userContacts)
+    .then(({ data }) => {
+      console.info('data', data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 export const userUpdate = (userInfo) => async (dispatch: Dispatch) => {
-    console.info('userInfo', userInfo);
-    userUpdateInfoAPI(userInfo)
-        .then(({data}) => {
-            console.info('userUpdate', data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+  console.info('userInfo', userInfo);
+  userUpdateInfoAPI(userInfo)
+    .then(({ data }) => {
+      console.info('userUpdate', data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 export const userRegister =
-    ({email, password, phoneNumber}: TUserRegister) =>
-        async (dispatch: Dispatch) => {
-            userRegisterAPI({
-                phonenumber: phoneNumber,
-                email,
-                password,
-            })
-                .then(({data}) => {
-                    dispatch(userRegisterRequest(data.data));
-                    localStorage.setItem('accessToken', JSON.stringify(data.data.token));
-                })
-                .catch((error) => {
-                    dispatch({
-                        type: SNACKBAR_OPEN,
-                        message: error?.defaultMessage,
-                        severity: SeverityEnum.error,
-                    });
-                });
-        };
+  ({ email, password, phoneNumber }: TUserRegister) =>
+  async (dispatch: Dispatch) => {
+    userRegisterAPI({
+      phoneNumber,
+      email,
+      password,
+    })
+      .then(({ data }) => {
+        dispatch(userRegisterRequest(data.data));
+        sessionStorage.setItem('accessToken', data.data.token);
+      })
+      .catch((error) => {
+        dispatch({
+          type: SNACKBAR_OPEN,
+          message: error?.defaultMessage,
+          severity: SeverityEnum.error,
+        });
+      });
+  };
 
 export const userLogin =
-    ({userName, password}: TUserLogin) =>
-        async (dispatch: Dispatch) => {
-            userLogInAPI({
-                username: userName,
-                password,
-            })
-                .then(({data}) => {
-                    dispatch(userLogInAction(data.data.user));
-                    sessionStorage.setItem('username', data.data.user.username);
-                    sessionStorage.setItem('accessToken', data.data.token);
-                })
-                .catch((error) => {
-                    dispatch({
-                        type: SNACKBAR_OPEN,
-                        message: error?.defaultMessage,
-                        severity: SeverityEnum.error,
-                    });
-                });
-        };
+  ({ userName, password }: TUserLogin) =>
+  async (dispatch: Dispatch) => {
+    userLogInAPI({
+      username: userName,
+      password,
+    })
+      .then(({ data }) => {
+        dispatch(userLogInAction(data.data.user));
+        sessionStorage.setItem('username', data.data.user.username);
+        sessionStorage.setItem('accessToken', data.data.token);
+      })
+      .catch((error) => {
+        console.info(error);
+        dispatch({
+          type: SNACKBAR_OPEN,
+          message: error?.defaultMessage,
+          severity: SeverityEnum.error,
+        });
+      });
+  };
 
 export const logout = () => (dispatch: Dispatch<any>) => {
-    const token = sessionStorage.getItem('accessToken');
+  const token = sessionStorage.getItem('accessToken');
 
-    axios
-        .get(apiUrl(USER_LOGOUT_ENDPOINT), {
-            headers: {
-                Authorization: 'Bearer ' + token,
-            },
-        })
-        .then(() => {
-            dispatch(userLogOutAction());
-            sessionStorage.removeItem('accessToken');
-            sessionStorage.removeItem('username');
-        })
-        .catch((error) => {
-            console.log('error', error);
-        });
+  axios
+    .get(apiUrl(USER_LOGOUT_ENDPOINT), {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(() => {
+      dispatch(userLogOutAction());
+      sessionStorage.removeItem('accessToken');
+      sessionStorage.removeItem('username');
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
 };
 
 export const registerConfirm = (id) => () =>

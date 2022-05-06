@@ -6,9 +6,10 @@ import express, { Request, Response } from 'express';
 import next from 'next';
 
 const dev = process.env.NODE_ENV !== 'production';
+const port = process.env.PORT || 3000;
+
 const app = next({ dev });
 const handle = app.getRequestHandler();
-const port = process.env.PORT || 3000;
 
 (async () => {
   try {
@@ -19,7 +20,7 @@ const port = process.env.PORT || 3000;
     });
     server.listen(port, (err?: any) => {
       if (err) throw err;
-      console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`);
+      console.log(`> Ready on host:${port} - env ${process.env.NODE_ENV}`);
     });
 
     const httpServer = http.createServer(server);
