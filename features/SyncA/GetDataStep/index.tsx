@@ -12,6 +12,21 @@ import ParseInfoList from "@features/SyncA/ParseInfoList";
 import { getParsedUrl } from "@store/syncA/selectors";
 
 
+const isLinkCorrect = (link)=>{
+	return (
+		link.indexOf('airbnb.ru') === -1
+		&& link.indexOf('airbnb.com') === -1
+		&& (
+			link.indexOf('/users/show') === -1
+			|| (
+				link.indexOf('/users') === -1
+				&& link.indexOf('/listings') === -1
+			)
+		)
+	)
+};
+
+
 export default function GetDataStep (){
 	const dispatch = useDispatch();
 
@@ -36,10 +51,10 @@ export default function GetDataStep (){
 			return formIsValid;
 		}
 
-		if (serviceLink.indexOf('airbnb.ru/users/show') === -1 && serviceLink.indexOf('airbnb.com/users/show') === -1){
+		if ( isLinkCorrect(serviceLink) ){
 			formIsValid = false;
 			setLinkHasError(true);
-			setLinkError('Поле должно содержать ссылку вида "https://www.airbnb.com/users/show/999999999"');
+			setLinkError('Поле должно содержать ссылку вида "airbnb.*/users/show/999999999" или "airbnb.*/users/999999999/listings"');
 			return formIsValid;
 		}
 
