@@ -54,7 +54,7 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
                         <AccountCircleIcon sx={{ width: 190, height: 190, color: '#707070' }} />
                     )}
                   </Avatar>
-                  <SuperHostIcon sx={{ position:'absolute', bottom:'0', right:'0' }}/>
+                  {user?.abbIsSuperHost && (<SuperHostIcon sx={{ position:'absolute', bottom:'0', right:'0' }}/>)}
                 </Box>
 
                 {user?.abbIsSuperHost && (
