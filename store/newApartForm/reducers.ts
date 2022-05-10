@@ -1,4 +1,4 @@
-import { DECREASE, FORM_GROUP_VALUE, FORM_VALUE, INCREASE } from '@store/constants';
+import { DECREASE, FORM_ADDRESS, FORM_GROUP_VALUE, FORM_VALUE, INCREASE } from '@store/constants';
 import { TPlaceType } from '@utils/types';
 
 export type State = {
@@ -12,11 +12,12 @@ export type Action =
   | { type: 'INCREASE' }
   | { type: 'DECREASE' }
   | {
-      type: 'FORM_GROUP_VALUE';
-      name: string;
-      groupName: string;
-      fieldValue: any;
-    }
+  type: 'FORM_GROUP_VALUE';
+  name: string;
+  groupName: string;
+  fieldValue: any;
+}
+  | { type: 'FORM_ADDRESS', address: unknown }
   | { type: 'FORM_VALUE'; name: string; fieldValue: any }
   | { type: 'form-error'; name: string; error: string };
 
@@ -54,7 +55,6 @@ export const newApart = (state: State = initialState, action: Action): State => 
 
     case FORM_GROUP_VALUE: {
       const { name, groupName, fieldValue } = action;
-      // console.info(name, groupName, fieldValue, state.formValues);
       return {
         ...state,
         formValues: {
@@ -65,6 +65,17 @@ export const newApart = (state: State = initialState, action: Action): State => 
               value: fieldValue,
             },
           },
+        },
+      };
+    }
+
+    case FORM_ADDRESS: {
+      const { address } = action;
+      return {
+        ...state,
+        formValues: {
+          ...state.formValues,
+          address,
         },
       };
     }

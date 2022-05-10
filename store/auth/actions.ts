@@ -1,17 +1,17 @@
-import axios, {AxiosResponse, ResponseType} from 'axios';
-import {Dispatch} from 'redux';
-import {createAction} from 'redux-actions';
+import axios, { AxiosResponse } from 'axios';
+import { Dispatch } from 'redux';
+import { createAction } from 'redux-actions';
 
-import {apiUrl, CURRENT_USER, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS, SNACKBAR_OPEN} from '@store/constants';
-
+import { apiUrl, CURRENT_USER, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS, SNACKBAR_OPEN } from '@store/constants';
+import Router from 'next/router';
 import {
-    USER_LOGOUT_ENDPOINT,
-    userCurrentAPI,
-    userLogInAPI,
-    userRegisterAPI,
-    userUpdateContactsAPI,
-    userUpdateInfoAPI,
-    userRegisterConfirmAPI,
+  USER_LOGOUT_ENDPOINT,
+  userCurrentAPI,
+  userLogInAPI,
+  userRegisterAPI,
+  userUpdateContactsAPI,
+  userUpdateInfoAPI,
+  userRegisterConfirmAPI,
 } from '@store/auth/api';
 import { SeverityEnum } from '@components/CustomSnackBar';
 import { error } from '@store/error/reducers';
@@ -49,7 +49,8 @@ export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
 
 export const userUpdateInfo = (userInfo) => async () => {
   userUpdateInfoAPI(userInfo)
-    .then(({ data }) => {})
+    .then(({ data }) => {
+    })
     .catch((error) => {
       console.error(error);
     });
@@ -79,46 +80,48 @@ export const userUpdate = (userInfo) => async (dispatch: Dispatch) => {
 
 export const userRegister =
   ({ email, password, phoneNumber }: TUserRegister) =>
-  async (dispatch: Dispatch) => {
-    userRegisterAPI({
-      phoneNumber,
-      email,
-      password,
-    })
-      .then(({ data }) => {
-        dispatch(userRegisterRequest(data.data));
-        sessionStorage.setItem('accessToken', data.data.token);
+    async (dispatch: Dispatch) => {
+      userRegisterAPI({
+        phoneNumber,
+        email,
+        password,
       })
-      .catch((error) => {
-        dispatch({
-          type: SNACKBAR_OPEN,
-          message: error?.defaultMessage,
-          severity: SeverityEnum.error,
+        .then(({ data }) => {
+          dispatch(userRegisterRequest(data.data));
+          sessionStorage.setItem('accessToken', data.data.token);
+          Router.reload(window.location.pathname);
+        })
+        .catch((error) => {
+          dispatch({
+            type: SNACKBAR_OPEN,
+            message: error?.defaultMessage,
+            severity: SeverityEnum.error,
+          });
         });
-      });
-  };
+    };
 
 export const userLogin =
   ({ userName, password }: TUserLogin) =>
-  async (dispatch: Dispatch) => {
-    userLogInAPI({
-      username: userName,
-      password,
-    })
-      .then(({ data }) => {
-        dispatch(userLogInAction(data.data.user));
-        sessionStorage.setItem('username', data.data.user.username);
-        sessionStorage.setItem('accessToken', data.data.token);
+    async (dispatch: Dispatch) => {
+      userLogInAPI({
+        username: userName,
+        password,
       })
-      .catch((error) => {
-        console.info(error);
-        dispatch({
-          type: SNACKBAR_OPEN,
-          message: error?.defaultMessage,
-          severity: SeverityEnum.error,
+        .then(({ data }) => {
+          dispatch(userLogInAction(data.data.user));
+          sessionStorage.setItem('username', data.data.user.username);
+          sessionStorage.setItem('accessToken', data.data.token);
+          Router.reload(window.location.pathname);
+        })
+        .catch((error) => {
+          console.info(error);
+          dispatch({
+            type: SNACKBAR_OPEN,
+            message: error?.defaultMessage,
+            severity: SeverityEnum.error,
+          });
         });
-      });
-  };
+    };
 
 export const logout = () => (dispatch: Dispatch<any>) => {
   const token = sessionStorage.getItem('accessToken');
@@ -140,11 +143,11 @@ export const logout = () => (dispatch: Dispatch<any>) => {
 };
 
 export const registerConfirm = (id) => () =>
-    userRegisterConfirmAPI(id)
-        .then(({status, data}:AxiosResponse) => {
-            if (status !== 200) throw data.data;
-            return data.data;
-        })
-        .catch(({data}:AxiosResponse) => {
-            console.error(data.data);
-        });
+  userRegisterConfirmAPI(id)
+    .then(({ status, data }: AxiosResponse) => {
+      if (status !== 200) throw data.data;
+      return data.data;
+    })
+    .catch(({ data }: AxiosResponse) => {
+      console.error(data.data);
+    });

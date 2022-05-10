@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Checkbox, Switch, FormControlLabel, FormGroup, Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SwitchGroup.module.css';
 import { FORM_GROUP_VALUE } from '@store/constants';
+import { getFormValues } from '@store/newApartForm/selectors';
 
 type TSwitch = {
   name: string;
@@ -13,10 +14,19 @@ type TSwitch = {
   isSwitcher?: boolean;
 };
 
-export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwitcher }) => {
+type TSwitchGroup = {
+  qualitiesArr: [];
+  title?: string;
+  category?: string;
+  isSwitcher?: boolean;
+}
+
+export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwitcher }: TSwitchGroup) => {
   const dispatch = useDispatch();
 
   const [values, setValues] = React.useState(qualitiesArr);
+
+  const formValues = useSelector(getFormValues);
 
   const checkHandler = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,10 +44,15 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
     [dispatch, values],
   );
 
+  React.useEffect(() => {
+    // setValues([...values]);
+  }, []);
+
+  // console.info('formValues', formValues[category], values);
   return (
     <div className={styles.host}>
       {title && (
-        <Typography variant="h5" className={styles.subTitle}>
+        <Typography variant='h5' className={styles.subTitle}>
           {title}
         </Typography>
       )}
@@ -55,7 +70,7 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
                     onChange={checkHandler}
                     name={key}
                     id={label}
-                    color="primary"
+                    color='primary'
                     inputProps={{ title: name }}
                   />
                 ) : (
@@ -64,7 +79,7 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
                     onChange={checkHandler}
                     name={key}
                     id={label}
-                    color="primary"
+                    color='primary'
                     inputProps={{ title: name }}
                   />
                 )

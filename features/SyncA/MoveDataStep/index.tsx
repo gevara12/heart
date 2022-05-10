@@ -53,29 +53,29 @@ export default function MoveDataStep() {
 
   return parsedData ? (
     <>
-      <Typography variant="h4" sx={{ mt: 10.5 }}>
+      <Typography variant='h4' sx={{ mt: 10.5 }}>
         Перенос данных профиля
       </Typography>
-      <Typography variant="body1" sx={{ mt: 4, maxWidth: '830px' }}>
+      <Typography variant='body1' sx={{ mt: 4, maxWidth: '830px' }}>
         <b>Мы нашли ваш профиль в открытых источниках на сервисе А и можем перенести следующие данные.</b>
       </Typography>
 
       <AccountInfo parsedInfo={parsedData} sx={{ mt: 6.5, overflow: 'hidden' }} />
 
-      <Typography variant="body1" sx={{ mt: 6.5, maxWidth: '648px' }}>
+      <Typography variant='body1' sx={{ mt: 6.5, maxWidth: '648px' }}>
         Если данная информация корректна и относится к вашему профилю, нажмите “Перенести данные”
       </Typography>
 
       <Box sx={{ overflow: 'hidden', mt: 4, mb: 17 }}>
-        <Stack direction={{xs:'column', sm:'row'}} justifyContent="space-between" alignItems="center">
-          <Stack direction={{xs:'column', sm:'row'}} spacing={2} alignItems="center">
-            <Button variant="outlined" onClick={stepDown} sx={{ width: '168px' }}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' alignItems='center'>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems='center'>
+            <Button variant='outlined' onClick={stepDown} sx={{ width: '168px' }}>
               Назад
             </Button>
             <LoadingButton
-              variant="contained"
-              type="submit"
-              color="primary"
+              variant='contained'
+              type='submit'
+              color='primary'
               loading={loading}
               disabled={loading}
               sx={{ width: '205px', whiteSpace: 'nowrap' }}
@@ -84,7 +84,7 @@ export default function MoveDataStep() {
               Перенести данные
             </LoadingButton>
           </Stack>
-          <LinkPrimary href="#" onClick={handleClickOpen} sx={{mt:{xs:3,sm:0}}}>
+          <LinkPrimary href='#' onClick={handleClickOpen} sx={{ mt: { xs: 3, sm: 0 } }}>
             Помощь
           </LinkPrimary>
         </Stack>
@@ -95,7 +95,7 @@ export default function MoveDataStep() {
   ) : (
     <>
       <Box sx={{ mt: 10.5 }}>no data</Box>
-      <Button variant="contained" onClick={stepDown} sx={{ mt: 4, mb: 17 }}>
+      <Button variant='contained' onClick={stepDown} sx={{ mt: 4, mb: 17 }}>
         Назад
       </Button>
     </>
