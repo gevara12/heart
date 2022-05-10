@@ -130,7 +130,7 @@ export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
           <Stack direction='row'>
             <Button
               fullWidth
-              disabled={!userName}
+              disabled={!(userName && password)}
               type='submit'
               variant='contained'
               color='primary'
