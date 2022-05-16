@@ -21,7 +21,7 @@ import TagFacesIcon from '@mui/icons-material/TagFaces';
 import ApartmentCard from '@features/Profile/components/ApartmentCard';
 
 import styles from '@features/Profile/components/AddAvatar/AddAvatar.module.css';
-import SuperHostIcon from "@components/SuperHostIcon";
+import SuperHostIcon from '@components/SuperHostIcon';
 
 type TProfileProps = {};
 
@@ -44,29 +44,33 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
           <Grid container spacing={{ xs: 2, sm: 4 }}>
             <Grid item xs={12} md={4} lg={3}>
               <Stack justifyContent={'center'} alignItems={'center'}>
-                <Box sx={{ position:'relative' }}>
-                  <Avatar sx={{ bgcolor: grey[100], width: 192, height: 190, position:'relative' }}>
+                <Box sx={{ position: 'relative' }}>
+                  <Avatar sx={{ bgcolor: grey[100], width: 192, height: 190, position: 'relative' }}>
                     {data?.avatar ? (
-                        <div className={styles.imageContainer}>
-                          <Image className={styles.image} src={data?.avatar} alt="avatar" layout="fill" unoptimized />
-                        </div>
+                      <div className={styles.imageContainer}>
+                        <Image className={styles.image} src={data?.avatar} alt="avatar" layout="fill" unoptimized />
+                      </div>
                     ) : (
-                        <AccountCircleIcon sx={{ width: 190, height: 190, color: '#707070' }} />
+                      <AccountCircleIcon sx={{ width: 190, height: 190, color: '#707070' }} />
                     )}
                   </Avatar>
-                  {user?.abbIsSuperHost && (<SuperHostIcon sx={{ position:'absolute', bottom:'0', right:'0' }}/>)}
+                  {user?.abbIsSuperHost && <SuperHostIcon sx={{ position: 'absolute', bottom: '0', right: '0' }} />}
                 </Box>
 
                 {user?.abbIsSuperHost && (
-                    <Box sx={{
+                  <Box
+                    sx={{
                       fontSize: '15px',
                       lineHeight: '26px',
                       textAlign: 'center',
                       letterSpacing: '0.46px',
                       textTransform: 'uppercase',
-                      mt:4,
-                      color: 'secondary.main'
-                    }}>Топ-сервис</Box>
+                      mt: 4,
+                      color: 'secondary.main',
+                    }}
+                  >
+                    Топ-сервис
+                  </Box>
                 )}
               </Stack>
               <Box sx={{ mb: 4, mt: 4 }}>
@@ -170,7 +174,7 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
                   {data.city}
                 </Stack>
               )}
-              {user?.apartments.length !== 0 && (
+              {user?.apartments && (
                 <Box>
                   <Typography variant="h5" sx={{ mt: 4, mb: 2.5 }}>
                     Объявления

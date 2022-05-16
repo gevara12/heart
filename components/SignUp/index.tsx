@@ -93,7 +93,7 @@ export const SignUp = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
   return (
     <div>
       {isLoginWall ? (
-        <Button variant='contained' onClick={handleOpen}>
+        <Button variant="contained" onClick={handleOpen}>
           Регистрация
         </Button>
       ) : (
@@ -106,10 +106,10 @@ export const SignUp = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
         <Box sx={{ maxWidth: '380px', p: 4 }}>
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
-              label='Email'
-              variant='outlined'
-              type='email'
-              size='small'
+              label="Email"
+              variant="outlined"
+              type="email"
+              size="small"
               required
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -118,37 +118,37 @@ export const SignUp = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
           <FormControl sx={{ mb: 4 }} fullWidth>
             <MuiPhoneNumber
               defaultCountry={'ru'}
-              label='Номер телефона'
-              variant='outlined'
-              size='small'
+              label="Номер телефона"
+              variant="outlined"
+              size="small"
               regions={'europe'}
               onChange={phoneChange}
             />
           </FormControl>
 
           <FormControl sx={{ mb: 4 }} fullWidth>
-            <InputLabel htmlFor='password' size='small'>
+            <InputLabel htmlFor="password" size="small">
               Введите пароль
             </InputLabel>
             <OutlinedInput
-              id='password'
+              id="password"
               type={showPassword ? 'text' : 'password'}
               value={password.firstPassword}
               onChange={setFirst}
               endAdornment={
-                <InputAdornment position='end'>
+                <InputAdornment position="end">
                   <IconButton
-                    aria-label='toggle password visibility'
+                    aria-label="toggle password visibility"
                     onClick={handleVisibility}
                     onMouseDown={handleMouseDownPassword}
-                    edge='end'
+                    edge="end"
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
-              size='small'
-              label='Введите пароль'
+              size="small"
+              label="Введите пароль"
               error={showError}
             />
             {showError && (
@@ -160,30 +160,30 @@ export const SignUp = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
 
           <FormControl sx={{ mb: 5 }} fullWidth>
             <TextField
-              id='second-password'
+              id="second-password"
               type={showPassword ? 'text' : 'password'}
               value={password.secondPassword}
               onChange={setSecond}
-              size='small'
-              label='Повторите пароль'
+              size="small"
+              label="Повторите пароль"
               error={showError}
             />
           </FormControl>
 
-          <Stack direction='row'>
+          <Stack direction="row">
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               sx={{ mr: 3 }}
-              size='large'
+              size="large"
               onClick={handleSubmit}
               disabled={!(email && passwordValid)}
               fullWidth
             >
               Регистрация
             </Button>
-            <Button variant='text' size='large' onClick={handleClose} fullWidth>
+            <Button variant="text" size="large" onClick={handleClose} fullWidth>
               Отмена
             </Button>
           </Stack>

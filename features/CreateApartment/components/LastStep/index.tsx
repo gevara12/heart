@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { NextButton } from '@features/CreateApartment/components/NextButton';
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { activateApartment, createApartment } from '@store/apartments/actions';

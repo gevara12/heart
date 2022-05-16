@@ -27,9 +27,9 @@ export const apartments = (state = initialApartmentsState, action) => {
 
 const initialApartmentState = {
   currentApartment: <TApartment>{
-    description: '',
-    name: '',
-    placeType: 'entire-place',
+    description: { value: '' },
+    name: { value: '' },
+    placeType: { value: 'entire_home' },
     publicInfo: {},
   },
 };

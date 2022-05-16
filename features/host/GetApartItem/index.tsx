@@ -45,7 +45,7 @@ export const GetApartItemComponent = ({ id }: { id: string | string[] }): React.
 
   return (
     <div>
-      <Typography variant="h2">{currentApartment.name}</Typography>
+      <Typography variant="h2">{currentApartment.name.value}</Typography>
 
       <IconButton size="small" onClick={() => handleOpen(id)}>
         <DeleteIcon />

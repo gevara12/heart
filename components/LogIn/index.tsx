@@ -65,13 +65,12 @@ export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
     }
   };
 
-  React.useEffect(() => {
-  }, [dispatch]);
+  React.useEffect(() => {}, [dispatch]);
 
   return (
     <div>
       {isLoginWall ? (
-        <Button variant='contained' onClick={handleOpen}>
+        <Button variant="outlined" onClick={handleOpen}>
           Войти
         </Button>
       ) : (
@@ -92,55 +91,55 @@ export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
         <Box sx={{ maxWidth: '380px', p: 3 }}>
           <FormControl sx={{ mb: 4 }} fullWidth>
             <TextField
-              label='Email или номер телефона'
-              variant='outlined'
+              label="Email или номер телефона"
+              variant="outlined"
               required
-              size='small'
+              size="small"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
           </FormControl>
 
           <FormControl sx={{ mb: 5 }} fullWidth>
-            <InputLabel htmlFor='login-password' size='small'>
+            <InputLabel htmlFor="login-password" size="small">
               Пароль
             </InputLabel>
             <OutlinedInput
-              id='login-password'
+              id="login-password"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               endAdornment={
-                <InputAdornment position='end'>
+                <InputAdornment position="end">
                   <IconButton
-                    aria-label='toggle password visibility'
+                    aria-label="toggle password visibility"
                     onClick={handleVisibility}
                     onMouseDown={handleMouseDownPassword}
-                    edge='end'
+                    edge="end"
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
-              size='small'
-              label='Введите пароль'
+              size="small"
+              label="Введите пароль"
             />
           </FormControl>
 
-          <Stack direction='row'>
+          <Stack direction="row">
             <Button
               fullWidth
               disabled={!(userName && password)}
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               sx={{ mr: 3 }}
-              size='large'
+              size="large"
               onClick={handleSubmit}
             >
               Войти
             </Button>
-            <Button fullWidth variant='text' size='large' onClick={handleClose}>
+            <Button fullWidth variant="text" size="large" onClick={handleClose}>
               Отмена
             </Button>
           </Stack>

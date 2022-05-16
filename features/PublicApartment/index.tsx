@@ -30,10 +30,10 @@ export default function PublicApartment({ apartment }: any) {
 
   return (
     <>
-      {isMobile && <PhotoSlider photos={Apartment.photos} />}
+      {/*{isMobile && <PhotoSlider photos={Apartment.photos} />}*/}
 
       <Typography variant="h5" component="div">
-        {publicInfo.name.value}
+        {publicInfo?.name.value}
       </Typography>
 
       <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between">
@@ -54,7 +54,7 @@ export default function PublicApartment({ apartment }: any) {
 
       {isMobile && <PublicApartmentDivider />}
 
-      {!isMobile && <PhotoBlock photos={Apartment.photos} />}
+      {/*{!isMobile && <PhotoBlock photos={Apartment.photos} />}*/}
 
       <Box sx={{ overflow: 'hidden' }}>
         <Grid container spacing={4}>
