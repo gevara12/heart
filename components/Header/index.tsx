@@ -104,17 +104,40 @@ export const Header = (): React.ReactElement => {
                   </MenuItem>
                 )}
                 {auth.isLoggedIn && (
-                  <MenuItem component="div">
-                    <Link href="/profile/apartments">
+                    <MenuItem component="div">
+                      <Link href="/profile/edit">
+                        <Typography sx={{ mr: 4 }} variant="body1" component="span">
+                          Настройки аккаунта
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                )}
+                {auth.isLoggedIn && (
+                    <MenuItem component="div">
+                      <Link href="/host/sync-a">
+                        <Typography sx={{ mr: 4 }} variant="body1" component="span">
+                          Перенос данных
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                )}
+                {auth.isLoggedIn && (
+                    <MenuItem component="div" disabled>
                       <Typography sx={{ mr: 4 }} variant="body1" component="span">
-                        Апартаменты
+                        Сдать жилье (скоро)
                       </Typography>
-                    </Link>
+                    </MenuItem>
+                )}
+                {auth.isLoggedIn && (
+                  <MenuItem component="div" disabled>
+                    <Typography sx={{ mr: 4 }} variant="body1" component="span">
+                      Мои объявления (скоро)
+                    </Typography>
                   </MenuItem>
                 )}
 
                 {!auth.isLoggedIn && <SignUp />}
-                {!auth.isLoggedIn && <Divider />}
+                <Divider />
 
                 <LogIn />
                 {/*<ThemeSwitcher />*/}
