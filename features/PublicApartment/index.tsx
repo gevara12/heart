@@ -21,12 +21,27 @@ import CheckInGrid from '@features/PublicApartment/CheckInGrid';
 import RatingTooltip from '@features/PublicApartment/RatingTooltip';
 
 import styles from './PublicApartment.module.css';
+import {useDispatch, useSelector} from "react-redux";
+
+import {getUser} from "@store/users/selectors";
+import {fetchUser} from "@store/users/actions";
+
 
 export default function PublicApartment({ apartment }: any) {
   const { breakpoints } = useTheme();
+  const dispatch = useDispatch();
+
   const isMobile = useMediaQuery(breakpoints.down('md'));
 
   const { publicInfo } = apartment;
+  console.log(apartment.ownerId)
+
+
+  const apartOwner = useSelector(getUser);
+  React.useEffect(() => {
+    dispatch(fetchUser(apartment.ownerId));
+  }, [dispatch]);
+  console.log(apartOwner)
 
   return (
     <div className={styles.host}>
@@ -61,7 +76,7 @@ export default function PublicApartment({ apartment }: any) {
       <Box sx={{ overflow: 'hidden' }}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={7}>
-            <AboutBlock characteristics={publicInfo.characteristics} />
+            <AboutBlock characteristics={publicInfo.characteristics} owner={apartOwner} />
 
             <PublicApartmentDivider />
 
@@ -71,9 +86,6 @@ export default function PublicApartment({ apartment }: any) {
 
             <ApartmentBlock title={'Заселение'}>
               <CheckInGrid />
-              <Alert severity='info' sx={{ mt: { xs: 2, md: 4 } }}>
-                После связи с хозяином вам будет доступна инструкция по заселению
-              </Alert>
             </ApartmentBlock>
 
             <PublicApartmentDivider />
@@ -120,7 +132,7 @@ export default function PublicApartment({ apartment }: any) {
       <ApartmentBlock title={'Хозяин'}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={5}>
-            <OwnerAboutBlock />
+            {apartOwner && <OwnerAboutBlock owner={apartOwner} />}
           </Grid>
           <Grid item xs={12} md={1} />
           <Grid item xs={12} md={3}>

@@ -11,10 +11,13 @@ import {grey} from "@mui/material/colors";
 import SuperHostIcon from "@components/SuperHostIcon";
 
 
-export default function AboutBlock({ characteristics }) {
+export default function AboutBlock({ characteristics, owner }:any) {
   const { breakpoints } = useTheme();
 
   const isMobile = useMediaQuery(breakpoints.down('md'));
+
+  console.log('-----')
+  console.log(owner)
 
   return (
     <Box sx={{ overflow: 'hidden' }}>
@@ -54,9 +57,9 @@ export default function AboutBlock({ characteristics }) {
         </div>
         <Box sx={{ position:'relative' }}>
           <Avatar sx={{ bgcolor: grey[100], width: { xs: 40, md: 70 }, height: { xs: 40, md: 70 }, position:'relative' }}>
-            <Image src={"https://i1.sndcdn.com/avatars-000211446087-hahqw0-t500x500.jpg"} alt="avatar" layout="fill" unoptimized />
+            {owner?.avatar && <Image src={owner.avatar} alt="avatar" layout="fill" unoptimized />}
           </Avatar>
-          <SuperHostIcon size={'small'} sx={{ position:'absolute', bottom:'0', right:'0' }}/>
+          {owner?.abbIsSuperHost && <SuperHostIcon size={'small'} sx={{ position:'absolute', bottom:'0', right:'0' }}/>}
         </Box>
       </Stack>
     </Box>

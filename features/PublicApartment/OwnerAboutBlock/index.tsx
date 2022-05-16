@@ -9,37 +9,39 @@ import Image from "next/image";
 import SuperHostIcon from "@components/SuperHostIcon";
 
 
-export default function OwnerAboutBlock(){
-	const owner = {
-		fullName: 'Иван Иванов',
-		registerDate: 'апрель 2022 г.',
-		isApproved: true,
-		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum est exercitationem ipsum iure laudantium maiores nostrum odit perferendis quas quidem quod rem rerum sint totam, vel. Maxime minus nulla velit!',
-	};
+export default function OwnerAboutBlock({owner}:any){
 	return (
 		<>
 			<Stack direction={{xs:'row-reverse', md:'row'}} spacing={2} sx={{mb:1}}>
 				<Box sx={{ position:'relative' }}>
-					<Avatar sx={{ bgcolor: grey[100], width: { xs: 40, md: 70 }, height: { xs: 40, md: 70 }, position:'relative' }}>
-						<Image src={"https://i1.sndcdn.com/avatars-000211446087-hahqw0-t500x500.jpg"} alt="avatar" layout="fill" unoptimized />
+					<Avatar sx={{ bgcolor: grey[300], width: { xs: 40, md: 70 }, height: { xs: 40, md: 70 }, position:'relative' }}>
+						{owner?.avatar && <Image src={owner.avatar} alt="avatar" layout="fill" unoptimized />}
 					</Avatar>
-					<SuperHostIcon size={'small'} sx={{ position:'absolute', bottom:'0', right:'0' }}/>
+					{owner?.abbIsSuperHost && <SuperHostIcon size={'small'} sx={{ position:'absolute', bottom:'0', right:'0' }}/>}
 				</Box>
 				<div style={{flex:'1 1 auto'}}>
-					<Typography variant='h5'>{owner.fullName}</Typography>
-					<Typography sx={{mt:1}}>На сайте с: {owner.registerDate}</Typography>
+					<Typography variant='h5'>{owner.name}</Typography>
+					<Typography sx={{mt:1}}>На сайте с: {owner.dateOfRegistration}</Typography>
 				</div>
 			</Stack>
-			<Stack direction={{xs:'column', md:'row'}} alignItems={{xs:'flex-start', md:'center'}} spacing={2} sx={{mb:2}}>
-				<Stack direction={'row'} alignItems={'center'} spacing={1}>
-					<Typography>20 отзывов</Typography>
-					<Link href='#' passHref><a style={{ color: '#00A699'}}>на сервисе A</a></Link>
+			{owner?.refAbb && (
+				<Stack direction={{xs:'column', md:'row'}} alignItems={{xs:'flex-start', md:'center'}} spacing={2} sx={{mb:2}}>
+					<Stack direction={'row'} alignItems={'center'} spacing={1}>
+						<Typography>{owner?.abbReviews} отзывов</Typography>
+						<Typography sx={{ color: 'primary.main'}}>
+						<Link href={owner?.refAbb+'#user-profile-review-tabs'} passHref>
+                            <a target="_blank" style={{color: 'inherit'}} rel="noopener noreferrer">на сервисе A</a>
+						</Link>
+						</Typography>
+					</Stack>
+					{owner?.refAbbVerified && (
+						<Stack direction={'row'} alignItems={'center'} spacing={0.5}>
+							<VerifiedUserIcon sx={{ color: 'primary.main'}}/><div>Личность подтверждена</div>
+						</Stack>
+					)}
 				</Stack>
-				<Stack direction={'row'} alignItems={'center'} spacing={1}>
-					<VerifiedUserIcon sx={{ color: '#00A699'}}/><div>Личность подтверждена</div>
-				</Stack>
-			</Stack>
-			<div>{owner.description}</div>
+			)}
+			<div>{owner?.description}</div>
 		</>
 	);
 }
