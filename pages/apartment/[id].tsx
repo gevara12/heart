@@ -15,9 +15,9 @@ const Apartment = () => {
       <SEO/>
       <section>
         <Container maxWidth='lg'>
-          {/*<h1>Apartment: {id}</h1>*/}
+          <h1>Apartment: {id}</h1>
           {/*<GetApartItemComponent id={id} />*/}
-          <PublicApartment apartment={currentApartment}/>
+          {/*<PublicApartment apartment={currentApartment}/>*/}
         </Container>
       </section>
     </Layout>
