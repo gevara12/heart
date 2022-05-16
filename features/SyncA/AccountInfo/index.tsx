@@ -1,10 +1,8 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Alert, Avatar, Box, Chip, Grid, Stack, Typography, useTheme } from '@mui/material';
+import { Alert, Avatar, Box, Chip, Grid, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
 import BoltIcon from '@mui/icons-material/Bolt';
-
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import ApartCard from '@features/SyncA/ApartCard';
 import AccountInfoRow from '@features/SyncA/AccountInfoRow';

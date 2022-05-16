@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Typography } from '@mui/material';
 
-
 interface ApartmentBlockProps extends React.HTMLAttributes<HTMLDivElement> {
 	title: string
 	children: React.ReactNode

@@ -13,15 +13,16 @@ import { getFormValues } from '@store/newApartForm/selectors';
 import type { TCharacteristic } from '@utils/types';
 
 
-export default function Characteristics({ bathrooms, bedrooms, beds }): React.ReactElement {
+export default function Characteristics({ characteristicsInput }): React.ReactElement {
   const dispatch = useDispatch();
   const { characteristics } = useSelector(getFormValues);
+  const { bathrooms, rooms, bed } = characteristicsInput;
 
   const [values, setValues] = React.useState<TCharacteristic>({
     guest: { value: 2 },
-    bed: { value: beds },
-    bathrooms: { value: bathrooms },
-    rooms: { value: bedrooms },
+    bed,
+    bathrooms,
+    rooms,
     floor: { value: 1 },
     square: { value: 10 },
   });

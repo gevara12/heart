@@ -41,21 +41,20 @@ function AdditionApartment({ item }): React.ReactElement {
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('md'));
   const activeStep = useSelector(getActiveStep);
-  const { bathrooms, bedrooms, beds, nameOrPlaceholderName, roomTypeCategory } = item;
+  const { characteristics, name, placeType } = item;
 
-  console.info(roomTypeCategory);
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <PlaceType placeTypeInput={roomTypeCategory} />;
+        return <PlaceType placeTypeInput={placeType} />;
       case 1:
         return <Address />;
       case 2:
-        return <Characteristics bathrooms={bathrooms} bedrooms={bedrooms} beds={beds} />;
+        return <Characteristics characteristicsInput={characteristics} />;
       case 3:
         return <HangDynamic />;
       case 4:
-        return <PlaceName placeNameInput={nameOrPlaceholderName} />;
+        return <PlaceName placeNameInput={name} />;
       case 5:
         return <LastStep />;
       // case 5:

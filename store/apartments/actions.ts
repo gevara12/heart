@@ -31,7 +31,6 @@ const setErrorAction = createAction(SET_ERROR);
 // @ts-ignore
 export const fetchApartments = () => async (dispatch: Dispatch) => {
   searchApartmentAPI({}).then(({ data }) => {
-    console.info(data);
     dispatch(getApartmentsRequest(data.data));
   });
 };

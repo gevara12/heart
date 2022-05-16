@@ -1,10 +1,9 @@
 import Layout from '@components/Layout';
 import SEO from '@components/SEO';
-import { Button, Grid, useTheme } from '@mui/material';
+import { Button, Grid, useTheme, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 
 import { UserApartments } from '@features/UserApartments';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Search() {
   const { breakpoints } = useTheme();

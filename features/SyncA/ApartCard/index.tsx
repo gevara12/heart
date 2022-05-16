@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Box, Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 // import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
 // import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
@@ -23,15 +22,6 @@ export type TApartmentServiceA = {
 };
 
 export default function ApartCard({ apartment }: { apartment: TApartmentServiceA }) {
-  const useStyles = makeStyles({
-    focusHighlight: {},
-    MuiButtonBase: {
-      disableRipple: true, // No more ripple, on the whole application!
-    },
-  });
-
-  const classes = useStyles();
-
   const {
     id,
     pictureUrl,
@@ -72,13 +62,7 @@ export default function ApartCard({ apartment }: { apartment: TApartmentServiceA
         <DraftBadge />
       </Box>
       <CardContent>
-        <Link
-          href={`/draft/${id}`}
-          passHref
-          // className={classes.focusHighlight}
-        >
-          <Typography variant="h5">{propertyTypeName}</Typography>
-        </Link>
+        <Typography variant="h5">{propertyTypeName}</Typography>
         <Stack direction="row" alignItems="center" sx={{ mb: 0.5 }}>
           <Stack direction="row" alignItems="center" sx={{ mr: 1 }}>
             <StarIcon fontSize="small" sx={{ color: 'secondary.main' }} />

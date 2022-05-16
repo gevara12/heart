@@ -27,19 +27,19 @@ export const PlaceName = ({ placeNameInput }) => {
   };
 
   const [values, setValues] = React.useState<TState>({
-    name: { value: placeNameInput },
+    name: placeNameInput,
     amount: { value: 0 },
     description: { value: '' },
   });
 
-  const handleChange = (prop: keyof TState) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = React.useCallback((prop: keyof TState) => (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FORM_VALUE,
       name: [prop],
       fieldValue: event.target.value,
     });
     setValues({ ...values, [prop]: { value: event.target.value } });
-  };
+  }, [dispatch]);
 
   return (
     <div>

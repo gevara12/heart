@@ -16,8 +16,8 @@ const Apartment = () => {
       <section>
         <Container maxWidth='lg'>
           {/*<h1>Apartment: {id}</h1>*/}
-          <GetApartItemComponent id={id} />
-          {/*<PublicApartment apartment={currentApartment}/>*/}
+          {/*<GetApartItemComponent id={id} />*/}
+          <PublicApartment apartment={currentApartment}/>
         </Container>
       </section>
     </Layout>

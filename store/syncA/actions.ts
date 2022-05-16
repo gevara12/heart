@@ -4,7 +4,6 @@ import {createAction} from "redux-actions";
 import {GET_A_DATA, SYNC_INCREASE_STEP} from '@store/constants';
 import {userGetDataAAPI,userSaveDataAAPI} from "@store/syncA/api";
 
-
 const getADataRequest = createAction(GET_A_DATA);
 
 export const getDataFromA = (url: string) => async (dispatch: Dispatch) => {

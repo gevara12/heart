@@ -14,7 +14,7 @@ const PlaceType = ({ placeTypeInput }: { placeTypeInput: TPlaceType }): React.Re
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('md'));
   const dispatch = useDispatch();
-  const [placeType, setPlaceType] = React.useState({ value: placeTypeInput });
+  const [placeType, setPlaceType] = React.useState(placeTypeInput);
   const placeArr = [
     { type: 'entire_home', label: 'Жилье целиком' },
     { type: 'private_home', label: 'Отдельная комната' },
@@ -44,19 +44,17 @@ const PlaceType = ({ placeTypeInput }: { placeTypeInput: TPlaceType }): React.Re
           onChange={handlePlace}
           orientation={isMobile ? 'vertical' : 'horizontal'}
         >
-          {placeArr.map(({ type, label }) => {
-            return (
-              <ToggleButton
-                value={type}
-                aria-label={type}
-                key={type}
-                color='primary'
-                size={isMobile ? 'small' : 'large'}
-              >
-                {label}
-              </ToggleButton>
-            );
-          })}
+          {placeArr.map(({ type, label }) => (
+            <ToggleButton
+              value={type}
+              aria-label={type}
+              key={type}
+              color='primary'
+              size={isMobile ? 'small' : 'large'}
+            >
+              {label}
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
       </Box>
 
