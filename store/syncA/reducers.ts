@@ -1,5 +1,4 @@
-import {SYNC_INCREASE_STEP, GET_A_DATA, SYNC_DECREASE_STEP} from '../constants';
-
+import { SYNC_INCREASE_STEP, GET_A_DATA, SYNC_DECREASE_STEP } from '../constants';
 
 const initialState = {
   parsedUrl: '',

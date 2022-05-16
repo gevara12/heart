@@ -2,8 +2,8 @@ import * as React from 'react';
 import Link from 'next/link';
 import Image from "next/image";
 
-import { Avatar, Box, Stack, Typography, useTheme } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { Avatar, Box, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
+
 import Bull from '@components/Bull';
 
 import {grey} from "@mui/material/colors";
@@ -22,9 +22,9 @@ export default function AboutBlock({ characteristics }) {
         <div style={{ flex: '1 1 auto' }}>
           <Typography variant="h6" component="div" sx={{ mb: 1 }}>Жилье целиком в многоэтажном доме</Typography>
           <Stack direction={'row'} alignItems={'center'} spacing={1} divider={<Bull />}>
-            {characteristics?.guest && <Typography variant="body2">до {characteristics?.guest.value} гостей</Typography>}
+            <Typography variant="body2">до {characteristics?.guest?.value} гостей</Typography>
             <Typography variant="body2">1 спальня</Typography>
-            {characteristics?.bed && <Typography variant="body2">{characteristics?.bed.value} кровать</Typography>}
+            <Typography variant="body2">{characteristics?.bed?.value} кровать</Typography>
           </Stack>
           <Stack
             direction={{ xs: 'column', md: 'row' }}

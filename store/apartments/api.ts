@@ -3,7 +3,7 @@ import { apiUrl } from '@store/constants';
 
 
 export const CREATE_APARTMENT_ENDPOINT = 'apartments';
-export const SEARCH_APARTMENT_ENDPOINT = 'public/apartments/search';
+export const SEARCH_APARTMENT_ENDPOINT = 'apartments/list';
 export const GET_APARTMENT_ENDPOINT = 'apartments';
 export const UPDATE_APARTMENT_ENDPOINT = 'apartments';
 export const DELETE_APARTMENT_ENDPOINT = 'apartments/delete';

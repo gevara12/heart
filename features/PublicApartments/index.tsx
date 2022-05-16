@@ -16,14 +16,14 @@ export const PublicApartments = (): React.ReactElement => {
   }, [dispatch]);
 
   const apartments = useSelector(getApartmentsList);
-  console.log(apartments)
+  console.log(apartments);
   return (
     <Grid container>
-      { apartments.map( (apartment) => (
+      {apartments.map((apartment) => (
         <Grid item xs={12} md={4} key={uuidv4()}>
-          <PublicApartItem apart={apartment}/>
+          <PublicApartItem apart={apartment} />
         </Grid>
-      )) }
+      ))}
     </Grid>
   );
 };

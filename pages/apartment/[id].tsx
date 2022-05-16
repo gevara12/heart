@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
 import Layout from '@components/Layout';
 import SEO from '@components/SEO';
 import { GetApartItemComponent } from '@features/host/GetApartItem';
+import PublicApartment from '@features/PublicApartment';
 
 const Apartment = () => {
   const router = useRouter();
@@ -15,7 +16,8 @@ const Apartment = () => {
       <section>
         <Container maxWidth='lg'>
           <h1>Apartment: {id}</h1>
-          <GetApartItemComponent id={id} />
+          {/*<GetApartItemComponent id={id} />*/}
+          {/*<PublicApartment apartment={currentApartment}/>*/}
         </Container>
       </section>
     </Layout>

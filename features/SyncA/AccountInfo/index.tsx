@@ -1,15 +1,26 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Alert, Avatar, Box, Chip, Grid, Stack, Typography, useTheme } from '@mui/material';
+import { Alert, Avatar, Box, Chip, Grid, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
 import BoltIcon from '@mui/icons-material/Bolt';
-
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import ApartCard from '@features/SyncA/ApartCard';
 import AccountInfoRow from '@features/SyncA/AccountInfoRow';
+import styles from './AccountInfo.module.css';
 
-export default function AccountInfo({ parsedInfo, ...rest }: { parsedInfo: any; [key: string]: any }) {
+type TAccountInfo = {
+  parsedInfo: {
+    smartName: string;
+    profilePictureUrl: string;
+    managedListings: [];
+    about: string;
+    reviewsCountFromGuest: number;
+    reviewsCountFromHost: number;
+    isSuperhost: boolean;
+  };
+};
+
+export default function AccountInfo({ parsedInfo }: TAccountInfo) {
   const {
     smartName,
     profilePictureUrl,
@@ -24,9 +35,11 @@ export default function AccountInfo({ parsedInfo, ...rest }: { parsedInfo: any; 
 
   const isMobile = useMediaQuery(breakpoints.down('md'));
 
+  // console.info(managedListings, parsedInfo);
+
   return (
-    <Box {...rest}>
-      <Grid container spacing={{ xs: 4.5, md: 6.5 }} sx={{}}>
+    <Box className={styles.host}>
+      <Grid container spacing={{ xs: 4.5, md: 6.5 }}>
         {smartName && (
           <AccountInfoRow title={'Имя'}>
             <Typography variant="body1" sx={{ width: isMobile ? '100%' : 552 }}>
@@ -56,7 +69,7 @@ export default function AccountInfo({ parsedInfo, ...rest }: { parsedInfo: any; 
             </Alert>
           </AccountInfoRow>
         )}
-        { (managedListings.length !== 0) && (
+        {managedListings && (
           <AccountInfoRow title={'Объявления'}>
             <Grid container spacing={3}>
               {managedListings.map((apart) => (

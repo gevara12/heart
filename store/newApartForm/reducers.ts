@@ -12,18 +12,18 @@ export type Action =
   | { type: 'INCREASE' }
   | { type: 'DECREASE' }
   | {
-  type: 'FORM_GROUP_VALUE';
-  name: string;
-  groupName: string;
-  fieldValue: any;
-}
-  | { type: 'FORM_ADDRESS', address: unknown }
+      type: 'FORM_GROUP_VALUE';
+      name: string;
+      groupName: string;
+      fieldValue: any;
+    }
+  | { type: 'FORM_ADDRESS'; address: unknown }
   | { type: 'FORM_VALUE'; name: string; fieldValue: any }
   | { type: 'form-error'; name: string; error: string };
 
 const initialState = {
   activeStep: 0,
-  formValues: { placeType: { value: 'entire-place' } },
+  formValues: { placeType: { value: 'entire_home' } },
 };
 
 export const newApart = (state: State = initialState, action: Action): State => {
