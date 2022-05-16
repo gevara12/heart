@@ -7,6 +7,28 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const labels = {
   wiFi: 'Wi-fi',
   conditioner: 'Кондиционер',
+  iron:'Утюг',
+  kitchen:'Кухня',
+  refrigerator:'Холодильник',
+  dishes:'Посуда',
+  microwave:'Микроволновка',
+  stove:'Плита',
+  oven:'Духовка',
+  dishwasher:'Посудомоечная машина',
+  kettle:'Чайник',
+  coffeeMaker:'Кофеварка',
+  coffee:'Кофе',
+  washingMachine:'Стиральная машина',
+  dryer:'Сушильная машина',
+  bathTub:'Ванна',
+  hairDryer:'Фен',
+  toiletries:'Предметы первой необходимости',
+  soap:'Средства для душа',
+  blankets:'Постельное белье',
+  wardrobe:'Шкаф для одежды',
+  heating:'Отопление',
+  parking:'Бесплатная парковка',
+  tv:'Телевизор',
 };
 
 export default function OptionsGrid({ options }: any) {

@@ -3,7 +3,7 @@ import {Box, styled} from "@mui/material";
 const Item = styled(Box)(({ theme }) => ({
 	backgroundColor: theme.palette.grey['200'],
 	height:'184px',
-	'& div':{
+	'& > div':{
 		display:'block',
 		height: '100%',
 		width: '100%'

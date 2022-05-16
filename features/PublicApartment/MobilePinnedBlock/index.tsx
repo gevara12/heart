@@ -11,9 +11,12 @@ import { isDateInArray } from "@utils/helpers";
 import disabledDates from "@features/PublicApartment/MobilePinnedBlock/disabledDates";
 import MobileSuccessDialog from "@features/PublicApartment/MobilePinnedBlock/MobileSuccessDialog";
 import generateDateRangeString from "@features/PublicApartment/MobilePinnedBlock/generateDateRangeString";
+import {useRouter} from "next/router";
 
 
 export default function MobilePinnedBlock() {
+
+	const router = useRouter();
 
 	const [value, setValue] = React.useState<DateRange<Date>>([null, null]);
 	const [open, setOpen] = React.useState<boolean>(false);
@@ -22,7 +25,7 @@ export default function MobilePinnedBlock() {
 	const [openDialog, setOpenDialog] = React.useState(false);
 
 	const handleClickOpen = () => {
-		setOpenDialog(true);
+		router.push(`/apartment-public/${router.query.id}/request?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`)
 	};
 	const handleClose = () => {
 		setOpenDialog(false);

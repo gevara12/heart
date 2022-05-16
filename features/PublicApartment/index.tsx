@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Alert, Box, Button, Grid, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography, useTheme } from '@mui/material';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -69,9 +69,9 @@ export default function PublicApartment({ apartment }: any) {
 
             <ApartmentBlock title={'Заселение'}>
               <CheckInGrid />
-              <Alert severity="info" sx={{ mt: { xs: 2, md: 4 } }}>
+              {/*<Alert severity="info" sx={{ mt: { xs: 2, md: 4 } }}>
                 После связи с хозяином вам будет доступна инструкция по заселению
-              </Alert>
+              </Alert>*/}
             </ApartmentBlock>
 
             <PublicApartmentDivider />
