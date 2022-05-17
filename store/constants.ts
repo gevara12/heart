@@ -36,6 +36,7 @@ export const INCREASE = 'INCREASE';
 export const DECREASE = 'DECREASE';
 export const FORM_VALUE = 'FORM_VALUE';
 export const FORM_GROUP_VALUE = 'FORM_GROUP_VALUE';
+export const FORM_GROUP_OBJECT = 'FORM_GROUP_OBJECT';
 export const FORM_ADDRESS = 'FORM_ADDRESS';
 
 export const UPDATE_AVATAR = 'UPDATE_AVATAR';

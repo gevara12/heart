@@ -1,4 +1,4 @@
-import { DECREASE, FORM_ADDRESS, FORM_GROUP_VALUE, FORM_VALUE, INCREASE } from '@store/constants';
+import { DECREASE, FORM_ADDRESS, FORM_GROUP_OBJECT, FORM_GROUP_VALUE, FORM_VALUE, INCREASE } from '@store/constants';
 import { TPlaceType } from '@utils/types';
 
 export type State = {
@@ -12,18 +12,23 @@ export type Action =
   | { type: 'INCREASE' }
   | { type: 'DECREASE' }
   | {
-      type: 'FORM_GROUP_VALUE';
-      name: string;
-      groupName: string;
-      fieldValue: any;
-    }
+  type: 'FORM_GROUP_VALUE';
+  name: string;
+  groupName: string;
+  fieldValue: any;
+}
+  | {
+  type: 'FORM_GROUP_OBJECT';
+  groupName: string;
+  groupObject: {}
+}
   | { type: 'FORM_ADDRESS'; address: unknown }
   | { type: 'FORM_VALUE'; name: string; fieldValue: any }
   | { type: 'form-error'; name: string; error: string };
 
 const initialState = {
   activeStep: 0,
-  formValues: { placeType: { value: 'entire_home' } },
+  formValues: { placeType: { value: 'entire-place' } },
 };
 
 export const newApart = (state: State = initialState, action: Action): State => {
@@ -38,6 +43,7 @@ export const newApart = (state: State = initialState, action: Action): State => 
         ...state,
         activeStep: state.activeStep - 1,
       };
+
     case FORM_VALUE: {
       const { name, fieldValue } = action;
 
@@ -65,6 +71,17 @@ export const newApart = (state: State = initialState, action: Action): State => 
               value: fieldValue,
             },
           },
+        },
+      };
+    }
+
+    case FORM_GROUP_OBJECT: {
+      const { groupName, groupObject } = action;
+      return {
+        ...state,
+        formValues: {
+          ...state.formValues,
+          [groupName]: groupObject,
         },
       };
     }

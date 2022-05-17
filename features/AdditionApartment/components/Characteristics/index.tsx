@@ -5,24 +5,30 @@ import { Button, InputAdornment, OutlinedInput, Stack, TextField, Typography } f
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-import { FORM_GROUP_VALUE } from '@store/constants';
+import { FORM_GROUP_OBJECT, FORM_GROUP_VALUE } from '@store/constants';
 import { BottomStick } from '@features/CreateApartment/components/BottomStick';
 
 import styles from '@features/CreateApartment/components/Hang/Hang.module.css';
 import { getFormValues } from '@store/newApartForm/selectors';
 import type { TCharacteristic } from '@utils/types';
 
+type TCharacteristicsProps = {
+  characteristicsInput: {
+    bathrooms: number;
+    rooms: number;
+    bed: number;
+  }
+}
 
-export default function Characteristics({ characteristicsInput }): React.ReactElement {
+export default function Characteristics({ characteristicsInput }: TCharacteristicsProps): React.ReactElement {
   const dispatch = useDispatch();
   const { characteristics } = useSelector(getFormValues);
   const { bathrooms, rooms, bed } = characteristicsInput;
-
   const [values, setValues] = React.useState<TCharacteristic>({
     guest: { value: 2 },
-    bed,
-    bathrooms,
-    rooms,
+    bed: { value: bed },
+    bathrooms: { value: bathrooms },
+    rooms: { value: rooms },
     floor: { value: 1 },
     square: { value: 10 },
   });
@@ -35,7 +41,7 @@ export default function Characteristics({ characteristicsInput }): React.ReactEl
         name: [prop],
         fieldValue: Number(event.target.value),
       });
-      setValues({ ...values, [prop]: {value: Number(event.target.value)} });
+      setValues({ ...values, [prop]: { value: Number(event.target.value) } });
     },
     [dispatch, values],
   );
@@ -65,8 +71,13 @@ export default function Characteristics({ characteristicsInput }): React.ReactEl
   };
 
   React.useEffect(() => {
+    dispatch({
+      type: FORM_GROUP_OBJECT,
+      groupName: 'characteristics',
+      groupObject: values,
+    });
     setValues({ ...values, ...characteristics });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

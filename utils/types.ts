@@ -1,4 +1,4 @@
-export type TPlaceType = 'entire_home' | 'private_home' | 'hotel_home' | 'shared_home';
+export type TPlaceType = 'entire-place' | 'private-room' | 'hotel-room' | 'shared-room';
 
 export type TImage = {
   image: string;

@@ -19,7 +19,6 @@ export default function ApartmentCard({ apartment }: TProfileApartmentProps) {
   const { id, publicInfo, externalRating, images, status } = apartment;
 
   const isLuxury = (externalRating?.isSelect || externalRating?.isLuxury);
-  console.info(apartment);
   return (
     <Card>
       <Box sx={{
@@ -48,7 +47,7 @@ export default function ApartmentCard({ apartment }: TProfileApartmentProps) {
           href={`/draft/${id}`}
           passHref
         >
-          <Typography variant='h5'>{publicInfo.name.value}</Typography>
+          <Typography variant='h5'>{publicInfo.name}</Typography>
         </Link>
         <Stack direction='row' alignItems='center' sx={{ mb: 0.5 }}>
           <Stack direction='row' alignItems='center' sx={{ mr: 1 }}>

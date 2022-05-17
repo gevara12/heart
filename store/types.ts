@@ -1,9 +1,9 @@
 // import { Characteristics } from '@features/CreateApartment/components/Characteristics';
 
-export type TPlaceType = 'entire_home' | 'private_home' | 'hotel_home' | 'shared_home';
+export type TPlaceType = 'entire-place' | 'private-room' | 'hotel-room' | 'shared-room';
 
 export type TApartment = {
-  placeType: 'entire_home' | 'private_home' | 'hotel_home' | 'shared_home';
+  placeType: 'entire-place' | 'private-room' | 'hotel-room' | 'shared-room';
   address: {
     city: { value: string };
     street: { value: string };

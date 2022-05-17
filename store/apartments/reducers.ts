@@ -29,7 +29,7 @@ const initialApartmentState = {
   currentApartment: <TApartment>{
     description: { value: '' },
     name: { value: '' },
-    placeType: { value: 'entire_home' },
+    placeType: { value: 'entire-place' },
     publicInfo: {},
   },
 };

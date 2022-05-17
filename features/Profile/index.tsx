@@ -180,7 +180,7 @@ export const Profile = ({}: TProfileProps): React.ReactElement => {
                     Объявления
                   </Typography>
                   <Grid container spacing={3}>
-                    {user?.apartments.map((apartment) => (
+                    {user.apartments.map((apartment) => (
                       <Grid item xs={12} md={6} key={uuidv4()}>
                         <ApartmentCard apartment={apartment} />
                       </Grid>

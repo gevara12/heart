@@ -16,7 +16,7 @@ export const PublicApartments = (): React.ReactElement => {
   }, [dispatch]);
 
   const apartments = useSelector(getApartmentsList);
-  console.log(apartments);
+  // console.log(apartments);
   return (
     <Grid container>
       {apartments.map((apartment) => (
