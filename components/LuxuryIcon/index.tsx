@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Box, styled} from '@mui/material';
+import {Box, styled, Tooltip} from '@mui/material';
 
 import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
 
@@ -16,9 +16,12 @@ const LuxuryBadge = styled(Box)(({}) => ({
 }));
 
 export default function LuxuryIcon({ size='large', ...rest}:{ size?:'large'|'small', [key: string]:any }) {
+    const title = "Премимум: Данное объявление размещается в премиальном сегменте жилья";
     return (
-        <LuxuryBadge {...rest} style={{ width: size === 'large' ? '52px' : '36px', height: size === 'large' ? '52px' : '36px', }}>
-            <DiamondOutlinedIcon sx={{ fontSize: size === 'large' ? 32 : 24  }}/>
-        </LuxuryBadge>
+        <Tooltip title={title} placement="top-start">
+            <LuxuryBadge {...rest} style={{ width: size === 'large' ? '52px' : '36px', height: size === 'large' ? '52px' : '36px', }}>
+                <DiamondOutlinedIcon sx={{ fontSize: size === 'large' ? 32 : 24  }}/>
+            </LuxuryBadge>
+        </Tooltip>
     );
 };
