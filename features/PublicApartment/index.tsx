@@ -1,11 +1,21 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 
 import { Alert, Box, Button, Grid, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
 
 import RatingIconsPanel from '@components/RatingIconsPanel';
 import Apartment from '@components/ApartmentMock';
 
-import PhotoBlock from '@features/PublicApartment/PhotoBlock';
+const PhotoBlock = dynamic(() => import('@features/PublicApartment/PhotoBlock'), {
+  loading: () => <span>Loading...</span>,
+  ssr: false,
+});
+
+const PhotoSlider = dynamic(() => import('@features/PublicApartment/PhotoSlider'), {
+  loading: () => <span>Loading...</span>,
+  ssr: false,
+});
+
 import AboutBlock from '@features/PublicApartment/AboutBlock';
 import ApartmentBlock from '@features/PublicApartment/ApartmentBlock';
 import MobilePinnedBlock from '@features/PublicApartment/MobilePinnedBlock';
@@ -14,7 +24,6 @@ import OwnerAboutBlock from '@features/PublicApartment/OwnerAboutBlock';
 import AddressLink from '@features/PublicApartment/AddressLink';
 import PublicApartmentDivider from '@features/PublicApartment/PublicApartmentDivider';
 import ShareLink from '@features/PublicApartment/ShareLink';
-import PhotoSlider from '@features/PublicApartment/PhotoSlider';
 import RulesGrid from '@features/PublicApartment/RulesGrid';
 import OptionsGrid from '@features/PublicApartment/OptionsGrid';
 import CheckInGrid from '@features/PublicApartment/CheckInGrid';

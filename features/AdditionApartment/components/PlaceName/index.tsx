@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { FormControl, InputAdornment, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 
-import { FORM_VALUE, INCREASE } from '@store/constants';
+import { FORM_GROUP_OBJECT, FORM_VALUE, INCREASE } from '@store/constants';
 import { showSnackbar } from '@store/snackbar/actions';
 import { SeverityEnum } from '@components/CustomSnackBar';
 import { BottomStick } from '@features/CreateApartment/components/BottomStick';
@@ -27,18 +27,26 @@ export const PlaceName = ({ placeNameInput }) => {
   };
 
   const [values, setValues] = React.useState<TState>({
-    name: placeNameInput,
     amount: { value: 0 },
     description: { value: '' },
+    name: { value: placeNameInput },
   });
 
-  const handleChange = React.useCallback((prop: keyof TState) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (prop: keyof TState) => (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FORM_VALUE,
       name: [prop],
       fieldValue: event.target.value,
     });
     setValues({ ...values, [prop]: { value: event.target.value } });
+  };
+
+  React.useEffect(() => {
+    dispatch({
+      type: FORM_VALUE,
+      name: 'name',
+      fieldValue: values.name.value,
+    });
   }, [dispatch]);
 
   return (

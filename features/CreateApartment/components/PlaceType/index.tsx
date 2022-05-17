@@ -19,10 +19,10 @@ const PlaceType = (): React.ReactElement => {
   const { placeType } = useSelector(getFormValues);
 
   const placeArr = [
-    { type: 'entire_home', label: 'Жилье целиком' },
-    { type: 'private_home', label: 'Отдельная комната' },
-    { type: 'hotel_home', label: 'Гостиничный номер' },
-    { type: 'shared_home', label: 'Место в комнате' },
+    { type: 'entire-place', label: 'Жилье целиком' },
+    { type: 'private-room', label: 'Отдельная комната' },
+    { type: 'hotel-room', label: 'Гостиничный номер' },
+    { type: 'shared-room', label: 'Место в комнате' },
   ];
 
   const handlePlace = (event: React.MouseEvent<HTMLElement>, newPlace: TPlaceType) => {

@@ -14,12 +14,12 @@ const PlaceType = ({ placeTypeInput }: { placeTypeInput: TPlaceType }): React.Re
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('md'));
   const dispatch = useDispatch();
-  const [placeType, setPlaceType] = React.useState(placeTypeInput);
+  const [placeType, setPlaceType] = React.useState({ value: placeTypeInput });
   const placeArr = [
-    { type: 'entire_home', label: 'Жилье целиком' },
-    { type: 'private_home', label: 'Отдельная комната' },
-    { type: 'hotel_home', label: 'Гостиничный номер' },
-    { type: 'shared_home', label: 'Место в комнате' },
+    { type: 'entire-place', label: 'Жилье целиком' },
+    { type: 'private-room', label: 'Отдельная комната' },
+    { type: 'hotel-room', label: 'Гостиничный номер' },
+    { type: 'shared-room', label: 'Место в комнате' },
   ];
 
   const handlePlace = (event: React.MouseEvent<HTMLElement>, newPlace: TPlaceType) => {

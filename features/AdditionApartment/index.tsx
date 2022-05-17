@@ -4,25 +4,20 @@ import dynamic from 'next/dynamic';
 
 import { Box, Container, Step, StepLabel, Stepper, useTheme, useMediaQuery } from '@mui/material';
 
-// const MapsGeocode = dynamic(() => import('@components/MapsGeocode'), {
-//   loading: () => <span>Loading...</span>,
-//   ssr: false,
-// });
-
 import { getActiveStep } from '@store/newApartForm/selectors';
 import { PlaceName } from '@features/AdditionApartment/components/PlaceName';
 
 import { LastStep } from '@features/AdditionApartment/components/LastStep';
-import { Address } from '@features/CreateApartment/components/Address';
+import { Address } from '@features/AdditionApartment/components/Address';
 import { ProgressScreen } from '@components/ProgressScreen';
 
 import Characteristics from '@features/AdditionApartment/components/Characteristics';
 import PlaceType from '@features/AdditionApartment/components/PlaceType';
 
-import { BottomStick } from '@features/CreateApartment/components/BottomStick';
+import { BottomStick } from '@features/AdditionApartment/components/BottomStick';
 import styles from './CreateApartment.module.css';
 
-const HangDynamic = dynamic(() => import('@features/CreateApartment/components/Hang'), {
+const HangDynamic = dynamic(() => import('@features/AdditionApartment/components/Hang'), {
   loading: () => <ProgressScreen />,
   ssr: false,
 });
