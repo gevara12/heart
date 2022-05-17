@@ -30,6 +30,8 @@ import ruLocale from "date-fns/locale/ru";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentApartment} from "@store/apartments/selectors";
 import {fetchApartmentById} from "@store/apartments/actions";
+import {getUser} from "@store/users/selectors";
+import {fetchUser} from "@store/users/actions";
 
 
 const socials = [
@@ -40,7 +42,6 @@ const socials = [
     { name: 'Звонок', SocialIcon: CallIcon },
 ];
 export default function ApartmentRequest() {
-    const avatarUrl = "https://i1.sndcdn.com/avatars-000211446087-hahqw0-t500x500.jpg";
     const { breakpoints } = useTheme();
     const isMobile = useMediaQuery(breakpoints.down('md'));
     const router = useRouter();
@@ -49,11 +50,16 @@ export default function ApartmentRequest() {
     const dispatch = useDispatch();
 
     const { currentApartment } = useSelector(getCurrentApartment);
+    const apartOwner = useSelector(getUser);
 
     React.useEffect(() => {
         console.log(currentApartment)
         id && dispatch(fetchApartmentById(id));
     }, [dispatch, id]);
+
+    React.useEffect(() => {
+        currentApartment.ownerId && dispatch(fetchUser(currentApartment.ownerId));
+    }, [dispatch, currentApartment.ownerId]);
 
     return (
         <Layout isHero={true}>
@@ -64,9 +70,9 @@ export default function ApartmentRequest() {
                     <Box sx={{overflow:'hidden', textAlign:isMobile ? 'center':'left', mt:isMobile ? 4:11, mb:14}}>
                         <Grid container columnSpacing={4}>
                             <Grid item xs={12} md={2}>
-                                {isMobile && <Typography variant="h5" component="div">Отправьте запрос Ивану</Typography>}
+                                {isMobile && <Typography variant="h5" component="div">Отправьте запрос {apartOwner?.name}</Typography>}
                                 <Avatar sx={{ bgcolor:grey[100], width: 88, height: 88, ml:'auto',mr:isMobile ? 'auto' : 'unset', mt:isMobile ? 2.5 : 0}}>
-                                    <Image src={avatarUrl} alt="avatar" layout="fill" unoptimized/>
+                                    {apartOwner?.avatar && <Image src={apartOwner?.avatar} alt="avatar" layout="fill" unoptimized/>}
                                 </Avatar>
                             </Grid>
                             <Grid item xs={12} md={6}>
