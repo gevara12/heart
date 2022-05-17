@@ -12,6 +12,8 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import PhotoSwipe from 'photoswipe';
 
 import 'photoswipe/style.css';
+import LuxuryIcon from '@components/LuxuryIcon';
+import SuperHostIcon from '@components/SuperHostIcon';
 
 
 interface PhotoSliderProps {
@@ -45,6 +47,10 @@ export default function PhotoSlider({ photos }: PhotoSliderProps) {
 
   return (
     <Box sx={{ ml: { xs: -2, sm: -3 }, mr: { xs: -2, sm: -3 }, mb: 1.5 }}>
+			<span style={{ position: 'absolute', display: 'flex', width: '100%', padding: '8px 12px', zIndex: 2 }}>
+				<LuxuryIcon size={'small'} />
+				<SuperHostIcon size={'small'} sx={{ ml: 1 }} />
+			</span>
       <Swiper {...SwiperOpts}>
         {photos.map((photo, i) =>
           <SwiperSlide style={{ height: '194px' }} key={i}>

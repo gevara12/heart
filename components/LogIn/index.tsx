@@ -11,7 +11,7 @@ import {
   MenuItem,
   OutlinedInput,
   Stack,
-  TextField,
+  TextField, Typography,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -75,9 +75,11 @@ export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
         </Button>
       ) : (
         <>
-          {auth.isLoggedIn === true ? (
+          {auth.isLoggedIn ? (
             <MenuItem key={'logout'} onClick={handleLogout}>
-              Выйти
+              <Typography sx={{ mr: 4, color:'secondary.main' }} variant="body1" component="span">
+                Выйти
+              </Typography>
             </MenuItem>
           ) : (
             <MenuItem key={'login'} onClick={handleOpen}>

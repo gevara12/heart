@@ -6,7 +6,6 @@ import {GuestPopover} from "@components/GuestPopover";
 import RatingIconsPanel from "@components/RatingIconsPanel";
 
 
-
 export default function PinnedBlock() {
 	const [dates, setDates] = React.useState<DateRange<Date>>([null, null]);
 	return (
@@ -19,7 +18,7 @@ export default function PinnedBlock() {
 					</Stack>
 				</Stack>
 				<Stack direction={{ xs: 'column' }} spacing={2}>
-					<MinMaxDateRangePicker dates={dates} setDates={setDates}  />
+					<MinMaxDateRangePicker dates={dates} setDates={setDates}/>
 					<GuestPopover />
 				</Stack>
 				<Button variant="contained" sx={{width: '100%', mt:2}} size="large">Связаться с хозяином</Button>

@@ -9,6 +9,8 @@ import 'photoswipe/style.css';
 import PhotoBlockGrid from './Grid';
 import BigItem from './BigItem';
 import Item from './Item';
+import LuxuryIcon from '@components/LuxuryIcon';
+import SuperHostIcon from '@components/SuperHostIcon';
 
 
 interface ApartmentPhotoBlockProps {
@@ -16,6 +18,7 @@ interface ApartmentPhotoBlockProps {
 }
 
 export default function PhotoBlock({ photos }: ApartmentPhotoBlockProps) {
+
   // TODO: common lightbox wrapper
   const [lightbox, setLightbox] = React.useState(null);
 
@@ -29,7 +32,6 @@ export default function PhotoBlock({ photos }: ApartmentPhotoBlockProps) {
       }
     };
   }, []);
-
   React.useEffect(() => {
     if (lightbox !== null) {
       lightbox.init();
@@ -43,6 +45,10 @@ export default function PhotoBlock({ photos }: ApartmentPhotoBlockProps) {
       {slicedPhotos.map(({ src, height, width }, i) =>
         (i === 0
             ? <BigItem gridColumn='span 6' gridRow='1/3' key={i}>
+							<span style={{ position: 'absolute', display: 'flex', width: '100%', padding: '8px 12px' }}>
+								<LuxuryIcon size={'small'} />
+								<SuperHostIcon size={'small'} sx={{ ml: 1 }} />
+							</span>
               <div onClick={() => ((lightbox !== null) && lightbox.loadAndOpen(i))}>
                 <img src={src} height={height} width={width} alt='' />
               </div>

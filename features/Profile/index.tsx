@@ -11,14 +11,13 @@ import { getUser } from '@store/users/selectors';
 
 import { grey } from '@mui/material/colors';
 
-import { Avatar, Box, Button, Chip, Grid, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Button, Grid, Stack, Typography } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import BoltIcon from '@mui/icons-material/Bolt';
-import TagFacesIcon from '@mui/icons-material/TagFaces';
 
 import ApartmentCard from '@features/Profile/components/ApartmentCard';
 

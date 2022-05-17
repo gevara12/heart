@@ -5,22 +5,20 @@ import {Box, styled} from '@mui/material';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 
-const SuperHostBadge = styled(Box)(({ theme }) => ({
+const SuperHostBadge = styled(Box)(({}) => ({
     backdropFilter: 'blur(15px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '50%',
     color: 'white',
-    width: '52px',
-    height: '52px',
     background: 'linear-gradient(180deg, rgba(247, 87, 92, 0.6) 0%, rgba(247, 87, 92, 0.4) 100%)'
 }));
 
-export default function SuperHostIcon({ ...rest}: { [key: string]: any }) {
+export default function SuperHostIcon({ size='large', ...rest}:{ size?:'large'|'small', [key: string]:any }) {
     return (
-        <SuperHostBadge {...rest}>
-            <WorkspacePremiumIcon sx={{ fontSize: 32 }}/>
+        <SuperHostBadge {...rest} style={{ width: size === 'large' ? '52px' : '36px', height: size === 'large' ? '52px' : '36px', }}>
+            <WorkspacePremiumIcon sx={{ fontSize: size === 'large' ? 32 : 24  }}/>
         </SuperHostBadge>
     );
 };
