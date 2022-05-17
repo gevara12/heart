@@ -40,8 +40,10 @@ export default function Confirmation() {
                     {loading && <CircularProgress />}
                     {success && (
                         <div>
-                            <div>вы успешно зарегистрированы на имейл {regEmail}</div>
-                            <Button variant="outlined" onClick={()=>router.replace('/profile')} sx={{ width: '168px' }}>профиль</Button>
+                            <div>Вы успешно подтвердили e-mail {regEmail} на сайте HeartApart. Спасибо за ваш выбор!</div>
+                            <div>На нашем сайте можно перенести данные из открытых источников в свой профиль, а также заполнить профиль самостоятельно:</div>
+                            <Button variant="contained" onClick={()=>router.replace('/host/sync-a')} sx={{ width: '168px', mt:2 }}>Перенести данные</Button>
+                            <Button variant="outlined" onClick={()=>router.replace('/profile/edit')} sx={{ width: '168px', mt:1 }}>Заполнить самостоятельно</Button>
                         </div>
                     )}
                     {error && <div>чтото пошло не так</div>}
