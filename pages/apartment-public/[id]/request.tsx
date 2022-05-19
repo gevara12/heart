@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 
 import {
     Container,
@@ -6,7 +6,7 @@ import {
     Stack,
     Button,
     Box,
-    Avatar, Grid, Divider,
+    Avatar, Grid, Divider, Tooltip,
 } from '@mui/material';
 
 import Layout from '@components/Layout';
@@ -32,6 +32,7 @@ import {getCurrentApartment} from "@store/apartments/selectors";
 import {fetchApartmentById} from "@store/apartments/actions";
 import {getUser} from "@store/users/selectors";
 import {fetchUser} from "@store/users/actions";
+import {getCurrentUser} from "@store/auth/selectors";
 
 
 const socials = [
@@ -43,17 +44,45 @@ const socials = [
 ];
 export default function ApartmentRequest() {
     const { breakpoints } = useTheme();
-    const isMobile = useMediaQuery(breakpoints.down('md'));
     const router = useRouter();
-
-    const { id, checkInDate, checkOutDate } = router.query;
     const dispatch = useDispatch();
+    const textInput = useRef(null);
 
+    const isMobile = useMediaQuery(breakpoints.down('md'));
+
+    const currentUser = useSelector(getCurrentUser);
     const { currentApartment } = useSelector(getCurrentApartment);
     const apartOwner = useSelector(getUser);
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const { id, checkInDate, checkOutDate } = router.query;
+
+
+    const copy = () => {
+        if (!navigator.clipboard) return;
+        if (!textInput.current){
+             return;
+        } else {
+            navigator.clipboard.writeText(textInput?.current?.innerText);
+            setOpen(true);
+            setTimeout(setOpen.bind(null, false), 1000);
+        }
+    };
 
     React.useEffect(() => {
-        console.log(currentApartment)
+        if (checkInDate && checkOutDate && currentUser){
+            setMessage(
+                `Добрый день! Нашел вашу квартиру на heartapart.ru <br/>
+                Объявление: https://www.heartapart.ru/apartment-public/${id} <br/>
+                Хочу забронировать с ${format(new Date(checkInDate), 'd.MM.yyyy', { locale: ruLocale })} по ${format(new Date(checkOutDate), 'd.MM.yyyy', { locale: ruLocale })}, на 2 взрослых, без детей, без животных. <br/>
+                Подскажите, какие дальнейшие шаги? <br/>
+                Гость: https://www.heartapart.ru/user/${currentUser.id}`
+            );
+        }
+    }, [checkInDate, checkOutDate, currentUser]);
+
+    React.useEffect(() => {
         id && dispatch(fetchApartmentById(id));
     }, [dispatch, id]);
 
@@ -81,7 +110,7 @@ export default function ApartmentRequest() {
                                 {isMobile
                                     ? (
                                         <Box sx={{background: 'rgba(0, 166, 153, 0.12)', borderRadius: '4px', padding: '16px 28px', textAlign: 'center', mt:1.5}}>
-                                            <Box>1-комн. квартира, 45 кв.м. очень красивая </Box>
+                                            <Box>{currentApartment?.publicInfo?.name?.value}</Box>
                                             <Box>{currentApartment?.publicInfo?.amount?.value} ₽/ночь</Box>
                                             <Stack direction={'row'} justifyContent={'center'}>
                                                 <Typography variant="body2" component="div">до 2 гостей</Typography>
@@ -91,8 +120,8 @@ export default function ApartmentRequest() {
                                         </Box>
                                     ) : (
                                         <Box>
-                                            <Box>1-комн. квартира, 45 кв.м. очень красивая </Box>
-                                            <Box>3500 ₽/ночь</Box>
+                                            <Box>{currentApartment?.publicInfo?.name?.value}</Box>
+                                            <Box>{currentApartment?.publicInfo?.amount?.value} ₽/ночь</Box>
                                             <Stack direction={'row'}>
                                                 <Typography variant="body2" component="div">до 2 гостей</Typography>
                                                 <Typography variant="body2" component="div">1 спальня</Typography>
@@ -123,14 +152,19 @@ export default function ApartmentRequest() {
                                     borderRadius: '4px',
                                     textAlign: 'left',
                                     mt:2.5,
-                                }}>
-                                    Добрый день! Нашел вашу квартиру на heartapart.ru. Объявление: https://www.heartapart.ru/apartment-public/{id}<br/>
-                                    Хочу забронировать с {format(new Date(checkInDate), 'd.MM.yyyy', { locale: ruLocale })} по {format(new Date(checkOutDate), 'd.MM.yyyy', { locale: ruLocale })}, на 2 взрослых, без детей, без животных.<br/>
-                                    Подскажите, какие дальнейшие шаги?<br/>
-                                    Гость: https://www.heartapart.ru/user/1234567<br/>
-                                </Box>}
+                                }} ref={textInput} dangerouslySetInnerHTML={{__html:message}}/>}
+                                {navigator.clipboard && (
+                                    <Tooltip
+                                        PopperProps={{ disablePortal: true }}
+                                        open={open}
+                                        title="Скопировано"
+                                        placement={isMobile ? 'top' : 'right'}
+                                        disableHoverListener
+                                    >
+                                        <Button variant={'contained'} sx={{mt:(isMobile ? 1.5 : 2.5) }} onClick={copy} fullWidth={isMobile}>Скопировать текст</Button>
+                                    </Tooltip>
+                                )}
 
-                                <Button variant={'contained'} sx={{mt:(isMobile ? 1.5 : 2.5),  }} fullWidth={isMobile}>Скопировать текст</Button>
 
                                 <Typography variant="h5" component="div" sx={{mt: 6.5}}>Выберите способ связи</Typography>
                                 <Stack direction='row' sx={{
