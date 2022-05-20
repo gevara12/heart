@@ -82,9 +82,9 @@ export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
               </Typography>
             </MenuItem>
           ) : (
-            <MenuItem key={'login'} onClick={handleOpen}>
+            <Button variant="text" size={'small'} onClick={handleOpen}>
               Войти
-            </MenuItem>
+            </Button>
           )}
         </>
       )}

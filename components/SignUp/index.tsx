@@ -97,9 +97,9 @@ export const SignUp = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
           Регистрация
         </Button>
       ) : (
-        <MenuItem key={'register'} onClick={handleOpen}>
-          Регистрация
-        </MenuItem>
+          <Button variant="contained" size="small" onClick={handleOpen}>
+            Регистрация
+          </Button>
       )}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>
