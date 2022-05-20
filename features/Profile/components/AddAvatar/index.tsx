@@ -42,7 +42,7 @@ export const AddAvatar = ({}: TAddAvatarProps): React.ReactElement => {
           <Avatar sx={{ bgcolor: grey[100], width: 230, height: 230 }} variant="square">
             {data?.avatar ? (
               <div className={styles.imageContainer}>
-                <Image className={styles.image} src={data?.avatar} alt="avatar" layout="fill" />
+                <Image className={styles.image} src={data?.avatar} alt="avatar" layout="fill" unoptimized />
               </div>
             ) : (
               <AccountCircleIcon sx={{ width: 190, height: 190, color: '#707070' }} />
