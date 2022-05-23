@@ -13,23 +13,23 @@ type TState = {
   amount: { value: number };
 };
 
-export const PlaceName = ({ placeNameInput }) => {
+export const PlaceName = ({ placeName, placeDescription }) => {
   const dispatch = useDispatch();
   const handleNext = () => {
     values.name.value === ''
       ? dispatch(
-        showSnackbar({
-          message: 'Заполните Название',
-          severity: SeverityEnum.warning,
-        }),
-      )
+          showSnackbar({
+            message: 'Заполните Название',
+            severity: SeverityEnum.warning,
+          }),
+        )
       : dispatch({ type: INCREASE });
   };
 
   const [values, setValues] = React.useState<TState>({
     amount: { value: 0 },
-    description: { value: '' },
-    name: { value: placeNameInput },
+    description: { value: placeDescription },
+    name: { value: placeName },
   });
 
   const handleChange = (prop: keyof TState) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,24 +47,29 @@ export const PlaceName = ({ placeNameInput }) => {
       name: 'name',
       fieldValue: values.name.value,
     });
+    dispatch({
+      type: FORM_VALUE,
+      name: 'description',
+      fieldValue: values.description.value,
+    });
   }, [dispatch]);
 
   return (
     <div>
-      <Typography variant='h4' sx={{ mb: 5 }}>
+      <Typography variant="h4" sx={{ mb: 5 }}>
         Дайте название вашему объявлению и установите цену
       </Typography>
 
       <Stack spacing={4}>
         <FormControl fullWidth>
-          <Typography variant='h6' sx={{ mb: 1.5 }}>
+          <Typography variant="h6" sx={{ mb: 1.5 }}>
             Введите название
           </Typography>
           <TextField
-            size='small'
-            id='name'
-            label='Название'
-            variant='outlined'
+            size="small"
+            id="name"
+            label="Название"
+            variant="outlined"
             value={values.name.value}
             onChange={handleChange('name')}
             required
@@ -72,14 +77,14 @@ export const PlaceName = ({ placeNameInput }) => {
         </FormControl>
 
         <FormControl fullWidth>
-          <Typography variant='h6' sx={{ mb: 1.5 }}>
+          <Typography variant="h6" sx={{ mb: 1.5 }}>
             Добавьте описание
           </Typography>
           <TextField
-            size='small'
-            id='description'
-            label='Описание'
-            variant='outlined'
+            size="small"
+            id="description"
+            label="Описание"
+            variant="outlined"
             multiline
             rows={4}
             value={values.description.value}
@@ -88,17 +93,17 @@ export const PlaceName = ({ placeNameInput }) => {
         </FormControl>
 
         <FormControl>
-          <Typography variant='h6' sx={{ mb: 1.5 }}>
+          <Typography variant="h6" sx={{ mb: 1.5 }}>
             Установите цену
           </Typography>
           <OutlinedInput
             notched={false}
-            id='amount'
-            size='small'
+            id="amount"
+            size="small"
             value={values.amount.value}
             onChange={handleChange('amount')}
-            startAdornment={<InputAdornment position='start'>₽/ночь</InputAdornment>}
-            label='Amount'
+            startAdornment={<InputAdornment position="start">₽/ночь</InputAdornment>}
+            label="Amount"
             sx={{ maxWidth: '150px' }}
           />
         </FormControl>

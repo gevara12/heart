@@ -1,26 +1,26 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 
-import { Qualities } from '@features/CreateApartment/components/Qualities';
-import { CheckInOut } from '@features/CreateApartment/components/CheckInOut';
-import { BetterComfort } from '@features/CreateApartment/components/BetterComfort';
-import { Services } from '@features/CreateApartment/components/Services';
-import { AdditionalRules } from '@features/CreateApartment/components/AdditionalRules';
-import { BottomStick } from '@features/CreateApartment/components/BottomStick';
+import { Qualities } from '@features/AdditionApartment/components/Qualities';
+import { CheckInOut } from '@features/AdditionApartment/components/CheckInOut';
+import { BetterComfort } from '@features/AdditionApartment/components/BetterComfort';
+import { Services } from '@features/AdditionApartment/components/Services';
+import { AdditionalRules } from '@features/AdditionApartment/components/AdditionalRules';
+import { BottomStick } from '@features/AdditionApartment/components/BottomStick';
 
 import styles from './Hang.module.css';
 
-const Hang = (): React.ReactElement => (
+export const Hang = ({ qualities, additionalRules, betterComfort, service }): React.ReactElement => (
   <>
     <Typography variant="h4" className={styles.title}>
       Укажите удобства вашего жилья
     </Typography>
 
-    <Qualities />
+    <Qualities qualities={qualities} />
 
-    <BetterComfort />
+    <BetterComfort betterComfort={betterComfort} />
 
-    <Services />
+    <Services service={service} />
 
     <Typography variant="h4" className={styles.title}>
       Укажите правила в вашем жилье
@@ -28,10 +28,8 @@ const Hang = (): React.ReactElement => (
 
     <CheckInOut />
 
-    <AdditionalRules />
+    <AdditionalRules additionalRules={additionalRules} />
 
     <BottomStick hasPrev />
   </>
 );
-
-export default Hang;

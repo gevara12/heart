@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Checkbox, Switch, FormControlLabel, FormGroup, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { FORM_GROUP_OBJECT } from '@store/constants';
 import styles from './SwitchGroup.module.css';
-import { FORM_GROUP_VALUE } from '@store/constants';
-import { getFormValues } from '@store/newApartForm/selectors';
 
 type TSwitch = {
   name: string;
@@ -15,54 +14,70 @@ type TSwitch = {
 };
 
 type TSwitchGroup = {
+  qualities: {};
   qualitiesArr: [];
   title?: string;
   category?: string;
   isSwitcher?: boolean;
-}
+};
 
-export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwitcher }: TSwitchGroup) => {
+export const SwitchGroup = ({ qualities, qualitiesArr, title, category = 'qualities', isSwitcher }: TSwitchGroup) => {
   const dispatch = useDispatch();
-
   const [values, setValues] = React.useState(qualitiesArr);
 
-  const formValues = useSelector(getFormValues);
+  const filtered = Object.keys(values)
+    .filter((key) => Object.keys(qualities || {}).includes(key))
+    .reduce(
+      (obj, key) => ({
+        ...obj,
+        [key]: {
+          ...values[key],
+          isChecked: true,
+        },
+      }),
+      {},
+    );
 
   const checkHandler = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const index = event.target.name;
-      let items = [...values];
+
+      let items = { ...values };
       items[index].isChecked = event.target.checked;
       dispatch({
-        type: FORM_GROUP_VALUE,
+        type: FORM_GROUP_OBJECT,
         groupName: category,
-        name: event.target.title,
-        fieldValue: event.target.checked,
+        groupObject: items,
       });
-      setValues([...values]);
+      setValues({ ...values });
     },
     [dispatch, values],
   );
 
   React.useEffect(() => {
-    // setValues([...values]);
+    dispatch({
+      type: FORM_GROUP_OBJECT,
+      groupName: category,
+      groupObject: filtered,
+    });
+    !isSwitcher && setValues({ ...values, ...filtered });
   }, []);
 
-  // console.info('formValues', formValues[category], values);
   return (
     <div className={styles.host}>
       {title && (
-        <Typography variant='h5' className={styles.subTitle}>
+        <Typography variant="h5" className={styles.subTitle}>
           {title}
         </Typography>
       )}
 
       <FormGroup className={styles.group}>
         {Object.entries(values).map(([key, value]: [key: string, value: TSwitch]) => {
-          const { name, isChecked, label } = value;
+          const { isChecked, label } = value;
+          // console.info('label', value);
           return (
             <FormControlLabel
-              key={name}
+              key={key}
               control={
                 isSwitcher ? (
                   <Switch
@@ -70,8 +85,8 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
                     onChange={checkHandler}
                     name={key}
                     id={label}
-                    color='primary'
-                    inputProps={{ title: name }}
+                    color="primary"
+                    inputProps={{ title: key }}
                   />
                 ) : (
                   <Checkbox
@@ -79,8 +94,8 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
                     onChange={checkHandler}
                     name={key}
                     id={label}
-                    color='primary'
-                    inputProps={{ title: name }}
+                    color="primary"
+                    inputProps={{ title: key }}
                   />
                 )
               }

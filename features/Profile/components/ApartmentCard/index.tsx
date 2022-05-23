@@ -47,7 +47,7 @@ export default function ApartmentCard({ apartment }: TProfileApartmentProps) {
           href={`/draft/${id}`}
           passHref
         >
-          <Typography variant='h5'>{publicInfo.name}</Typography>
+          <Typography variant='h5' sx={{ cursor: 'pointer' }}>{publicInfo.name}</Typography>
         </Link>
         <Stack direction='row' alignItems='center' sx={{ mb: 0.5 }}>
           <Stack direction='row' alignItems='center' sx={{ mr: 1 }}>
