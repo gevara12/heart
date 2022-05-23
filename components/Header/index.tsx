@@ -8,14 +8,10 @@ import {
   Avatar,
   Box,
   Container,
-  Divider,
   IconButton,
-  Menu,
   Typography,
-  MenuItem,
   Stack, useTheme, useMediaQuery,
 } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { SignUp } from '@components/SignUp';
 import { LogIn } from '@components/LogIn';
@@ -23,16 +19,17 @@ import { LogIn } from '@components/LogIn';
 import { getUserStatus } from '@store/auth/selectors';
 import { fetchCurrentUser } from '@store/auth/actions';
 
-import styles from '@features/Profile/components/AddAvatar/AddAvatar.module.css';
+import {HeaderProfileMenu} from "@components/HeaderProfileMenu";
 
 
 export const Header = (): React.ReactElement => {
   const dispatch = useDispatch();
   const auth = useSelector(getUserStatus);
   const theme = useTheme();
-  console.log(theme)
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  console.log(isTablet)
+
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm','md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -50,16 +47,9 @@ export const Header = (): React.ReactElement => {
 
   return (
     <div>
-      <AppBar
-        position='static'
-        color='background'
-        sx={{
-          // bgcolor: 'background.default',
-          boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.15)',
-        }}
-      >
+      <AppBar elevation={isTablet?2:4} position='static' color="background">
         <Container maxWidth='lg'>
-          <Stack justifyContent='space-between' direction='row' alignItems={'center'} sx={{ py: 1 }}>
+          <Stack justifyContent='space-between' direction='row' alignItems={'center'} sx={{ py:(isMobile?1.25:(isTablet?2:2.5)) }}>
             <Stack direction={'row'} alignItems={'center'}>
             <Box>
               <Link href='/hero' passHref>
@@ -68,83 +58,32 @@ export const Header = (): React.ReactElement => {
                 </a>
               </Link>
             </Box>
-            {isTablet && (<>
-              <Typography variant={'h6'} sx={{ml:1.5}}>Heartapart</Typography>
-              <Typography variant={'h6'} sx={{ml:2.5, px:1,border:'1px solid #000',borderRadius: '4px'}}>beta</Typography>
-
-            </>)}
+            { (isTablet||isDesktop) && (
+              <>
+                <Typography variant={'h6'} sx={{ml:1.5}}>Heartapart</Typography>
+                <Typography variant={'h6'} sx={{ml:2.5, px:1,border:'1px solid', borderColor:'background',borderRadius: '4px'}}>beta</Typography>
+              </>
+            )}
             </Stack>
             {!auth.isLoggedIn ? (
-                <Stack direction={'row'} spacing={2.5}>
-                  <LogIn />
-                  <SignUp />
-                </Stack>
-            ):(<>
-              <Box sx={{ ml: 2 }}>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ bgcolor: 'background.default' }}>
-                    {auth?.user?.data?.avatar ? (
-                        <div className={styles.imageContainer}>
-                          <Image className={styles.image} src={auth?.user?.data?.avatar} alt='avatar' layout='fill'
-                                 unoptimized />
-                        </div>
-                    ) : (
-                        <AccountCircleIcon sx={{ color: '#707070' }} />
-                    )}
-                  </Avatar>
-                </IconButton>
+              <Stack direction={'row'} spacing={2.5}>
+                <LogIn />
+                <SignUp />
+              </Stack>
+            ):(
+              <>
+                <Box sx={{ ml: 2 }}>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar sx={{ bgcolor: 'grey[400]', width: { xs: 40 }, height: { xs: 40 }, position:'relative' }}>
+                      {auth?.user?.data?.avatar && <Image src={auth?.user?.data?.avatar} alt="avatar" layout="fill" unoptimized />}
+                    </Avatar>
+                  </IconButton>
 
-                <Menu
-                    sx={{ mt: '45px' }}
-                    id='menu-appbar'
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    keepMounted
-                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                >
-                  <MenuItem component='div'>
-                    <Link href='/profile'>
-                      <Typography sx={{ mr: 4 }} variant='body1' component='span'>
-                        Профиль
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                  <MenuItem component="div">
-                    <Link href="/profile/edit">
-                      <Typography sx={{ mr: 4 }} variant="body1" component="span">
-                        Настройки аккаунта
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                  <MenuItem component="div">
-                    <Link href="/host/sync-a">
-                      <Typography sx={{ mr: 4 }} variant="body1" component="span">
-                        Перенос данных
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                  <MenuItem component="div" disabled>
-                    <Typography sx={{ mr: 4 }} variant="body1" component="span">
-                      Сдать жилье (скоро)
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem component="div" disabled>
-                    <Typography sx={{ mr: 4 }} variant="body1" component="span">
-                      Мои объявления (скоро)
-                    </Typography>
-                  </MenuItem>
+                  <HeaderProfileMenu anchorElUser={anchorElUser} handleCloseUserMenu={handleCloseUserMenu}/>
 
-                  <Divider />
-
-                  <LogIn />
-                </Menu>
-              </Box>
-            </>)}
-
-
-
+                </Box>
+              </>
+            )}
           </Stack>
         </Container>
       </AppBar>
