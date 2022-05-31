@@ -36,8 +36,8 @@ export const Footer = (): React.ReactElement => {
               </Link>
             </Box>
 
-            <Typography variant={'h4'} sx={{ml:isMobile ? 1.5 : (isTablet ? 2 : 2.5), fontWeight:500}}>Heartapart</Typography>
-            <Typography variant={'h4'} sx={{ml:2.5, px:1 ,border:'1px solid', borderColor:'background',borderRadius: '4px', fontWeight:500}}>beta</Typography>
+            <Typography variant={isMobile?'h5':'h3'} sx={{ml:isMobile ? 1.5 : (isTablet ? 2 : 2.5), fontWeight:500}}>Heartapart</Typography>
+            <Typography variant={isMobile?'h5':'h4'} sx={{ml:2.5, px:1 ,border:'1px solid', borderColor:'background',borderRadius: '4px', fontWeight:500}}>beta</Typography>
 
           </Stack>
 
