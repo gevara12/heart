@@ -1,18 +1,20 @@
 import * as React from "react";
 import {useSelector} from "react-redux";
 
-import {Container, Button, Grid, Box, Typography, Stack, useMediaQuery, useTheme} from '@mui/material';
+import {Container, Grid, Box, useMediaQuery, useTheme} from '@mui/material';
 import {LoginWall} from "@features/LoginWall";
 import {getCurrentUser} from "@store/auth/selectors";
 import PromoBigCard from "./components/PromoBigCard";
-import PromoCard from "@features/Home/components/PromoCard";
+
 import LeftRightPromoCard from "./components/LeftRightPromoCard";
 import LeftRightPromoCard2 from "@features/Home/components/LeftRightPromoCard2";
 import HomeHero from "@features/Home/components/HomeHero";
 import FuturePlansGrid from "./components/FuturePlansGrid";
 import JoinUs from "@features/Home/components/JoinUs";
 import Application from "@features/Home/components/Application";
-import SafeData from "@features/Home/components/SafeData";
+import BeSure from "@features/Home/components/BeSure";
+import DemoScreens from "@features/Home/components/DemoScreens";
+import TeamCard from "./components/TeamCard";
 
 
 const bigCardsList = [
@@ -20,10 +22,19 @@ const bigCardsList = [
     {title:'Безопаность личных данных', desc:'Ваша личная информация бережно хранится на серверах в РФ со строгим соблюдением законодательства.', image:'/images/home/PersonalData.png'},
 ];
 
-
 const leftRightCardsList = [
-    {title:'<Box style="color:#00A699">Сохраняйте рейтинг</Box> и отзывы гостей', desc:'Вам не придется снова завоевывать доверие, данные можно перенести из открытых источников на американском сервисе А.', image:'/images/home/TopserviceMini.png'},
-    {title:'<Box style="color:#00A699">Переносите объявления</Box> за пару кликов', desc:'Не тратьте время на добавление с нуля, а также сохраните рейтинг объявлений.', image:'/images/home/ListingCards.png'},
+    {
+        title:'<Box style="color:#00A699">Сохраняйте рейтинг</Box> и отзывы гостей',
+        desc:'Вам не придется снова завоевывать доверие, данные можно перенести из открытых источников на американском сервисе А.',
+        image:'/images/home/TopserviceMini.png',
+        link:'/host/sync-a',
+    },
+    {
+        title:'<Box style="color:#00A699">Переносите объявления</Box> за пару кликов',
+        desc:'Не тратьте время на добавление с нуля, а также сохраните рейтинг объявлений.',
+        image:'/images/home/ListingCards.png',
+        link:'/host/sync-a',
+    },
 ];
 
 const leftRightCardsList2 = [
@@ -48,10 +59,10 @@ export default function Home() {
         <>
             <HomeHero/>
 
-            <Box sx={{textAlign:'center', height: '648px', background: '#FAFAFA'}}/>
+            <DemoScreens/>
 
             <Container maxWidth='lg'>
-                <Box sx={{marginTop:'136px', overflow:'hidden'}}>
+                <Box sx={{marginTop: isMobile ?'166px':'136px', overflow:'hidden'}}>
                     <Grid container spacing={{xs: isMobile ? '58px' :'84px'}}>
                         {leftRightCardsList.map((card,i)=>(
                             <Grid item xs={12} key={i}>
@@ -62,11 +73,11 @@ export default function Home() {
                 </Box>
             </Container>
 
-            <SafeData/>
+            <BeSure/>
 
             <Container maxWidth='lg'>
-                <Box sx={{marginTop:'136px', overflow:'hidden'}}>
-                    <Grid container spacing={{xs: '60px'}}>
+                <Box sx={{marginTop:isMobile?'52px':'136px', overflow:'hidden'}}>
+                    <Grid container spacing={{xs: isMobile ? '20px':'60px'}}>
                         {bigCardsList.map((card, i)=>(
                             <Grid item xs={12} lg={6} key={i}>
                                 <PromoBigCard card={card}/>
@@ -83,13 +94,14 @@ export default function Home() {
             <JoinUs/>
 
             <Container maxWidth='lg'>
-                <Box sx={{marginTop:'136px', overflow:'hidden'}}>
+                <Box sx={{marginTop:isMobile ? '55px':'188px'}}>
                     <Grid container spacing={{xs: isMobile ? '58px' :'84px'}}>
-                        {leftRightCardsList2.map((card,i)=>(
-                            <Grid item xs={12} key={i}>
-                                <LeftRightPromoCard2 card={card} reverse={(i+1)%2===0}/>
-                            </Grid>
-                        ))}
+                        <Grid item xs={12}>
+                            <TeamCard card={leftRightCardsList2[0]}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <LeftRightPromoCard2 card={leftRightCardsList2[1]} reverse={true}/>
+                        </Grid>
                     </Grid>
                 </Box>
             </Container>

@@ -1,5 +1,6 @@
 import * as React from "react";
-import {Box, Button, Container, Stack, Typography} from "@mui/material";
+import {Box, Button, Container, Stack, Typography, useMediaQuery, useTheme} from "@mui/material";
+
 
 interface BeforeInstallPromptEvent extends Event {
     readonly platforms: string[];
@@ -16,8 +17,10 @@ declare global {
     }
 }
 
-
 export default function Application() {
+    const { breakpoints } = useTheme();
+    const isMobile = useMediaQuery(breakpoints.down('md'));
+
     let deferredPrompt:BeforeInstallPromptEvent|null = null;
 
     React.useEffect(() => {
@@ -38,15 +41,15 @@ export default function Application() {
     };
     return (
         <Container maxWidth='lg'>
-            <Box sx={{marginTop:'272px', background: 'linear-gradient(90deg, #F3E7E9 0%, #E3EEFF 99%, #E3EEFF 100%)', borderRadius: '20px', padding:'60px 0'}}>
-                <Stack direction={'row'} alignItems={'center'} justifyContent={'center'}>
-                    <Box sx={{flex:'1 1 50%', textAlign:'center'}}>
-                        <img style={{display: 'inline-block', width:'260px', marginTop:'-112px'}} src={'/images/home/MobileProfile1.png'} alt={''}/>
-                    </Box>
+            <Box sx={{marginTop:isMobile? '52px':'272px', background: 'linear-gradient(90deg, #F3E7E9 0%, #E3EEFF 99%, #E3EEFF 100%)', borderRadius: '20px', padding:isMobile?'52px 24px':'60px 0'}}>
+                <Stack direction={isMobile ? 'column':'row-reverse'} alignItems={'center'} justifyContent={'center'}>
                     <Box sx={{flex:'1 1 50%'}}>
-                        <Typography variant={'h3'}>Всегда под рукой</Typography>
-                        <Typography variant={'body1'} sx={{mt:'20px'}}>Поддержка всех функций в PWA приложении.</Typography>
-                        <Button variant={'outlined'} onClick={installPWAApp} sx={{mt:'32px', color:'black', borderColor:'black'}}>Установить приложение</Button>
+                        <Typography variant={isMobile? 'h6':'h3'}>Всегда под рукой</Typography>
+                        <Typography variant={isMobile?'body2':'body1'} sx={{mt:isMobile?'8px' :'20px'}}>Поддержка всех функций в PWA приложении.</Typography>
+                        <Button variant={'outlined'} onClick={installPWAApp} sx={{mt:isMobile?'20px':'32px', color:'black', borderColor:'black', whiteSpace:'nowrap'}}>Установить приложение</Button>
+                    </Box>
+                    <Box sx={{flex:'1 1 50%', textAlign:'center'}}>
+                        <img style={{display: 'inline-block', width:isMobile?'160px':'260px', marginTop:isMobile?'36px':'-112px'}} src={'/images/home/MobileProfile1.png'} alt={''}/>
                     </Box>
                 </Stack>
             </Box>

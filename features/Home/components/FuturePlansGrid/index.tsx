@@ -15,17 +15,17 @@ export default function FuturePlansGrid() {
     const isMobile = useMediaQuery(breakpoints.down('md'));
     return (
         <Container maxWidth='lg'>
-            <Box sx={{marginTop:'220px'}}>
+            <Box sx={{marginTop:isMobile?'52px':'220px'}}>
 
-                <Typography variant={'h3'} sx={{mt:2.5, fontWeight:500, textAlign:'center'}}><Box sx={{color:'primary.main', display:'inline-block'}}>Планы</Box> на будущее</Typography>
+                <Typography variant={isMobile?'h5':'h3'} sx={{mt:2.5, fontWeight:500, textAlign:'center'}}><Box sx={{color:'primary.main', display:'inline-block'}}>Планы</Box> на будущее</Typography>
 
-                <Stack direction={'row'} sx={{mt:6.5, background: grey[50], borderRadius: 2.5, p:3}} spacing={{xs:7.5}}>
-                    <Box sx={{flex:'1 1 50%'}}>
-                        <Typography variant={'h4'} sx={{fontWeight:500}}>Календарь бронирований</Typography>
-                        <Typography variant={'body1'} sx={{mt:2.5}}>Главный помощник в планировании как для гостя, так и для хозяина.</Typography>
-                    </Box>
-                    <Box sx={{flex:'1 1 50%', display:'flex', height:'296px', background: 'linear-gradient(107.45deg, #F3E7E9 0%, #E3EEFF 100%)', borderRadius:'20px'}}>
+                <Stack direction={isMobile?'column':'row-reverse'} sx={{mt:isMobile?2.5:6.5, background: grey[50], borderRadius: 2.5, p:3}} spacing={{xs:isMobile?2.5:7.5}}>
+                    <Box sx={{flex: isMobile ?'unset':'1 1 50%', display:'flex', height: isMobile ?'240px':'296px', background: 'linear-gradient(107.45deg, #F3E7E9 0%, #E3EEFF 100%)', borderRadius:'20px', overflow:'hidden'}}>
                         <img style={{ display:'block', height:'100%', marginLeft:'auto'}} src={'/images/home/Calendars.png'} alt={''}/>
+                    </Box>
+                    <Box sx={{flex: isMobile ?'unset':'1 1 50%'}}>
+                        <Typography variant={isMobile?'h6':'h4'} sx={{fontWeight:500}}>Календарь бронирований</Typography>
+                        <Typography variant={isMobile?'body2':'body1'} sx={{mt:isMobile?1:2.5}}>Главный помощник в планировании как для гостя, так и для хозяина.</Typography>
                     </Box>
                 </Stack>
 
@@ -39,13 +39,13 @@ export default function FuturePlansGrid() {
                     </Grid>
                 </Box>
 
-                <Stack direction={'row'} sx={{mt:4, background:grey[50], borderRadius:2.5, p:3 }} spacing={{xs:7.5}}>
-                    <Box sx={{flex:'1 1 50%', display:'flex', height:'296px', background: 'linear-gradient(90deg, #FFC3A0 0%, #FFAFBD 100%)', borderRadius:2.5}}>
-                        <img style={{ display:'block', height:'170px', margin:'auto'}} src={'/images/home/Objects.png'} alt={''}/>
+                <Stack direction={isMobile?'column':'row'} sx={{mt:4, background:grey[50], borderRadius:2.5, p:3 }} spacing={{xs:isMobile?2.5:7.5}}>
+                    <Box sx={{flex:isMobile?'unset':'1 1 50%', display:'flex', height:isMobile?'240px':'296px', background: 'linear-gradient(90deg, #FFC3A0 0%, #FFAFBD 100%)', borderRadius:2.5, overflow:'hidden'}}>
+                        <img style={{ display:'block', height:isMobile?'95px':'170px', margin:'auto'}} src={'/images/home/Objects.png'} alt={''}/>
                     </Box>
-                    <Box sx={{flex:'1 1 50%'}}>
-                        <Typography variant={'h4'} sx={{fontWeight:500}}>Страховка жилья для хостов</Typography>
-                        <Typography variant={'body1'} sx={{mt:2.5}}>В партнерстве с mango.rocks</Typography>
+                    <Box sx={{flex: isMobile ?'unset':'1 1 50%'}}>
+                        <Typography variant={isMobile?'h6':'h4'} sx={{fontWeight:500}}>Страховка жилья для хостов</Typography>
+                        <Typography variant={isMobile?'body2':'body1'} sx={{mt:isMobile?1:2.5}}>В партнерстве с mango.rocks</Typography>
                     </Box>
                 </Stack>
 
