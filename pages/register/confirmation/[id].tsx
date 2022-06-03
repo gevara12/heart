@@ -2,15 +2,18 @@ import {default as React, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useRouter} from 'next/router';
 
-import {Button, CircularProgress, Container} from '@mui/material';
+import {Box, Button, CircularProgress, Container, Stack, Typography, useMediaQuery} from '@mui/material';
 import Layout from '@components/Layout';
 import {registerConfirm} from "@store/auth/actions";
+import useTheme from "@mui/material/styles/useTheme";
 
 
 export default function Confirmation() {
     const router = useRouter();
     const {id} = router.query;
     const dispatch = useDispatch();
+    const { breakpoints } = useTheme();
+    const isMobile = useMediaQuery(breakpoints.down('md'));
 
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -39,12 +42,15 @@ export default function Confirmation() {
                 <Container maxWidth='lg'>
                     {loading && <CircularProgress />}
                     {success && (
-                        <div>
-                            <div>Вы успешно подтвердили e-mail {regEmail} на сайте HeartApart. Спасибо за ваш выбор!</div>
-                            <div>На нашем сайте можно перенести данные из открытых источников в свой профиль, а также заполнить профиль самостоятельно:</div>
-                            <Button variant="contained" onClick={()=>router.replace('/host/sync-a')} sx={{ width: '168px', mt:2 }}>Перенести данные</Button>
-                            <Button variant="outlined" onClick={()=>router.replace('/profile/edit')} sx={{ width: '168px', mt:1 }}>Заполнить самостоятельно</Button>
-                        </div>
+                        <Box sx={{textAlign:'center', mt:isMobile?10.5:'208px', width:isMobile?'auto':'524px', ml:'auto',mr:'auto'}}>
+                            <Typography variant={'body1'} sx={{}}>Ваш адрес электронной почты успешно подтвержден!</Typography>
+                            <Typography variant={'h6'} sx={{mt:6.5}}>Заполните профиль</Typography>
+                            <Typography variant={'body1'} sx={{mt:2.5}}>Если вы ранее были зарегистрированы на известных зарубежных сайтах аренды жилья, вы можете перенести данные профиля из открытых источников.</Typography>
+                            <Stack direction={isMobile?'column':'row'} alignItems={isMobile?'stretch':'center'} justifyContent={'center'} sx={{mt:3}} spacing={isMobile?2.5:3}>
+                                <Button variant="contained" onClick={()=>router.replace('/host/sync-a')} sx={{ minWidth:'205px'}}>Перенести данные</Button>
+                                <Button variant="outlined" onClick={()=>router.replace('/profile/edit')} sx={{ minWidth:'205px' }}>Заполнить сам</Button>
+                            </Stack>
+                        </Box>
                     )}
                     {error && <div>чтото пошло не так</div>}
                 </Container>
