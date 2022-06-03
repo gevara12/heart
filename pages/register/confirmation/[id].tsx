@@ -1,14 +1,14 @@
-import {default as React, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useRouter} from 'next/router';
 
 import {Box, Button, CircularProgress, Container, Stack, Typography, useMediaQuery} from '@mui/material';
 import Layout from '@components/Layout';
 import {registerConfirm} from "@store/auth/actions";
-import useTheme from "@mui/material/styles/useTheme";
+import {useTheme} from "@mui/material/styles";
 
 
-export default function Confirmation() {
+export default function Confirmation(){
     const router = useRouter();
     const {id} = router.query;
     const dispatch = useDispatch();
