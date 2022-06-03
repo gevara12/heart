@@ -9,9 +9,9 @@ const fs = require('fs');
 const express_1 = __importDefault(require("express"));
 const next_1 = __importDefault(require("next"));
 const dev = process.env.NODE_ENV !== 'production';
+const port = process.env.PORT || 3000;
 const app = (0, next_1.default)({ dev });
 const handle = app.getRequestHandler();
-const port = process.env.PORT || 3000;
 (async () => {
     try {
         await app.prepare();
@@ -22,7 +22,7 @@ const port = process.env.PORT || 3000;
         server.listen(port, (err) => {
             if (err)
                 throw err;
-            console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`);
+            console.log(`> Ready on host:${port} - env ${process.env.NODE_ENV}`);
         });
         const httpServer = http.createServer(server);
         const httpsServer = https.createServer({
