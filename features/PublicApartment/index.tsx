@@ -30,39 +30,37 @@ import CheckInGrid from '@features/PublicApartment/CheckInGrid';
 import RatingTooltip from '@features/PublicApartment/RatingTooltip';
 
 import styles from './PublicApartment.module.css';
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import {getUser} from "@store/users/selectors";
-import {fetchUser} from "@store/users/actions";
+import { getUser } from '@store/users/selectors';
+import { fetchUser } from '@store/users/actions';
 
-
-export default function PublicApartment({ apartment }: any) {
+export default function PublicApartment({ apartment, ownerAvailable = true }: any) {
   const { breakpoints } = useTheme();
   const dispatch = useDispatch();
 
   const isMobile = useMediaQuery(breakpoints.down('md'));
 
   const { publicInfo } = apartment;
-  console.log(apartment.ownerId)
-
+  // console.log(apartment.ownerId)
 
   const apartOwner = useSelector(getUser);
   React.useEffect(() => {
     dispatch(fetchUser(apartment.ownerId));
   }, [dispatch]);
-  console.log(apartOwner)
+  // console.log('apartOwner', apartOwner);
 
   return (
     <div className={styles.host}>
       {isMobile && <PhotoSlider photos={Apartment.photos} />}
 
       {publicInfo?.name.value && (
-        <Typography variant='h5' component='div'>
+        <Typography variant="h5" component="div">
           {publicInfo.name.value}
         </Typography>
       )}
 
-      <Stack direction={{ xs: 'column', md: 'row' }} justifyContent='space-between'>
+      <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between">
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           alignItems={{ xs: 'start', md: 'center' }}
@@ -111,27 +109,31 @@ export default function PublicApartment({ apartment }: any) {
           </Grid>
           <Grid item xs={12} md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
-          {isMobile ? (
-            <MobilePinnedBlock />
-          ) : (
-            <Grid item xs={12} md={4}>
-              <PinnedBlock />
-            </Grid>
+          {ownerAvailable && (
+            <>
+              {isMobile ? (
+                <MobilePinnedBlock />
+              ) : (
+                <Grid item xs={12} md={4}>
+                  <PinnedBlock />
+                </Grid>
+              )}
+            </>
           )}
         </Grid>
       </Box>
 
       <PublicApartmentDivider />
 
-      <ApartmentBlock title={'На карте'} id='map'>
+      <ApartmentBlock title={'На карте'} id="map">
         <Box sx={{ height: { xs: '162px', sm: '320px', lg: '510px' } }}>
           <iframe
-            width='100%'
-            height='100%'
+            width="100%"
+            height="100%"
             style={{ objectFit: 'cover' }}
-            src='https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed'
-            frameBorder='0'
-            scrolling='no'
+            src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            frameBorder="0"
+            scrolling="no"
           />
         </Box>
       </ApartmentBlock>
@@ -146,7 +148,7 @@ export default function PublicApartment({ apartment }: any) {
           <Grid item xs={12} md={1} />
           <Grid item xs={12} md={3}>
             <Typography sx={{ mb: 3 }}>Скорость ответа: 1 час</Typography>
-            <Button variant='outlined'>Задать вопрос хозяину</Button>
+            <Button variant="outlined">Задать вопрос хозяину</Button>
           </Grid>
         </Grid>
       </ApartmentBlock>

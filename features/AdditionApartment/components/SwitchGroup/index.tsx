@@ -66,15 +66,14 @@ export const SwitchGroup = ({ qualities, qualitiesArr, title, category = 'qualit
   return (
     <div className={styles.host}>
       {title && (
-        <Typography variant="h5" className={styles.subTitle}>
+        <Typography variant="h5" sx={{ mb: 2 }}>
           {title}
         </Typography>
       )}
 
-      <FormGroup className={styles.group}>
+      <div className={styles.group}>
         {Object.entries(values).map(([key, value]: [key: string, value: TSwitch]) => {
           const { isChecked, label } = value;
-          // console.info('label', value);
           return (
             <FormControlLabel
               key={key}
@@ -103,7 +102,7 @@ export const SwitchGroup = ({ qualities, qualitiesArr, title, category = 'qualit
             />
           );
         })}
-      </FormGroup>
+      </div>
     </div>
   );
 };
