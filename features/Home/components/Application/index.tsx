@@ -49,7 +49,7 @@ export default function Application() {
                         <Button variant={'outlined'} onClick={installPWAApp} sx={{mt:isMobile?'20px':'32px', color:'black', borderColor:'black', whiteSpace:'nowrap'}}>Установить приложение</Button>
                     </Box>
                     <Box sx={{flex:'1 1 50%', textAlign:'center'}}>
-                        <img style={{display: 'inline-block', width:isMobile?'160px':'260px', marginTop:isMobile?'36px':'-112px'}} src={'/images/home/MobileProfile1.png'} alt={''}/>
+                        <img style={{display: 'inline-block', width:isMobile?'160px':'260px', marginTop:isMobile?'36px':'-112px'}} src={'/images/home/Application/MobileProfile1.png'} alt={''}/>
                     </Box>
                 </Stack>
             </Box>

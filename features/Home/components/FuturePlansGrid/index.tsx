@@ -5,9 +5,9 @@ import {grey} from "@mui/material/colors";
 
 
 const cardsList = [
-    {title:'Поиск с масштабируемой картой', image:'/images/home/Map.png', bg:'linear-gradient(47.24deg, #D9AFD9 0%, #97D9E1 100%)'},
-    {title:'Встроенный месседжер', image:'/images/home/Messages.png', bg:'linear-gradient(312.76deg, #96FBC4 0%, #F9F586 100%)'},
-    {title:'Онлайн-оплата', image:'/images/home/OnlinePayment.png', bg:'linear-gradient(227.24deg, #F6D365 0%, #FDA085 100%)'},
+    {title:'Поиск с масштабируемой картой', image:'/images/home/FuturePlansGrid/Map.png', bg:'linear-gradient(47.24deg, #D9AFD9 0%, #97D9E1 100%)'},
+    {title:'Встроенный месседжер', image:'/images/home/FuturePlansGrid/Messages.png', bg:'linear-gradient(312.76deg, #96FBC4 0%, #F9F586 100%)'},
+    {title:'Онлайн-оплата', image:'/images/home/FuturePlansGrid/OnlinePayment.png', bg:'linear-gradient(227.24deg, #F6D365 0%, #FDA085 100%)'},
 ];
 
 export default function FuturePlansGrid() {
@@ -21,7 +21,7 @@ export default function FuturePlansGrid() {
 
                 <Stack direction={isMobile?'column':'row-reverse'} sx={{mt:isMobile?2.5:6.5, background: grey[50], borderRadius: 2.5, p:3}} spacing={{xs:isMobile?2.5:7.5}}>
                     <Box sx={{flex: isMobile ?'unset':'1 1 50%', display:'flex', height: isMobile ?'240px':'296px', background: 'linear-gradient(107.45deg, #F3E7E9 0%, #E3EEFF 100%)', borderRadius:'20px', overflow:'hidden'}}>
-                        <img style={{ display:'block', height:'100%', marginLeft:'auto'}} src={'/images/home/Calendars.png'} alt={''}/>
+                        <img style={{ display:'block', height:'100%', marginLeft:'auto'}} src={'/images/home/FuturePlansGrid/Calendars.png'} alt={''}/>
                     </Box>
                     <Box sx={{flex: isMobile ?'unset':'1 1 50%'}}>
                         <Typography variant={isMobile?'h6':'h4'} sx={{fontWeight:500}}>Календарь бронирований</Typography>
@@ -41,7 +41,7 @@ export default function FuturePlansGrid() {
 
                 <Stack direction={isMobile?'column':'row'} sx={{mt:4, background:grey[50], borderRadius:2.5, p:3 }} spacing={{xs:isMobile?2.5:7.5}}>
                     <Box sx={{flex:isMobile?'unset':'1 1 50%', display:'flex', height:isMobile?'240px':'296px', background: 'linear-gradient(90deg, #FFC3A0 0%, #FFAFBD 100%)', borderRadius:2.5, overflow:'hidden'}}>
-                        <img style={{ display:'block', height:isMobile?'95px':'170px', margin:'auto'}} src={'/images/home/Objects.png'} alt={''}/>
+                        <img style={{ display:'block', height:isMobile?'95px':'170px', margin:'auto'}} src={'/images/home/FuturePlansGrid/Objects.png'} alt={''}/>
                     </Box>
                     <Box sx={{flex: isMobile ?'unset':'1 1 50%'}}>
                         <Typography variant={isMobile?'h6':'h4'} sx={{fontWeight:500}}>Страховка жилья для хостов</Typography>
