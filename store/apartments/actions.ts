@@ -7,6 +7,7 @@ import {
   deleteApartmentByIdAPI,
   fetchApartmentByIdAPI,
   searchApartmentAPI,
+  statusUpdateApartmentAPI,
   updateApartmentAPI,
 } from '@store/apartments/api';
 import {
@@ -69,10 +70,11 @@ export const createApartment = (formValues: TApartment) => async (dispatch: Disp
 };
 
 export const activateApartment = (id: string) => async (dispatch: Dispatch<any>) => {
-  activateApartmentAPI(id).then(({ data }) => {
-    console.info('data', data);
-    dispatch(createApartmentRequest(data));
-  })
+  activateApartmentAPI(id)
+    .then(({ data }) => {
+      console.info('data', data);
+      dispatch(createApartmentRequest(data));
+    })
     .catch((error) => {
       dispatch({
         type: SNACKBAR_OPEN,
@@ -80,16 +82,29 @@ export const activateApartment = (id: string) => async (dispatch: Dispatch<any>)
         severity: SeverityEnum.error,
       });
     });
-}
+};
 
-export const updateApartment = (newApartment: TApartment) => async (dispatch: Dispatch) => {
-  const { id, name, description, amount } = newApartment;
-  updateApartmentAPI({
-    id,
-    name,
-    description,
-    amount,
-  })
+type TStatus = 'CREATED' | 'ACTIVE' | 'UNLISTED' | 'DELETED';
+
+type TStatusRequest = { status: TStatus; apartmentsId: string };
+
+export const statusUpdateApartment = (statusData: TStatusRequest) => async (dispatch: Dispatch<any>) => {
+  statusUpdateApartmentAPI(statusData)
+    .then(({ data }) => {
+      console.info('data', data);
+      dispatch(createApartmentRequest(data));
+    })
+    .catch((error) => {
+      dispatch({
+        type: SNACKBAR_OPEN,
+        message: error?.defaultMessage,
+        severity: SeverityEnum.error,
+      });
+    });
+};
+
+export const updateApartment = (id, formValues) => async (dispatch: Dispatch) => {
+  updateApartmentAPI({ id, status: 'ACTIVE', publicInfo: formValues })
     .then(({ data }) => {
       dispatch(createApartmentRequest(data));
     })

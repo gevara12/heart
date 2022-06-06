@@ -12,16 +12,16 @@ const Apartment = () => {
 
   return (
     <Layout>
-      <SEO/>
+      <SEO />
       <section>
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <h1>Apartment: {id}</h1>
-          {/*<GetApartItemComponent id={id} />*/}
-          {/*<PublicApartment apartment={currentApartment}/>*/}
+          <GetApartItemComponent id={id} />
+          {/*<PublicApartment apartment={currentApartment} />*/}
         </Container>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default Apartment
+export default Apartment;

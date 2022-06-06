@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { Box, Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 
 import StarIcon from '@mui/icons-material/Star';
-import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+// import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
+// import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import LuxuryIcon from '@components/LuxuryIcon';
 import SuperHostIcon from '@components/SuperHostIcon';
 import DraftBadge from '@components/DraftBadge';
+
+import styles from './ApartmentCard.module.css';
 
 type TProfileApartmentProps = {
   apartment: any;
@@ -16,7 +18,6 @@ type TProfileApartmentProps = {
 
 export default function ApartmentCard({ apartment }: TProfileApartmentProps) {
   const { id, publicInfo, externalRating, images, status } = apartment;
-  console.info(publicInfo);
   const isLuxury = externalRating?.isSelect || externalRating?.isLuxury;
   const places = {
     'entire-place': 'Жилье целиком',
@@ -25,7 +26,7 @@ export default function ApartmentCard({ apartment }: TProfileApartmentProps) {
     'shared-room': 'Место в комнате',
   };
   return (
-    <Card>
+    <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Box
         sx={{
           position: 'relative',
@@ -52,8 +53,8 @@ export default function ApartmentCard({ apartment }: TProfileApartmentProps) {
         {status === 'CREATED' && <DraftBadge />}
       </Box>
       <CardContent>
-        <Link href={`/draft/${id}`} passHref>
-          <Typography variant="h5" sx={{ cursor: 'pointer' }}>
+        <Link href={status === 'CREATED' ? `/draft/${id}` : `/apartment-public/${id}`} passHref>
+          <Typography variant="h5" sx={{ cursor: 'pointer' }} className={styles.title}>
             {publicInfo.name.value || publicInfo.name}
           </Typography>
         </Link>

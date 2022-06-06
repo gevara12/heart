@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { Alert, Box, Button, Grid, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
 
 import RatingIconsPanel from '@components/RatingIconsPanel';
 import Apartment from '@components/ApartmentMock';
@@ -34,21 +34,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getUser } from '@store/users/selectors';
 import { fetchUser } from '@store/users/actions';
+import { MapBlock } from '@features/PublicApartment/MapBlock';
 
-export default function PublicApartment({ apartment, ownerAvailable = true }: any) {
+export default function PublicApartment({ apartment }: any) {
   const { breakpoints } = useTheme();
-  const dispatch = useDispatch();
-
   const isMobile = useMediaQuery(breakpoints.down('md'));
-
-  const { publicInfo } = apartment;
-  // console.log(apartment.ownerId)
-
+  const dispatch = useDispatch();
   const apartOwner = useSelector(getUser);
+  const { publicInfo } = apartment;
+
   React.useEffect(() => {
     dispatch(fetchUser(apartment.ownerId));
   }, [dispatch]);
-  // console.log('apartOwner', apartOwner);
+
+  console.info(publicInfo.address);
 
   return (
     <div className={styles.host}>
@@ -71,7 +70,7 @@ export default function PublicApartment({ apartment, ownerAvailable = true }: an
             <RatingTooltip />
           </Stack>
 
-          <AddressLink text={Apartment.address} />
+          <AddressLink text={publicInfo.address.address} />
         </Stack>
         {!isMobile && <ShareLink />}
       </Stack>
@@ -109,16 +108,12 @@ export default function PublicApartment({ apartment, ownerAvailable = true }: an
           </Grid>
           <Grid item xs={12} md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
-          {ownerAvailable && (
-            <>
-              {isMobile ? (
-                <MobilePinnedBlock />
-              ) : (
-                <Grid item xs={12} md={4}>
-                  <PinnedBlock />
-                </Grid>
-              )}
-            </>
+          {isMobile ? (
+            <MobilePinnedBlock />
+          ) : (
+            <Grid item xs={12} md={4}>
+              <PinnedBlock />
+            </Grid>
           )}
         </Grid>
       </Box>
@@ -126,16 +121,7 @@ export default function PublicApartment({ apartment, ownerAvailable = true }: an
       <PublicApartmentDivider />
 
       <ApartmentBlock title={'На карте'} id="map">
-        <Box sx={{ height: { xs: '162px', sm: '320px', lg: '510px' } }}>
-          <iframe
-            width="100%"
-            height="100%"
-            style={{ objectFit: 'cover' }}
-            src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            frameBorder="0"
-            scrolling="no"
-          />
-        </Box>
+        <MapBlock address={publicInfo.address.addressDetails} />
       </ApartmentBlock>
 
       <PublicApartmentDivider />
