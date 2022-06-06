@@ -17,9 +17,9 @@ export const LastStep = (): React.ReactElement => {
   const { currentApartment } = useSelector(getCurrentApartment);
   const handleClick = async () => {
     await dispatch(updateApartment(id, formValues));
-    // setTimeout(() => {
-    //   router.push('/profile');
-    // }, 1000);
+    setTimeout(() => {
+      router.push('/profile');
+    }, 1000);
   };
 
   const apartment = { publicInfo: formValues };
