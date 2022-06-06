@@ -8,9 +8,6 @@ export default function JoinUs() {
     const { breakpoints } = useTheme();
     const isMobile = useMediaQuery(breakpoints.down('md'));
 
-    console.log(breakpoints.down('sm'));
-    console.log(breakpoints.down('md'));
-
     return (
         <Container maxWidth='lg'>
             <Box sx={{overflow:'hidden',marginTop:isMobile? '52px':'104px', background: 'linear-gradient(90deg, #F3E7E9 0%, #E3EEFF 99%, #E3EEFF 100%)', borderRadius: '20px', padding:isMobile?'52px 24px':'60px 24px'}}>

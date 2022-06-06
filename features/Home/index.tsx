@@ -1,20 +1,18 @@
 import * as React from "react";
-import {useSelector} from "react-redux";
 
 import {Container, Grid, Box, useMediaQuery, useTheme} from '@mui/material';
-import {LoginWall} from "@features/LoginWall";
-import {getCurrentUser} from "@store/auth/selectors";
-import PromoBigCard from "./components/PromoBigCard";
 
-import LeftRightPromoCard from "./components/LeftRightPromoCard";
+import PromoBigCard from "@features/Home/components/PromoBigCard";
+import LeftRightPromoCard from "@features/Home/components/LeftRightPromoCard";
 import LeftRightPromoCard2 from "@features/Home/components/LeftRightPromoCard2";
 import HomeHero from "@features/Home/components/HomeHero";
-import FuturePlansGrid from "./components/FuturePlansGrid";
+import FuturePlansGrid from "@features/Home/components/FuturePlansGrid";
 import JoinUs from "@features/Home/components/JoinUs";
 import Application from "@features/Home/components/Application";
 import BeSure from "@features/Home/components/BeSure";
 import DemoScreens from "@features/Home/components/DemoScreens";
-import TeamCard from "./components/TeamCard";
+import TeamCard from "@features/Home/components/TeamCard";
+import AuthBlock from "@features/Home/components/AuthBlock";
 
 
 const bigCardsList = [
@@ -52,8 +50,7 @@ const leftRightCardsList2 = [
 
 export default function Home() {
     const { breakpoints } = useTheme();
-    const isMobile = useMediaQuery(breakpoints.down('md'));
-    const currentUser = useSelector(getCurrentUser);
+    const isTablet = useMediaQuery(breakpoints.down('md'));
 
     return (
         <>
@@ -62,8 +59,8 @@ export default function Home() {
             <DemoScreens/>
 
             <Container maxWidth='lg'>
-                <Box sx={{marginTop: isMobile ?'166px':'136px', overflow:'hidden'}}>
-                    <Grid container spacing={{xs: isMobile ? '58px' :'84px'}}>
+                <Box sx={{marginTop: isTablet ?'166px':'136px', overflow:'hidden'}}>
+                    <Grid container spacing={{xs: isTablet ? '58px' :'84px'}}>
                         {leftRightCardsList.map((card,i)=>(
                             <Grid item xs={12} key={i}>
                                 <LeftRightPromoCard card={card} reverse={(i+1)%2===0}/>
@@ -76,8 +73,8 @@ export default function Home() {
             <BeSure/>
 
             <Container maxWidth='lg'>
-                <Box sx={{marginTop:isMobile?'52px':'136px', overflow:'hidden'}}>
-                    <Grid container spacing={{xs: isMobile ? '20px':'60px'}}>
+                <Box sx={{marginTop:isTablet?'52px':'136px', overflow:'hidden'}}>
+                    <Grid container spacing={{xs: isTablet ? '20px':'60px'}}>
                         {bigCardsList.map((card, i)=>(
                             <Grid item xs={12} lg={6} key={i}>
                                 <PromoBigCard card={card}/>
@@ -94,8 +91,8 @@ export default function Home() {
             <JoinUs/>
 
             <Container maxWidth='lg'>
-                <Box sx={{marginTop:isMobile ? '55px':'188px'}}>
-                    <Grid container spacing={{xs: isMobile ? '58px' :'84px'}}>
+                <Box sx={{marginTop:isTablet ? '55px':'188px'}}>
+                    <Grid container spacing={{xs: isTablet ? '58px' :'84px'}}>
                         <Grid item xs={12}>
                             <TeamCard card={leftRightCardsList2[0]}/>
                         </Grid>
@@ -106,9 +103,7 @@ export default function Home() {
                 </Box>
             </Container>
 
-            <Container maxWidth="lg">
-                {currentUser ? <div>logged in</div> : <LoginWall />}
-            </Container>
+            <AuthBlock/>
 
         </>
     );

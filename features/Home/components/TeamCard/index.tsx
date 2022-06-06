@@ -4,7 +4,7 @@ import {Box, Stack, Typography, useMediaQuery, useTheme} from "@mui/material";
 
 export default function TeamCard({ card }:any) {
     const { breakpoints } = useTheme();
-    const isMobile = useMediaQuery(breakpoints.down('lg'));
+    const isMobile = useMediaQuery(breakpoints.down('md'));
 
     return (
         <Stack direction={isMobile?'column':('row')} sx={{}} spacing={{xs:isMobile?2.5:'60px'}}>
