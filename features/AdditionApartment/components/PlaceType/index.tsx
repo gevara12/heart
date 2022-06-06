@@ -33,9 +33,9 @@ const PlaceType = ({ placeTypeInput }: { placeTypeInput: TPlaceType }): React.Re
 
   return (
     <div className={styles.host}>
-      <Typography variant='h4' className={styles.title}>
-        Выберите тип жилья
-      </Typography>
+      <div className={styles.title}>
+        <Typography variant="h4">Выберите тип жилья</Typography>
+      </div>
 
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <ToggleButtonGroup
@@ -45,13 +45,7 @@ const PlaceType = ({ placeTypeInput }: { placeTypeInput: TPlaceType }): React.Re
           orientation={isMobile ? 'vertical' : 'horizontal'}
         >
           {placeArr.map(({ type, label }) => (
-            <ToggleButton
-              value={type}
-              aria-label={type}
-              key={type}
-              color='primary'
-              size={isMobile ? 'small' : 'large'}
-            >
+            <ToggleButton value={type} aria-label={type} key={type} color="primary" size={isMobile ? 'small' : 'large'}>
               {label}
             </ToggleButton>
           ))}

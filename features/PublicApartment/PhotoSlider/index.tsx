@@ -15,7 +15,6 @@ import 'photoswipe/style.css';
 import LuxuryIcon from '@components/LuxuryIcon';
 import SuperHostIcon from '@components/SuperHostIcon';
 
-
 interface PhotoSliderProps {
   photos: Array<any>;
 }
@@ -47,20 +46,22 @@ export default function PhotoSlider({ photos }: PhotoSliderProps) {
 
   return (
     <Box sx={{ ml: { xs: -2, sm: -3 }, mr: { xs: -2, sm: -3 }, mb: 1.5 }}>
-			<span style={{ position: 'absolute', display: 'flex', width: '100%', padding: '8px 12px', zIndex: 2 }}>
-				<LuxuryIcon size={'small'} />
-				<SuperHostIcon size={'small'} sx={{ ml: 1 }} />
-			</span>
+      <span style={{ position: 'absolute', display: 'flex', width: '100%', padding: '8px 12px', zIndex: 2 }}>
+        <LuxuryIcon size={'small'} />
+        <SuperHostIcon size={'small'} sx={{ ml: 1 }} />
+      </span>
       <Swiper {...SwiperOpts}>
-        {photos.map((photo, i) =>
-          <SwiperSlide style={{ height: '194px' }} key={i}>
-            <div onClick={() => ((lightbox !== null) && lightbox.loadAndOpen(i))} style={{ height: '100%' }}>
-              <img src={photo.src} alt='' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-          </SwiperSlide>,
-        )}
+        {photos.map((photo, i) => {
+          console.info(photo.imageUrl);
+          return (
+            <SwiperSlide style={{ height: '194px' }} key={i}>
+              <div onClick={() => lightbox !== null && lightbox.loadAndOpen(i)} style={{ height: '100%' }}>
+                <img src={photo.imageUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
-
     </Box>
   );
 }

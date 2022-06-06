@@ -40,10 +40,11 @@ export default function MoveDataStep() {
   const moveData = async () => {
     setLoading(true);
     try {
-      // await new Promise(resolve => setTimeout(resolve, 2000));
       await dispatch(saveDataFromA(parsedData));
-      await router.push('/profile');
       setLoading(false);
+      setTimeout(() => {
+        router.push('/profile');
+      }, 1000);
     } catch (e) {
       console.error(e);
       setLoading(false);

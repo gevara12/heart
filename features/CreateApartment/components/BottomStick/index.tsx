@@ -27,7 +27,7 @@ export const BottomStick = ({ clickPrev, clickNext, hasPrev }: TBottomStickProps
   return (
     <div className={styles.host}>
       {hasPrev && (
-        <Button variant="contained" onClick={handlePrev}>
+        <Button variant="outlined" onClick={handlePrev}>
           Назад
         </Button>
       )}

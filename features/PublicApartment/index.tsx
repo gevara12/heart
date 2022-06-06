@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { Alert, Box, Button, Grid, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
 
 import RatingIconsPanel from '@components/RatingIconsPanel';
 import Apartment from '@components/ApartmentMock';
@@ -30,39 +30,36 @@ import CheckInGrid from '@features/PublicApartment/CheckInGrid';
 import RatingTooltip from '@features/PublicApartment/RatingTooltip';
 
 import styles from './PublicApartment.module.css';
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import {getUser} from "@store/users/selectors";
-import {fetchUser} from "@store/users/actions";
-
+import { getUser } from '@store/users/selectors';
+import { fetchUser } from '@store/users/actions';
+import { MapBlock } from '@features/PublicApartment/MapBlock';
 
 export default function PublicApartment({ apartment }: any) {
   const { breakpoints } = useTheme();
-  const dispatch = useDispatch();
-
   const isMobile = useMediaQuery(breakpoints.down('md'));
-
-  const { publicInfo } = apartment;
-  console.log(apartment.ownerId)
-
-
+  const dispatch = useDispatch();
   const apartOwner = useSelector(getUser);
+  const { publicInfo } = apartment;
+
   React.useEffect(() => {
     dispatch(fetchUser(apartment.ownerId));
   }, [dispatch]);
-  console.log(apartOwner)
+
+  console.info(publicInfo.address);
 
   return (
     <div className={styles.host}>
       {isMobile && <PhotoSlider photos={Apartment.photos} />}
 
       {publicInfo?.name.value && (
-        <Typography variant='h5' component='div'>
+        <Typography variant="h5" component="div">
           {publicInfo.name.value}
         </Typography>
       )}
 
-      <Stack direction={{ xs: 'column', md: 'row' }} justifyContent='space-between'>
+      <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between">
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           alignItems={{ xs: 'start', md: 'center' }}
@@ -73,7 +70,7 @@ export default function PublicApartment({ apartment }: any) {
             <RatingTooltip />
           </Stack>
 
-          <AddressLink text={Apartment.address} />
+          <AddressLink text={publicInfo.address.address} />
         </Stack>
         {!isMobile && <ShareLink />}
       </Stack>
@@ -123,17 +120,8 @@ export default function PublicApartment({ apartment }: any) {
 
       <PublicApartmentDivider />
 
-      <ApartmentBlock title={'На карте'} id='map'>
-        <Box sx={{ height: { xs: '162px', sm: '320px', lg: '510px' } }}>
-          <iframe
-            width='100%'
-            height='100%'
-            style={{ objectFit: 'cover' }}
-            src='https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed'
-            frameBorder='0'
-            scrolling='no'
-          />
-        </Box>
+      <ApartmentBlock title={'На карте'} id="map">
+        <MapBlock address={publicInfo.address.addressDetails} />
       </ApartmentBlock>
 
       <PublicApartmentDivider />
@@ -146,7 +134,7 @@ export default function PublicApartment({ apartment }: any) {
           <Grid item xs={12} md={1} />
           <Grid item xs={12} md={3}>
             <Typography sx={{ mb: 3 }}>Скорость ответа: 1 час</Typography>
-            <Button variant='outlined'>Задать вопрос хозяину</Button>
+            <Button variant="outlined">Задать вопрос хозяину</Button>
           </Grid>
         </Grid>
       </ApartmentBlock>
