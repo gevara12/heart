@@ -9,7 +9,7 @@ export default function JoinUs() {
     const isMobile = useMediaQuery(breakpoints.down('md'));
 
     return (
-        <Container maxWidth='lg'>
+        <Container fixed>
             <Box sx={{overflow:'hidden',marginTop:isMobile? '52px':'104px', background: 'linear-gradient(90deg, #F3E7E9 0%, #E3EEFF 99%, #E3EEFF 100%)', borderRadius: '20px', padding:isMobile?'52px 24px':'60px 24px'}}>
                 <Stack direction={isMobile ? 'column':'row'} alignItems={isMobile?'flex-start':'center'} justifyContent={'center'}>
                     <Box sx={{flex:'1 1 50%'}}>

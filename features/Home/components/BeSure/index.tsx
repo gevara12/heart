@@ -10,12 +10,12 @@ export default function BeSure() {
     return (
         <Box sx={{
             marginTop: isMobile ? '52px':'136px',
-            background: grey[50],
+            background: grey[100],
             padding: isMobile ? '52px 16px' : '136px 0',
             textAlign: 'center',
             position: 'relative',
         }}>
-            <Typography variant={isMobile ? 'h6' : 'h4'} sx={{maxWidth: '744px', margin: '0 auto'}}><Box
+            <Typography variant={isMobile ? 'h6' : 'h4'} sx={{maxWidth: '744px', margin: '0 auto', fontWeight:500}}><Box
                 sx={{color: 'primary.main'}}>Будьте уверены</Box> в том, с кем ведете переписку</Typography>
             <Typography variant={isMobile ? 'body2' : 'body1'} sx={{
                 maxWidth: '744px',

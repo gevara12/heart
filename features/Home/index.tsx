@@ -50,7 +50,7 @@ const leftRightCardsList2 = [
 
 export default function Home() {
     const { breakpoints } = useTheme();
-    const isTablet = useMediaQuery(breakpoints.down('md'));
+    const isTablet = useMediaQuery(breakpoints.down('lg'));
 
     return (
         <>
@@ -58,7 +58,7 @@ export default function Home() {
 
             <DemoScreens/>
 
-            <Container maxWidth='lg'>
+            <Container fixed>
                 <Box sx={{marginTop: isTablet ?'166px':'136px', overflow:'hidden'}}>
                     <Grid container spacing={{xs: isTablet ? '58px' :'84px'}}>
                         {leftRightCardsList.map((card,i)=>(
@@ -72,7 +72,7 @@ export default function Home() {
 
             <BeSure/>
 
-            <Container maxWidth='lg'>
+            <Container fixed>
                 <Box sx={{marginTop:isTablet?'52px':'136px', overflow:'hidden'}}>
                     <Grid container spacing={{xs: isTablet ? '20px':'60px'}}>
                         {bigCardsList.map((card, i)=>(
@@ -90,7 +90,7 @@ export default function Home() {
 
             <JoinUs/>
 
-            <Container maxWidth='lg'>
+            <Container fixed>
                 <Box sx={{marginTop:isTablet ? '55px':'188px'}}>
                     <Grid container spacing={{xs: isTablet ? '58px' :'84px'}}>
                         <Grid item xs={12}>

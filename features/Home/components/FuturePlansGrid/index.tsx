@@ -14,7 +14,7 @@ export default function FuturePlansGrid() {
     const { breakpoints } = useTheme();
     const isMobile = useMediaQuery(breakpoints.down('md'));
     return (
-        <Container maxWidth='lg'>
+        <Container fixed>
             <Box sx={{marginTop:isMobile?'52px':'220px'}}>
 
                 <Typography variant={isMobile?'h5':'h3'} sx={{mt:2.5, fontWeight:500, textAlign:'center'}}><Box sx={{color:'primary.main', display:'inline-block'}}>Планы</Box> на будущее</Typography>

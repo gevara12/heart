@@ -11,7 +11,18 @@ export enum Theme {
   dark = 'dark',
 }
 
+const customBreakpoints = {
+  values: {
+    xs: 0,
+    sm: 600+48,
+    md: 900+48,
+    lg: 1200+48,
+    xl: 1536,
+  },
+};
+
 const lightTheme = createTheme({
+  breakpoints: {...customBreakpoints},
   palette: {
     mode: Theme.light,
     primary: {
@@ -32,6 +43,7 @@ const lightTheme = createTheme({
 });
 
 const darkTheme = createTheme({
+  breakpoints: {...customBreakpoints},
   palette: {
     mode: Theme.dark,
     primary: {

@@ -22,8 +22,8 @@ export default function HomeHero() {
                 <Box sx={isMobile?{fontWeight: '500', fontSize: '24px',lineHeight: '32px', maxWidth:'288px', margin:'0 auto'}:{fontWeight: '500', fontSize: '60px',lineHeight: '72px', letterSpacing: '-0.5px', maxWidth:'864px', margin:'0 auto'}}>Размещайте объявления с <span style={{color:"#00A699"}}>подтвержденным рейтингом</span> и без комиссии</Box>
                 <Box sx={{mt:4}}>
                 {currentUser
-                    ? <Button variant={'contained'} onClick={()=>router.push('/profile')}>Сдать жилье</Button>
-                    : <SignUp/>}
+                    ? <Button variant={'contained'} size={'large'} onClick={()=>router.push('/profile')}>Сдать жилье</Button>
+                    : <SignUp isHome/>}
                 </Box>
             </Box>
         </Container>

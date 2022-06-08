@@ -12,7 +12,7 @@ export default function AuthBlock() {
     const currentUser = useSelector(getCurrentUser);
 
     return (
-        <Container maxWidth="lg">
+        <Container fixed>
             { currentUser ? (
                 <Box sx={{ mt:isTablet?10.5:27.5, mb:isTablet?10:27.5 }}>
                     <Typography variant={isTablet? 'h6':'h3'} sx={{mb:isTablet?4:6.5, textAlign:'center'}}>Рады новым встречам</Typography>
