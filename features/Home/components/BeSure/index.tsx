@@ -14,6 +14,7 @@ export default function BeSure() {
             padding: isMobile ? '52px 16px' : '136px 0',
             textAlign: 'center',
             position: 'relative',
+            overflow:'hidden',
         }}>
             <Typography variant={isMobile ? 'h6' : 'h4'} sx={{maxWidth: '744px', margin: '0 auto', fontWeight:500}}><Box
                 sx={{color: 'primary.main'}}>Будьте уверены</Box> в том, с кем ведете переписку</Typography>
