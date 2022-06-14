@@ -20,7 +20,7 @@ declare global {
 export default function Application() {
     const { breakpoints } = useTheme();
     const isMobile = useMediaQuery(breakpoints.down('md'));
-    console.log(breakpoints)
+
     let deferredPrompt:BeforeInstallPromptEvent|null = null;
 
     React.useEffect(() => {
