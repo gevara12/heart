@@ -1,19 +1,28 @@
 import * as React from "react";
-import {Box, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Container, useMediaQuery, useTheme} from "@mui/material";
 
 
 export default function DemoScreens() {
     const { breakpoints } = useTheme();
-    const isMobile = useMediaQuery(breakpoints.down('md'));
+    const isSmBreak = useMediaQuery(breakpoints.down('sm'));
+    const isMdBreak = useMediaQuery(breakpoints.down('md'));
+    const isLgBreak = useMediaQuery(breakpoints.down('lg'));
 
+    const boxShadow = "0px 4px 24px rgba(46, 60, 80, 0.08)";
+    const commonStyles = {
+        position:'absolute',
+        boxShadow:boxShadow,
+    };
     return (
-        <Box sx={{textAlign:'center', background:isMobile?'none' :'#FAFAFA', position:'relative', paddingBottom:isMobile ? '' : '210px'}}>
-            <img style={{display:isMobile?'none':'block', position:'absolute', width: '190px', left: 'calc(50% - 465px)', top: '142px'}} src={'/images/home/DemoScreens/Mockup_Mobile.png'} alt={''}/>
-            <img style={{height: isMobile?'192px':'493px', marginTop:isMobile?'0':'-55px', boxShadow: "0px 4px 24px rgba(46, 60, 80, 0.08)"}} src={'/images/home/DemoScreens/Mockup_Desktop.png'} alt={''}/>
-            <img style={{display:isMobile?'none':'block', position:'absolute', width: '240px', left: 'calc(50% + 228px)', top: '-10px', boxShadow: '0px 4px 24px rgba(46, 60, 80, 0.08)'}} src={'/images/home/DemoScreens/Request.png'} alt={''}/>
+        <Box sx={{ textAlign:'center', background:isSmBreak?'none':'#FAFAFA', paddingBottom:isSmBreak ? 0 : (isMdBreak?'186px':'210px')}}>
+            <Container fixed sx={{ position:'relative'}}>
+                <img style={{ ...commonStyles, position:'relative', width: isSmBreak ? 288 :(isMdBreak?398:740), marginTop:isSmBreak?0:(isMdBreak?-48:-55)}} src={'/images/home/DemoScreens/Mockup_Desktop.png'} alt={''}/>
+                <img style={{ ...commonStyles, display:isSmBreak?'none':'block', width: isMdBreak?122:190, left:isLgBreak?32:160, top:isLgBreak?91:143}} src={'/images/home/DemoScreens/Mockup_Mobile.png'} alt={''}/>
+                <img style={{ ...commonStyles, display:isSmBreak?'none':'block', width: isMdBreak?122:240, right:isLgBreak?32:155, top:-12}} src={'/images/home/DemoScreens/Request.png'} alt={''}/>
 
-            <img style={{display:isMobile?'block':'none', position:'absolute', width: '136px', left: 'calc(50% - 130px)', top: 'calc(100% + 42px)', boxShadow: '0px 4px 24px rgba(46, 60, 80, 0.08)'}} src={'/images/home/HomeHero/Rating.png'} alt={''}/>
-            <img style={{display:isMobile?'block':'none', position:'absolute', width: '136px',  right: 'calc(50% - 130px)', top: 'calc(100% + 20px)', boxShadow: '0px 4px 24px rgba(46, 60, 80, 0.08)'}} src={'/images/home/HomeHero/Message.png'} alt={''}/>
+                <img style={{ ...commonStyles, display:isSmBreak?'block':'none', width: 136, left: 'calc(50% - 130px)', top: 'calc(100% + 42px)'}} src={'/images/home/HomeHero/Rating.png'} alt={''}/>
+                <img style={{ ...commonStyles, display:isSmBreak?'block':'none', width: 136,  right: 'calc(50% - 130px)', top: 'calc(100% + 20px)'}} src={'/images/home/HomeHero/Message.png'} alt={''}/>
+            </Container>
         </Box>
     )
 }
