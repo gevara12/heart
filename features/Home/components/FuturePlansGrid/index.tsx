@@ -39,7 +39,7 @@ export default function FuturePlansGrid() {
                     </Grid>
                 </Box>
 
-                <Stack direction={isMobile?'column':'row'} sx={{mt:4, background:grey[50], borderRadius:2.5, p:3 }} spacing={{xs:isMobile?2.5:7.5}}>
+                {/*<Stack direction={isMobile?'column':'row'} sx={{mt:4, background:grey[50], borderRadius:2.5, p:3 }} spacing={{xs:isMobile?2.5:7.5}}>
                     <Box sx={{flex:isMobile?'unset':'1 1 50%', display:'flex', height:isMobile?'240px':'296px', background: 'linear-gradient(90deg, #FFC3A0 0%, #FFAFBD 100%)', borderRadius:2.5, overflow:'hidden'}}>
                         <img style={{ display:'block', height:isMobile?'95px':'170px', margin:'auto'}} src={'/images/home/FuturePlansGrid/Objects.png'} alt={''}/>
                     </Box>
@@ -47,7 +47,7 @@ export default function FuturePlansGrid() {
                         <Typography variant={isMobile?'h6':'h4'} sx={{fontWeight:500}}>Страховка жилья для хостов</Typography>
                         <Typography variant={isMobile?'body2':'body1'} sx={{mt:isMobile?1:2.5}}>В партнерстве с mango.rocks</Typography>
                     </Box>
-                </Stack>
+                </Stack>*/}
 
             </Box>
         </Container>
