@@ -21,13 +21,13 @@ import ApartmentBlock from '@features/PublicApartment/ApartmentBlock';
 import MobilePinnedBlock from '@features/PublicApartment/MobilePinnedBlock';
 import PinnedBlock from '@features/PublicApartment/PinnedBlock';
 import OwnerAboutBlock from '@features/PublicApartment/OwnerAboutBlock';
-import AddressLink from '@features/PublicApartment/AddressLink';
+import { AddressLink } from '@features/PublicApartment/AddressLink';
 import PublicApartmentDivider from '@features/PublicApartment/PublicApartmentDivider';
 import ShareLink from '@features/PublicApartment/ShareLink';
 import RulesGrid from '@features/PublicApartment/RulesGrid';
 import OptionsGrid from '@features/PublicApartment/OptionsGrid';
 import CheckInGrid from '@features/PublicApartment/CheckInGrid';
-import RatingTooltip from '@features/PublicApartment/RatingTooltip';
+import { RatingTooltip } from '@features/PublicApartment/RatingTooltip';
 
 import styles from './PublicApartment.module.css';
 import { useDispatch, useSelector } from 'react-redux';

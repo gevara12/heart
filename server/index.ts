@@ -18,6 +18,10 @@ const handle = app.getRequestHandler();
     server.all('*', (req: Request, res: Response) => {
       return handle(req, res);
     });
+    server.use((req, res, next) => {
+      if (!req?.headers?.host?.match(/^www/)) res.redirect('https://www.' + req.headers.host + req.url, 301);
+      else next();
+    });
     server.listen(port, (err?: any) => {
       if (err) throw err;
       console.log(`> Ready on host:${port} - env ${process.env.NODE_ENV}`);

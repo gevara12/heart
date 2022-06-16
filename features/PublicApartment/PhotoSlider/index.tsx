@@ -11,15 +11,22 @@ import 'swiper/css';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import PhotoSwipe from 'photoswipe';
 
-import 'photoswipe/style.css';
 import LuxuryIcon from '@components/LuxuryIcon';
 import SuperHostIcon from '@components/SuperHostIcon';
 
-interface PhotoSliderProps {
-  photos: Array<any>;
-}
+import 'photoswipe/style.css';
 
-export default function PhotoSlider({ photos }: PhotoSliderProps) {
+type TPhoto = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+type TPhotoSliderProps = {
+  photos: TPhoto[];
+};
+
+export default function PhotoSlider({ photos }: TPhotoSliderProps) {
   const SwiperOpts = {
     spaceBetween: 10,
     slidesPerView: 1,
@@ -38,6 +45,7 @@ export default function PhotoSlider({ photos }: PhotoSliderProps) {
       }
     };
   }, []);
+
   React.useEffect(() => {
     if (lightbox !== null) {
       lightbox.init();
