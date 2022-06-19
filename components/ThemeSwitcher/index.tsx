@@ -6,6 +6,21 @@ import Switch from '@mui/material/Switch';
 
 import { grey } from '@mui/material/colors';
 
+
+declare module '@mui/material/styles' {
+    interface Theme {
+        gradient: {
+          main: string;
+        };
+    }
+    // allow configuration using `createTheme`
+    interface ThemeOptions {
+      gradient?: {
+            main?: string;
+        };
+    }
+}
+
 export enum Theme {
   light = 'light',
   dark = 'dark',
@@ -23,6 +38,9 @@ const customBreakpoints = {
 
 const lightTheme = createTheme({
   breakpoints: {...customBreakpoints},
+  gradient:{
+    main:'linear-gradient(90deg, #F3E7E9 0%, #E3EEFF 99%, #E3EEFF 100%)'
+  },
   palette: {
     mode: Theme.light,
     primary: {
@@ -44,6 +62,9 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   breakpoints: {...customBreakpoints},
+  gradient:{
+    main:'linear-gradient(90deg, #485563 0%, #29323C 100%)'
+  },
   palette: {
     mode: Theme.dark,
     primary: {
@@ -53,7 +74,7 @@ const darkTheme = createTheme({
       main: '#ff5a5f',
     },
     background: {
-      default: '#000',
+      default: '#121212',
       paper: grey[900],
     },
     text: {
