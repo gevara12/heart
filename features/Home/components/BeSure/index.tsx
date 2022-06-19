@@ -4,7 +4,7 @@ import {grey} from "@mui/material/colors";
 
 
 export default function BeSure() {
-    const {breakpoints} = useTheme();
+    const {breakpoints, palette} = useTheme();
     const isSmBreak = useMediaQuery(breakpoints.down('sm'));
     const isMdBreak = useMediaQuery(breakpoints.down('md'));
     const isLgBreak = useMediaQuery(breakpoints.down('lg'));
@@ -15,10 +15,14 @@ export default function BeSure() {
         position: 'absolute',
     };
 
+    const background = palette.mode === 'dark'
+        ? 'linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), #121212'
+        : grey[100];
+
     return (
         <Box sx={{
             marginTop: isSmBreak ? 6.5:(isMdBreak?10:17),
-            background: grey[100],
+            background: background,
             paddingTop: isSmBreak?'52px':(isMdBreak?'80px':'136px'),
             paddingBottom: isSmBreak?'52px':(isMdBreak?'80px':'136px'),
             textAlign: 'center',

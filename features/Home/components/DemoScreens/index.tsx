@@ -3,7 +3,7 @@ import {Box, Container, useMediaQuery, useTheme} from "@mui/material";
 
 
 export default function DemoScreens() {
-    const { breakpoints } = useTheme();
+    const { breakpoints, palette } = useTheme();
     const isSmBreak = useMediaQuery(breakpoints.down('sm'));
     const isMdBreak = useMediaQuery(breakpoints.down('md'));
     const isLgBreak = useMediaQuery(breakpoints.down('lg'));
@@ -13,8 +13,12 @@ export default function DemoScreens() {
         position:'absolute',
         boxShadow:boxShadow,
     };
+    const background = isSmBreak?'none':palette.mode === 'dark'
+        ? 'linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), #121212'
+        : '#FAFAFA';
+
     return (
-        <Box sx={{ textAlign:'center', background:isSmBreak?'none':'#FAFAFA', paddingBottom:isSmBreak ? 0 : (isMdBreak?'186px':'210px')}}>
+        <Box sx={{ textAlign:'center', background:background, paddingBottom:isSmBreak ? 0 : (isMdBreak?'186px':'210px')}}>
             <Container fixed sx={{ position:'relative'}}>
                 <img style={{ ...commonStyles, position:'relative', width: isSmBreak ? 288 :(isMdBreak?398:740), marginTop:isSmBreak?0:(isMdBreak?-48:-55)}} src={'/images/home/DemoScreens/Mockup_Desktop.png'} alt={''}/>
                 <img style={{ ...commonStyles, display:isSmBreak?'none':'block', width: isMdBreak?122:190, left:isLgBreak?32:160, top:isLgBreak?91:143}} src={'/images/home/DemoScreens/Mockup_Mobile.png'} alt={''}/>

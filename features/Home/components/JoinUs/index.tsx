@@ -5,18 +5,19 @@ import {Box, Button, Container, Stack, Typography, useMediaQuery, useTheme} from
 
 
 export default function JoinUs() {
-    const { breakpoints } = useTheme();
+    const { breakpoints, palette } = useTheme();
     const isSmBreak = useMediaQuery(breakpoints.down('sm'));
     const isMdBreak = useMediaQuery(breakpoints.down('md'));
 
     const telegramLink = 'https://t.me/%20XsyLZklmE1VkOWQ6';
+    const background = palette.mode === 'dark' ? 'linear-gradient(90deg, #485563 0%, #29323C 100%)' : 'linear-gradient(90deg, #F3E7E9 0%, #E3EEFF 99%, #E3EEFF 100%)';
 
     return (
         <Container fixed>
             <Box sx={{
                 overflow:'hidden',
                 marginTop:isMdBreak? 6.5:13,
-                background: 'linear-gradient(90deg, #F3E7E9 0%, #E3EEFF 99%, #E3EEFF 100%)',
+                background: background,
                 borderRadius: 2.5,
                 padding:isSmBreak?'52px 24px':(isMdBreak?'80px 24px':'74px 24px')
             }}>
@@ -26,7 +27,8 @@ export default function JoinUs() {
                         <Typography variant={isMdBreak?'body2':'body1'} sx={{mt:isMdBreak?1 :2.5}}>Вы можете внести свой вклад в рождение нового сервиса. Присоединяйтесь к нашей фокус-группе в Telegram.</Typography>
                         <Stack direction={'row'} alignItems={'center'} sx={{mt:isMdBreak?2.5:4}} spacing={1}>
                             <Link href={telegramLink} passHref>
-                                <Button variant={'outlined'} size={isMdBreak?'medium':'large'} target="_blank" rel="noopener noreferrer" sx={{color:'black', borderColor:'black', whiteSpace:'nowrap'}}>Вступить в группу</Button>
+                                <Button variant={'outlined'} size={isMdBreak?'medium':'large'} target="_blank" rel="noopener noreferrer"
+                                        sx={{color:'text.primary', borderColor: 'text.primary', whiteSpace:'nowrap'}}>Вступить в группу</Button>
                             </Link>
                             <img style={{display:isMdBreak?'block':'none', width:50}} src={'/images/home/JoinUs/Telegram.png'} alt={''}/>
                         </Stack>

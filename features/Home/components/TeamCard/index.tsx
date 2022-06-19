@@ -17,11 +17,11 @@ export default function TeamCard({ card }:any) {
             </Box>
             <Box sx={{flex:isSmBreak?'0 0 auto':'1 1 50%', alignSelf:'center', width:isSmBreak?'290px':'auto', margin:'0', display:'flex', borderRadius:'20px', height:isSmBreak?'188px':'328px'}}>
                 <Box sx={{ margin:'0 auto', position: 'relative', width:isSmBreak?'288px':(isLgBreak?'252px':'570px')}}>
-                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?'39px':(isLgBreak?'31px':'78px'), top: isSmBreak?'8px': (isLgBreak ?'8px':'16px')}} src={'/images/home/Team/Male_Memoji_1.png'} alt={''}/>
-                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?'161px':(isLgBreak ?'153px':'318px'), top:0}} src={'/images/home/Team/Male_Memoji_2.png'} alt={''}/>
-                    <img style={{position:'absolute', width:avatarWidth, left: 0, top: isSmBreak?'109px':(isLgBreak ?'125px':'168px')}} src={'/images/home/Team/Male_Memoji_3.png'} alt={''}/>
-                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?'104px':(isLgBreak ?'96px':'225px'), top: isSmBreak?'93px':(isLgBreak ?'93px':'136px')}} src={'/images/home/Team/Female_Memoji_1.png'} alt={''}/>
-                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?'208px':(isLgBreak ? '172px':'450px'), top: isSmBreak?'93px': (isLgBreak ?'157px':'136px')}} src={'/images/home/Team/Female_Memoji_2.png'} alt={''}/>
+                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?39:(isLgBreak?31:78), top:isSmBreak?8:(isLgBreak?8:16)}} src={'/images/home/Team/Male_Memoji_1.png'} alt={''}/>
+                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?161:(isLgBreak ?153:318), top:0}} src={'/images/home/Team/Male_Memoji_2.png'} alt={''}/>
+                    <img style={{position:'absolute', width:avatarWidth, left: 0, top:isSmBreak?109:(isLgBreak?125:168)}} src={'/images/home/Team/Male_Memoji_3.png'} alt={''}/>
+                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?104:(isLgBreak?96:225), top:isSmBreak?93:(isLgBreak ?93:136)}} src={'/images/home/Team/Female_Memoji_1.png'} alt={''}/>
+                    <img style={{position:'absolute', width:avatarWidth, left: isSmBreak?208:(isLgBreak?172:450), top:isSmBreak?93:(isLgBreak ?157:136)}} src={'/images/home/Team/Female_Memoji_2.png'} alt={''}/>
                 </Box>
             </Box>
         </Stack>
