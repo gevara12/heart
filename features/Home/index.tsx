@@ -13,6 +13,7 @@ import BeSure from "@features/Home/components/BeSure";
 import DemoScreens from "@features/Home/components/DemoScreens";
 import TeamCard from "@features/Home/components/TeamCard";
 import AuthBlock from "@features/Home/components/AuthBlock";
+import {ThemeSwitcher} from "@components/ThemeSwitcher";
 
 
 const bigCardsList = [
@@ -54,6 +55,9 @@ export default function Home() {
 
     return (
         <>
+            <Box sx={{position:'fixed',top:'0',zIndex:1000}}>
+                <ThemeSwitcher/>
+            </Box>
             <HomeHero/>
 
             <DemoScreens/>

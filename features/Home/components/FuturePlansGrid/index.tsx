@@ -1,18 +1,28 @@
+import * as React from "react";
+
 import {Box, Container, Grid, Stack, Typography, useMediaQuery, useTheme} from "@mui/material";
 import PromoCard from "@features/Home/components/PromoCard";
-import * as React from "react";
+
 import {grey} from "@mui/material/colors";
 
-
-const cardsList = [
-    {title:'Поиск с масштабируемой картой', image:'/images/home/FuturePlansGrid/Map.png', bg:'linear-gradient(47.24deg, #D9AFD9 0%, #97D9E1 100%)'},
-    {title:'Встроенный месседжер', image:'/images/home/FuturePlansGrid/Messages.png', bg:'linear-gradient(312.76deg, #96FBC4 0%, #F9F586 100%)'},
-    {title:'Онлайн-оплата', image:'/images/home/FuturePlansGrid/OnlinePayment.png', bg:'linear-gradient(227.24deg, #F6D365 0%, #FDA085 100%)'},
-];
 
 export default function FuturePlansGrid() {
     const { breakpoints, gradient, palette } = useTheme();
     const isMobile = useMediaQuery(breakpoints.down('md'));
+
+    const cardsList = [{
+        title:'Поиск с масштабируемой картой',
+        image:'/images/home/FuturePlansGrid/Map.png',
+        bg: palette.mode === 'dark' ? 'linear-gradient(90deg, #2B5876 0%, #4E4376 100%)' : 'linear-gradient(47.24deg, #D9AFD9 0%, #97D9E1 100%)'
+    }, {
+        title:'Встроенный месседжер',
+        image:'/images/home/FuturePlansGrid/Messages.png',
+        bg: palette.mode === 'dark' ? 'linear-gradient(90deg, #0BA360 0%, #3CBA92 100%)' : 'linear-gradient(312.76deg, #96FBC4 0%, #F9F586 100%)',
+    }, {
+        title:'Онлайн-оплата',
+        image:'/images/home/FuturePlansGrid/OnlinePayment.png',
+        bg: palette.mode === 'dark' ? 'linear-gradient(90deg, #FC6076 0%, #FF9A44 100%)' : 'linear-gradient(227.24deg, #F6D365 0%, #FDA085 100%)',
+    },];
 
     const background = palette.mode === 'dark'
         ? 'linear-gradient(0deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)), #121212'
