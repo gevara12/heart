@@ -34,7 +34,7 @@ export default function JoinUs() {
                         </Stack>
                     </Box>
                     <Box sx={{flex:'1 1 50%', textAlign:'center', position:'relative'}}>
-                        <img style={{display:isMdBreak?'none':'block', position:'absolute', left:12, top:14}} src={'/images/home/JoinUs/Magic_Wand.png'} alt={''}/>
+                        <img style={{display:isMdBreak?'none':'block', width:110, position:'absolute', left:12, top:14}} src={'/images/home/JoinUs/Magic_Wand.png'} alt={''}/>
                         <img style={{display: 'inline-block', width:isSmBreak?160:(isMdBreak?170:260), marginTop:isSmBreak?40:0, marginBottom:isSmBreak?-170:(isMdBreak?-152:-152)}} src={'/images/home/JoinUs/MokupSocial.png'} alt={''}/>
                     </Box>
                 </Stack>
