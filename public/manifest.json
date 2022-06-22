@@ -4,7 +4,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "HeartApart Application",
+  "name": "Heart Apart",
   "short_name": "HeartApart",
   "description": "HeartApart - новый сервис краткосрочной аренды в России",
   "icons": [
