@@ -19,7 +19,7 @@ type TSwitchGroup = {
   title?: string;
   category?: string;
   isSwitcher?: boolean;
-}
+};
 
 export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwitcher }: TSwitchGroup) => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
   return (
     <div className={styles.host}>
       {title && (
-        <Typography variant='h5' className={styles.subTitle}>
+        <Typography variant="h5" className={styles.subTitle}>
           {title}
         </Typography>
       )}
@@ -70,7 +70,7 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
                     onChange={checkHandler}
                     name={key}
                     id={label}
-                    color='primary'
+                    color="primary"
                     inputProps={{ title: name }}
                   />
                 ) : (
@@ -79,7 +79,7 @@ export const SwitchGroup = ({ qualitiesArr, title, category = 'qualities', isSwi
                     onChange={checkHandler}
                     name={key}
                     id={label}
-                    color='primary'
+                    color="primary"
                     inputProps={{ title: name }}
                   />
                 )

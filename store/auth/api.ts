@@ -9,9 +9,9 @@ export const USER_CURRENT_ENDPOINT = 'users/current';
 export const USER_UPDATE_INFO_ENDPOINT = 'users/update/info';
 export const USER_UPDATE_CONTACTS_ENDPOINT = 'users/update/contacts';
 
-
 export const userRegisterAPI = (data) => axiosService.post(apiUrl(USER_REGISTER_ENDPOINT), data);
-export const userRegisterConfirmAPI = (id: string, ...data) => axiosService.get(apiUrl(`${USER_REGISTER_ENDPOINT}/${id}`), data);
+export const userRegisterConfirmAPI = (id: string, ...data) =>
+  axiosService.get(apiUrl(`${USER_REGISTER_ENDPOINT}/${id}`), data);
 
 export const userLogInAPI = (data) => axiosService.post(apiUrl(USER_LOGIN_ENDPOINT), data);
 export const userUpdateInfoAPI = (data) => axiosService.post(apiUrl(USER_UPDATE_INFO_ENDPOINT), data);

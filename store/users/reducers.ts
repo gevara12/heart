@@ -1,7 +1,4 @@
-import {
-  USER_GET,
-} from '@store/constants';
-
+import { USER_GET } from '@store/constants';
 
 const initialState = { user: null };
 

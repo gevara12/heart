@@ -49,8 +49,7 @@ export const fetchCurrentUser = () => async (dispatch: Dispatch) => {
 
 export const userUpdateInfo = (userInfo) => async () => {
   userUpdateInfoAPI(userInfo)
-    .then(({ data }) => {
-    })
+    .then(({ data }) => {})
     .catch((error) => {
       console.error(error);
     });
@@ -80,48 +79,48 @@ export const userUpdate = (userInfo) => async (dispatch: Dispatch) => {
 
 export const userRegister =
   ({ email, password, phoneNumber }: TUserRegister) =>
-    async (dispatch: Dispatch) => {
-      userRegisterAPI({
-        phoneNumber,
-        email,
-        password,
+  async (dispatch: Dispatch) => {
+    userRegisterAPI({
+      phoneNumber,
+      email,
+      password,
+    })
+      .then(({ data }) => {
+        dispatch(userRegisterRequest(data.data));
+        sessionStorage.setItem('accessToken', data.data.token);
+        Router.reload(window.location.pathname);
       })
-        .then(({ data }) => {
-          dispatch(userRegisterRequest(data.data));
-          sessionStorage.setItem('accessToken', data.data.token);
-          Router.reload(window.location.pathname);
-        })
-        .catch((error) => {
-          dispatch({
-            type: SNACKBAR_OPEN,
-            message: error?.defaultMessage,
-            severity: SeverityEnum.error,
-          });
+      .catch((error) => {
+        dispatch({
+          type: SNACKBAR_OPEN,
+          message: error?.defaultMessage,
+          severity: SeverityEnum.error,
         });
-    };
+      });
+  };
 
 export const userLogin =
   ({ userName, password }: TUserLogin) =>
-    async (dispatch: Dispatch) => {
-      userLogInAPI({
-        username: userName,
-        password,
+  async (dispatch: Dispatch) => {
+    userLogInAPI({
+      username: userName,
+      password,
+    })
+      .then(({ data }) => {
+        dispatch(userLogInAction(data.data.user));
+        sessionStorage.setItem('username', data.data.user.username);
+        sessionStorage.setItem('accessToken', data.data.token);
+        Router.reload(window.location.pathname);
       })
-        .then(({ data }) => {
-          dispatch(userLogInAction(data.data.user));
-          sessionStorage.setItem('username', data.data.user.username);
-          sessionStorage.setItem('accessToken', data.data.token);
-          Router.reload(window.location.pathname);
-        })
-        .catch((error) => {
-          console.info(error);
-          dispatch({
-            type: SNACKBAR_OPEN,
-            message: error?.defaultMessage,
-            severity: SeverityEnum.error,
-          });
+      .catch((error) => {
+        console.info(error);
+        dispatch({
+          type: SNACKBAR_OPEN,
+          message: error?.defaultMessage,
+          severity: SeverityEnum.error,
         });
-    };
+      });
+  };
 
 export const logout = () => (dispatch: Dispatch<any>) => {
   const token = sessionStorage.getItem('accessToken');

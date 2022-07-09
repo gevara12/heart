@@ -9,7 +9,7 @@ export default function Terms() {
       <SEO />
       <section>
         <div>Terms page</div>
-        <Link href='/'>Home</Link>
+        <Link href="/">Home</Link>
       </section>
     </Layout>
   );

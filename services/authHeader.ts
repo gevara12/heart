@@ -10,7 +10,5 @@ const http = axios.create({
 export default http;
 
 http.defaults.headers.common = {
-  Authorization: `Bearer ${
-    typeof window !== 'undefined' && sessionStorage.getItem('accessToken')
-  }`,
+  Authorization: `Bearer ${typeof window !== 'undefined' && sessionStorage.getItem('accessToken')}`,
 };

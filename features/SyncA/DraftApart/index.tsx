@@ -7,12 +7,11 @@ import { getUserApartment } from '@store/users/selectors';
 
 type TDraftApartProps = { id: string };
 
-export default function DraftApart ({ id }: TDraftApartProps): React.ReactElement {
+export default function DraftApart({ id }: TDraftApartProps): React.ReactElement {
   const { publicInfo } = useSelector(getUserApartment(id)) || {};
   return (
     <>
-      {publicInfo ? <AdditionApartment item={publicInfo} /> :
-        <Typography variant='h4'>Что-то пошло не так</Typography>}
+      {publicInfo ? <AdditionApartment item={publicInfo} /> : <Typography variant="h4">Что-то пошло не так</Typography>}
     </>
   );
-};
+}

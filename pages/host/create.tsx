@@ -16,7 +16,7 @@ export default function Create() {
     <Layout>
       <SEO />
       <section>
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <CreateWithNoSSR />
         </Container>
       </section>

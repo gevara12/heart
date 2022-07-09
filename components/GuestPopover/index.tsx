@@ -1,14 +1,5 @@
 import * as React from 'react';
-import {
-  ClickAwayListener,
-  Grow,
-  IconButton,
-  Paper,
-  Popper,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { ClickAwayListener, Grow, IconButton, Paper, Popper, Stack, TextField, Typography } from '@mui/material';
 
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -28,10 +19,7 @@ export const GuestPopover = () => {
   };
 
   const handleClose = (event: Event) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
+    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
 
@@ -64,7 +52,7 @@ export const GuestPopover = () => {
 
   return (
     <div>
-      <div ref={anchorRef} aria-label='split button' role='button'>
+      <div ref={anchorRef} aria-label="split button" role="button">
         <TextField
           id="guests"
           label="Гости"
@@ -77,33 +65,26 @@ export const GuestPopover = () => {
         {/*  Open Popover*/}
         {/*</Button>*/}
       </div>
-      <Popper
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        transition
-        style={{zIndex:'10'}}
-      >
+      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition style={{ zIndex: '10' }}>
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
             style={{
-              transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
+              transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
             <Paper sx={{ px: 2, py: 1 }}>
               <ClickAwayListener onClickAway={handleClose}>
                 <div>
-                  <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                    <Typography variant='body1' component='span' className={styles.countLabel}>
+                  <Stack direction="row" alignItems="center" justifyContent="space-between">
+                    <Typography variant="body1" component="span" className={styles.countLabel}>
                       Взрослые:
                     </Typography>
 
                     <IconButton onClick={decAdultNum}>
                       <RemoveIcon />
                     </IconButton>
-                    <Typography variant='body1' component='span' sx={{ mx: 2 }}>
+                    <Typography variant="body1" component="span" sx={{ mx: 2 }}>
                       {adultCount}
                     </Typography>
                     <IconButton onClick={incAdultNum}>
@@ -111,15 +92,15 @@ export const GuestPopover = () => {
                     </IconButton>
                   </Stack>
 
-                  <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                    <Typography variant='body1' component='span' className={styles.countLabel}>
+                  <Stack direction="row" alignItems="center" justifyContent="space-between">
+                    <Typography variant="body1" component="span" className={styles.countLabel}>
                       Дети:
                     </Typography>
 
                     <IconButton onClick={decChildNum}>
                       <RemoveIcon />
                     </IconButton>
-                    <Typography variant='body1' component='span' sx={{ mx: 2 }}>
+                    <Typography variant="body1" component="span" sx={{ mx: 2 }}>
                       {childCount}
                     </Typography>
                     <IconButton onClick={incChildNum}>
@@ -127,15 +108,15 @@ export const GuestPopover = () => {
                     </IconButton>
                   </Stack>
 
-                  <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                    <Typography variant='body1' component='span' className={styles.countLabel}>
+                  <Stack direction="row" alignItems="center" justifyContent="space-between">
+                    <Typography variant="body1" component="span" className={styles.countLabel}>
                       Животные:
                     </Typography>
 
                     <IconButton onClick={decAnimalNum}>
                       <RemoveIcon />
                     </IconButton>
-                    <Typography variant='body1' component='span' sx={{ mx: 2 }}>
+                    <Typography variant="body1" component="span" sx={{ mx: 2 }}>
                       {animalCount}
                     </Typography>
                     <IconButton onClick={incAnimalNum}>

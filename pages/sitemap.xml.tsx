@@ -1,7 +1,6 @@
 import fs from 'fs';
 
-const Sitemap = () => {
-};
+const Sitemap = () => {};
 
 export const getServerSideProps = ({ res }) => {
   const baseUrl = {
@@ -12,12 +11,7 @@ export const getServerSideProps = ({ res }) => {
   const staticPages = fs
     .readdirSync('pages')
     .filter((staticPage) => {
-      return ![
-        '_app.tsx',
-        '_document.tsx',
-        '_error.tsx',
-        'sitemap.xml.tsx',
-      ].includes(staticPage);
+      return !['_app.tsx', '_document.tsx', '_error.tsx', 'sitemap.xml.tsx'].includes(staticPage);
     })
     .map((staticPagePath) => {
       return `${baseUrl}/${staticPagePath}`;
@@ -25,8 +19,9 @@ export const getServerSideProps = ({ res }) => {
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${staticPages.map((url) => {
-    return `
+      ${staticPages
+        .map((url) => {
+          return `
             <url>
               <loc>${url}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
@@ -34,8 +29,8 @@ export const getServerSideProps = ({ res }) => {
               <priority>1.0</priority>
             </url>
           `;
-  })
-    .join('')}
+        })
+        .join('')}
     </urlset>
   `;
 

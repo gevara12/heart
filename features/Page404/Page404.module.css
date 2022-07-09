@@ -11,7 +11,7 @@
 .title {
   margin-bottom: 2rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #00C7B7 0%, #C48CCD 50.31%, #FF6F73 100%);
+  background: linear-gradient(90deg, #00c7b7 0%, #c48ccd 50.31%, #ff6f73 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

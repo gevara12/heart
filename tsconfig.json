@@ -22,40 +22,18 @@
     "resolveJsonModule": true,
     "incremental": true,
     "paths": {
-      "@modules/*": [
-        "modules/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@features/*": [
-        "features/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ],
-      "@layout/*": [
-        "layout/*"
-      ],
-      "@services/*": [
-        "services/*"
-      ],
-      "@actions/*": [
-        "actions/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@static/*": [
-        "static/*"
-      ],
-      "@store/*": [
-        "store/*"
-      ],
-      "@dummy/*": [
-        "__dummy__/*"
-      ]
-    },
+      "@modules/*": ["modules/*"],
+      "@components/*": ["components/*"],
+      "@features/*": ["features/*"],
+      "@hooks/*": ["hooks/*"],
+      "@layout/*": ["layout/*"],
+      "@services/*": ["services/*"],
+      "@actions/*": ["actions/*"],
+      "@utils/*": ["utils/*"],
+      "@static/*": ["static/*"],
+      "@store/*": ["store/*"],
+      "@dummy/*": ["__dummy__/*"]
+    }
   },
   "exclude": ["dist", ".next", "out", "next.config.js"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

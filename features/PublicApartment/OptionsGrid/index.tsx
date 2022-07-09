@@ -37,15 +37,14 @@ const labels = {
 export default function OptionsGrid({ options }: any) {
   return (
     <Grid container spacing={{ xs: 1 }}>
-      {Object.keys(options).map((key, i) =>
-        (
-          <Grid item xs={12} md={5} key={i}>
-            <div style={{ display: 'flex' }}>
-              <CheckCircleOutlineIcon sx={{ color: 'green', mr: 1 }} />
-              {labels[key] || 'null'}
-            </div>
-          </Grid>
-        ))}
+      {Object.keys(options).map((key, i) => (
+        <Grid item xs={12} md={5} key={i}>
+          <div style={{ display: 'flex' }}>
+            <CheckCircleOutlineIcon sx={{ color: 'green', mr: 1 }} />
+            {labels[key] || 'null'}
+          </div>
+        </Grid>
+      ))}
     </Grid>
   );
 }

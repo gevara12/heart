@@ -1,7 +1,8 @@
 import Head from 'next/head';
 
 export const defaultTitle = 'HeartApart - новый сервис краткосрочной аренды в России';
-export const defaultDescription = 'Мы объединяем гостей и хозяев уникальных квартир, предоставляя услуги по размещению объектов с доказанным рейтингом из открытых источников';
+export const defaultDescription =
+  'Мы объединяем гостей и хозяев уникальных квартир, предоставляя услуги по размещению объектов с доказанным рейтингом из открытых источников';
 export const defaultImage =
   'https://res.cloudinary.com/dh3i90adr/image/upload/v1648032157/heart-apart/248AF219-4C47-4158-AADF-586D769DCDDF_1_201_a_gzg7ot.jpg';
 

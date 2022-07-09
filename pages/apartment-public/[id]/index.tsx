@@ -3,13 +3,12 @@ import { Container } from '@mui/material';
 
 import Layout from '@components/Layout';
 import SEO from '@components/SEO';
-import React from "react";
+import React from 'react';
 
 import PublicApartment from '@features/PublicApartment';
-import {useDispatch, useSelector} from "react-redux";
-import {getCurrentApartment} from "@store/apartments/selectors";
-import {fetchApartmentById} from "@store/apartments/actions";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentApartment } from '@store/apartments/selectors';
+import { fetchApartmentById } from '@store/apartments/actions';
 
 const apartmentPublic = () => {
   const router = useRouter();
@@ -24,14 +23,14 @@ const apartmentPublic = () => {
 
   return (
     <Layout>
-      <SEO/>
+      <SEO />
       <section>
-        <Container maxWidth='lg'>
-          {Object.keys(currentApartment.publicInfo).length !== 0 && <PublicApartment apartment={currentApartment}/>}
+        <Container maxWidth="lg">
+          {Object.keys(currentApartment.publicInfo).length !== 0 && <PublicApartment apartment={currentApartment} />}
         </Container>
       </section>
     </Layout>
-  )
+  );
 };
 
 export default apartmentPublic;

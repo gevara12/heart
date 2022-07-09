@@ -1,2 +1,1 @@
-export const getErrorSelector = (state: { error: { error: string } }) =>
-  state.error;
+export const getErrorSelector = (state: { error: { error: string } }) => state.error;

@@ -25,21 +25,21 @@ export const Search = (): React.ReactElement => {
     >
       <Autocomplete
         disablePortal
-        id='select-area'
+        id="select-area"
         options={data}
         getOptionLabel={(option) => option.name}
         selectOnFocus
         // sx={{ flexGrow: 2 }}
-        style={{flex: '1 0 auto'}}
-        renderInput={(params) => <TextField {...params} sx={{flex: '1 0 auto'}} label='Локация' />}
+        style={{ flex: '1 0 auto' }}
+        renderInput={(params) => <TextField {...params} sx={{ flex: '1 0 auto' }} label="Локация" />}
       />
 
-      <MinMaxDateRangePicker dates={dates} setDates={setDates}  />
+      <MinMaxDateRangePicker dates={dates} setDates={setDates} />
 
       <GuestPopover />
 
       <div>
-        <Button size='large' variant='contained' sx={{ minHeight: '56px', width:'100%',flex: '1 0 auto' }}>
+        <Button size="large" variant="contained" sx={{ minHeight: '56px', width: '100%', flex: '1 0 auto' }}>
           Найти жилье
         </Button>
       </div>

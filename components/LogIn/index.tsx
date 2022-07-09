@@ -5,13 +5,11 @@ import { Button, MenuItem, Typography } from '@mui/material';
 
 import { logout } from '@store/auth/actions';
 import { getUserStatus } from '@store/auth/selectors';
-import {LogInModal} from "@components/LogInModal";
-
+import { LogInModal } from '@components/LogInModal';
 
 export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-
 
   const handleOpen = (): void => setIsModalOpen(true);
   const handleClose = (): void => setIsModalOpen(false);
@@ -38,7 +36,7 @@ export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
         <>
           {auth.isLoggedIn ? (
             <MenuItem key={'logout'} onClick={handleLogout}>
-              <Typography sx={{ mr: 4, color:'secondary.main' }} variant="body1" component="span">
+              <Typography sx={{ mr: 4, color: 'secondary.main' }} variant="body1" component="span">
                 Выйти
               </Typography>
             </MenuItem>
@@ -49,7 +47,7 @@ export const LogIn = ({ isLoginWall = false }: { isLoginWall?: boolean }) => {
           )}
         </>
       )}
-      <LogInModal isOpen={isModalOpen} handleClose={handleClose}/>
+      <LogInModal isOpen={isModalOpen} handleClose={handleClose} />
     </div>
   );
 };

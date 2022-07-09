@@ -8,7 +8,6 @@ import { FORM_ADDRESS } from '@store/constants';
 import { BottomStick } from '@features/CreateApartment/components/BottomStick';
 import styles from './Address.module.css';
 
-
 export const Address = (): React.ReactElement => {
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -41,7 +40,7 @@ export const Address = (): React.ReactElement => {
 
   return (
     <div>
-      <Typography variant='h4' sx={{ mb: 5 }}>
+      <Typography variant="h4" sx={{ mb: 5 }}>
         Укажите адрес
       </Typography>
 
@@ -50,7 +49,7 @@ export const Address = (): React.ReactElement => {
           token={token}
           value={value}
           onChange={setValue}
-          uid='dadata-address-order-page'
+          uid="dadata-address-order-page"
           httpCache
           inputProps={{
             style: { backgroundColor: theme.palette.background.default, color: theme.palette.text.primary },

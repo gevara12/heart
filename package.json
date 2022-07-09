@@ -72,7 +72,7 @@
     "build:next": "next build",
     "build": "npm run build:next && npm run build:server",
     "start": "NODE_ENV=production node dist/index.js",
-    "prettier": "prettier -write ."
+    "prettier": "prettier --write ."
   },
   "version": "0.1.0"
 }

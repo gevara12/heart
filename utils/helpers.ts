@@ -5,9 +5,9 @@ export const addZeroBefore = (n) => {
 export function isDateInArray(array, dateString) {
   let dateExists = false;
   let date = new Date(dateString);
-  array.forEach(function(arrayDateString) {
+  array.forEach(function (arrayDateString) {
     let arrayDate = new Date(arrayDateString);
-    if(date.getTime() === arrayDate.getTime()){
+    if (date.getTime() === arrayDate.getTime()) {
       dateExists = true;
     }
   });

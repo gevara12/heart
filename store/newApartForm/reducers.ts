@@ -12,16 +12,16 @@ export type Action =
   | { type: 'INCREASE' }
   | { type: 'DECREASE' }
   | {
-  type: 'FORM_GROUP_VALUE';
-  name: string;
-  groupName: string;
-  fieldValue: any;
-}
+      type: 'FORM_GROUP_VALUE';
+      name: string;
+      groupName: string;
+      fieldValue: any;
+    }
   | {
-  type: 'FORM_GROUP_OBJECT';
-  groupName: string;
-  groupObject: {}
-}
+      type: 'FORM_GROUP_OBJECT';
+      groupName: string;
+      groupObject: {};
+    }
   | { type: 'FORM_ADDRESS'; address: unknown }
   | { type: 'FORM_VALUE'; name: string; fieldValue: any }
   | { type: 'form-error'; name: string; error: string };

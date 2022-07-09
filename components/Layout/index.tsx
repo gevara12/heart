@@ -6,13 +6,7 @@ import { Header } from '@components/Header';
 
 import styles from './layout.module.css';
 
-export default function Layout({
-  children,
-  isHero,
-}: {
-  children: React.ReactNode;
-  isHero?: boolean;
-}) {
+export default function Layout({ children, isHero }: { children: React.ReactNode; isHero?: boolean }) {
   return (
     <>
       <CustomSnackBar />

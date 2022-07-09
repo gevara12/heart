@@ -1,7 +1,7 @@
 import { ADD_IMAGE, GET_IMAGES } from '../constants';
 
 const initialState = {
-  images: []
+  images: [],
 };
 
 // @ts-ignore
@@ -14,4 +14,4 @@ export const images = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

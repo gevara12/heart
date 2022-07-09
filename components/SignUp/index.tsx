@@ -27,7 +27,7 @@ import { usePasswordValidation } from '@hooks/usePasswordValidation';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const SignUp = ({ isLoginWall = false, isHome = false }: { isLoginWall?: boolean, isHome?: boolean }) => {
+export const SignUp = ({ isLoginWall = false, isHome = false }: { isLoginWall?: boolean; isHome?: boolean }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -96,16 +96,14 @@ export const SignUp = ({ isLoginWall = false, isHome = false }: { isLoginWall?: 
         <Button variant="contained" onClick={handleOpen}>
           Регистрация
         </Button>
-      ) : (isHome ? (
-              <Button variant="contained" size="large" onClick={handleOpen}>
-                Зарегистрироваться
-              </Button>
-          ) : (
-              <Button variant="contained" size="small" onClick={handleOpen}>
-                Регистрация
-              </Button>
-          )
-
+      ) : isHome ? (
+        <Button variant="contained" size="large" onClick={handleOpen}>
+          Зарегистрироваться
+        </Button>
+      ) : (
+        <Button variant="contained" size="small" onClick={handleOpen}>
+          Регистрация
+        </Button>
       )}
 
       <CustomModal isOpen={isModalOpen} onClose={handleClose}>

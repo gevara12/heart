@@ -17,7 +17,7 @@ class AxiosService {
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
     this.instance = instance;
   }
@@ -60,14 +60,10 @@ class AxiosService {
             }
           });
       } catch (_error) {
-        return Promise.reject(
-          (_error.response && _error.response.data) || 'Something went wrong'
-        );
+        return Promise.reject((_error.response && _error.response.data) || 'Something went wrong');
       }
     }
-    return Promise.reject(
-      (error.response && error.response.data) || 'Something went wrong'
-    );
+    return Promise.reject((error.response && error.response.data) || 'Something went wrong');
   }
 
   get(url, ...params) {

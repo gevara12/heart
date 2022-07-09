@@ -1,11 +1,4 @@
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  CURRENT_USER,
-} from '@store/constants';
+import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CURRENT_USER } from '@store/constants';
 
 const iSServer = typeof window === 'undefined';
 
@@ -27,10 +20,10 @@ export const auth = (state = initialState, action) => {
 
     case REGISTER_SUCCESS:
       return {
-      ...state,
-      isLoggedIn: true,
-      user: payload?.user,
-    };
+        ...state,
+        isLoggedIn: true,
+        user: payload?.user,
+      };
 
     case REGISTER_FAIL:
       return {
